@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 8 Control Structures (1) | Introduction to Programming with R</title>
+  <title>Chapter 4 Nuts and Bolts | Introduction to Programming with R</title>
   <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 8 Control Structures (1) | Introduction to Programming with R" />
+  <meta property="og:title" content="Chapter 4 Nuts and Bolts | Introduction to Programming with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 8 Control Structures (1) | Introduction to Programming with R" />
+  <meta name="twitter:title" content="Chapter 4 Nuts and Bolts | Introduction to Programming with R" />
   
   <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="style-guide.html"/>
-<link rel="next" href="control-structures-2.html"/>
+<link rel="prev" href="getting-help.html"/>
+<link rel="next" href="vectors.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -318,209 +318,140 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="control-structures-1" class="section level1">
-<h1><span class="header-section-number">Chapter 8</span> Control Structures (1)</h1>
-<p>So far we have only written very simple functions and scripts which always did the very same. To make the code more dynamic we need so called control statements. The following ones exist in <em>R</em> and we will learn how they work over the next few sessions.</p>
+<div id="nuts-and-bolts" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Nuts and Bolts</h1>
+<p><em>R</em> is an object oriented programming language. In <em>R</em> basically everything is an object. Objects can be:</p>
 <ul>
-<li><code>if</code> and : test a condition and act on it</li>
-<li><code>for</code>: loop over a <em>fixed number</em> of items</li>
-<li><code>while</code>: execute loop <code>while</code> a condition is <code>TRUE</code></li>
-<li><code>repeat</code>: an infinite loop (until <code>break</code> stops it)</li>
-<li><code>break</code>: stop/break execution of a loop</li>
-<li><code>next</code>: skip iteration, continue loop</li>
-<li><code>return</code>: exit a function (returns result)</li>
+<li>defined variables (e.g., <code>a</code>, <code>b</code>, <code>result</code>),</li>
+<li>functions (e.g., <code>mean</code>, <code>max</code>, <code>sin</code>),</li>
+<li>connection handlers,</li>
+<li>… (as I said, basically everything).</li>
 </ul>
-<p>The following comic can be seen as a function with a set of control statements.</p>
+<p>Each object in <em>R</em> has a specific class and can have a set of class-specific attributes and generic functions (or methods).</p>
+<div id="atomic-classes" class="section level2">
+<h2><span class="header-section-number">4.1</span> Atomic classes</h2>
+<p>There are five so called atomic classes. Atomic classes are the most basic classes on which most high-level objects are based on. These are:</p>
 <ul>
-<li>the whole flowchart can be seen as a function <code>start_homework</code></li>
-<li>there are a set of <code>if</code>-<code>else</code> conditions (if something is <code>Yes</code> do this, else to that)</li>
-<li>the loop in the bottom right corner is a <code>while</code> loop. While (or “as long as”) more than <code>12</code> hours left until submission: procrastinate.
+<li><strong>double:</strong> <code>-0.5</code>, <code>120.9</code>, <code>5.0</code></li>
+<li><strong>integer:</strong> <code>-1</code>, <code>121</code>, <code>5</code></li>
+<li><strong>logical:</strong> <code>TRUE</code> and <code>FALSE</code></li>
+<li><strong>character:</strong> <code>&quot;Reto&quot;</code>, <code>&quot;Innsbruck&quot;</code>, <code>&quot;5&quot;</code></li>
+<li><strong>complex:</strong> <code>-5+11i</code>, <code>3+2i</code>, <code>0+4i</code></li>
+</ul>
+<p>You can always check the class of an object by calling <code>class</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># numeric</span>
+x &lt;-<span class="st"> </span><span class="dv">1</span>
+<span class="kw">class</span>(x)</code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># character</span>
+y &lt;-<span class="st"> &quot;This is just a dummy text&quot;</span>
+<span class="kw">class</span>(y)</code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<div id="know-the-basics" class="section level3">
+<h3><span class="header-section-number">4.1.1</span> Know the basics!</h3>
+<p>It is fundamental to understand the basic objects or data types of <em>R</em> (same for other programming languages). More complex objects are based on these basic data types. Once you have understood the basics it makes it <em>much easier</em> to understand objects of increasing complexity.</p>
 <div style="text-align: center;">
-<p><img src="/home/retos/Documents/Lehre/SS2019_RProgramming/images/03/03_flowchart_homework_graphjam.jpg" style="width: 40%"></p>
-</div></li>
-</ul>
-<div id="logical-operators" class="section level2">
-<h2><span class="header-section-number">8.1</span> Logical Operators</h2>
-<p>Logical operators are an essential part of control structures. Check “Session 02, Exercise B” and read the <em>R</em> documentation <code>?Logical</code> and <code>?Comparison</code> (help pages) for more details.</p>
+<img src="images/02/02_datatypes_3.png">
 </div>
-<div id="if-conditions" class="section level2">
-<h2><span class="header-section-number">8.2</span> If conditions</h2>
-<p>The most basic control structure is the single <code>if</code> condition.</p>
-<p><strong>Basic usage:</strong></p>
+<div style="text-align: center;">
+<img src="images/02/02_datatypes_4.png">
+</div>
+<p>Thus, <strong>knowing the basics</strong> is <strong>essential</strong> to get a good programmer.</p>
+</div>
+</div>
+<div id="input-and-output" class="section level2">
+<h2><span class="header-section-number">4.2</span> Input and Output</h2>
+<p>This is just a very brief repetition from the last session. In <em>R</em>, values are assigned to objects (input) using either <code>=</code> or <code>&lt;-</code>. The latter one is the preferred way in <em>R</em>. As an example: if we want to store the number <code>5</code> on a variable called <code>a</code> we will write <code>a &lt;- 5</code>. This is read as “<em>a gets five</em>”, you can think of it as an arrow assigning <code>5</code> to <code>a</code>.</p>
+<p>An assignment always requires a left and a right hand side, just as in mathematics (<code>a = 5</code>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x =<span class="st"> </span><span class="dv">2</span>
+x &lt;-<span class="st"> </span><span class="dv">2</span> <span class="co"># preferred in R</span></code></pre></div>
+<p>Comments in <em>R</em> can be written everywhere using the <code>#</code> character. Everything behind <code>#</code> will be ignored by <em>R</em> (a comment is not a command, but an explanation or note for those reading your code.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Everything behind &#39;#&#39; is ignored (just a comment)</span>
+<span class="co"># Comments are not executed: y &lt;- 100</span>
+x &lt;-<span class="st"> </span><span class="dv">5</span>  <span class="co"># Can also be at the end of the line</span></code></pre></div>
+<p><strong>Keep in mind that code is more often read than written!</strong> Well written comments will make it much easier for you to understand what you did and why you did it (believe me, you will forget it) but also for others checking, using or adapting your code. Some people say a good code-to-comment ratio is 60 percent comments, 40 percent code. When typing commands into <em>R</em> console without assigning the value(s) to an object <em>R</em> prints the values (output), also known as implicit printing. Two examples:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">50</span></code></pre></div>
+<pre><code>## [1] 50</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;A useless character string&quot;</span></code></pre></div>
+<pre><code>## [1] &quot;A useless character string&quot;</code></pre>
+<p>We can also <em>explicitly</em> call the <code>print</code> function. The result is the very same. Note: <em>implicit printing</em> is only used when you are working on an interactive <em>R</em> console (as in your IDE). When calling <em>R</em> as a batch job you have to do explicit printing.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="dv">50</span>)</code></pre></div>
+<pre><code>## [1] 50</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="st">&quot;A useless character string&quot;</span>)</code></pre></div>
+<pre><code>## [1] &quot;A useless character string&quot;</code></pre>
+<p>On an interactive <em>R</em> command line we can also use both, implicit and explicit printing, when we want to print the current values of an object. In this example we store a character string as <code>y</code> and print it to examine <code>y</code>s current content/values:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> &quot;A useless character string&quot;</span>
+<span class="kw">print</span>(y)</code></pre></div>
+<pre><code>## [1] &quot;A useless character string&quot;</code></pre>
+</div>
+<div id="atomic-classes-1" class="section level2">
+<h2><span class="header-section-number">4.3</span> Atomic Classes</h2>
+<div id="double" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> Double</h3>
+<p>One atomic data class are doubles (double precision floating point values). Double is actually not often used in <em>R</em>, objects of type double are simply called <code>numeric</code> and the class of floating point numbers will be <code>numeric</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># define a double (numeric)</span>
+x &lt;-<span class="st"> </span><span class="fl">1.5</span>
+x</code></pre></div>
+<pre><code>## [1] 1.5</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># another one</span>
+x &lt;-<span class="st"> </span><span class="dv">10</span>
+x</code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(x)</code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+</div>
+<div id="integers" class="section level3">
+<h3><span class="header-section-number">4.3.2</span> Integers</h3>
+<p>A second atomic class are integers. Integers can explicitly be defined using the so called <code>L</code> suffix. While <code>1</code> will be numeric, <code>1L</code> will e integer.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># define an integer value</span>
+x &lt;-<span class="st"> </span>10L
+x</code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(x)</code></pre></div>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<p>This is not important most of the time when you are using <em>R</em>. Except when it is! There are some situations where integers are required! ### Logical values</p>
+<p>Logicals are rather simple as they can only take up two different values: either <code>TRUE</code> or <code>FALSE</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># logical &quot;true&quot;</span>
+x &lt;-<span class="st"> </span><span class="ot">TRUE</span>
+x</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># logical &quot;false&quot;</span>
+x &lt;-<span class="st"> </span><span class="ot">FALSE</span>
+x</code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(x)</code></pre></div>
+<pre><code>## [1] &quot;logical&quot;</code></pre>
+</div>
+<div id="characters" class="section level3">
+<h3><span class="header-section-number">4.3.3</span> Characters</h3>
+<p>The last atomic class we will is the character class. A character is basically just a text and can be of any length.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># define character string</span>
+x &lt;-<span class="st"> &quot;Austria&quot;</span>
+x</code></pre></div>
+<pre><code>## [1] &quot;Austria&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># can be of an arbitrary length</span>
+x &lt;-<span class="st"> &quot;Max Konstantin Mustermann (AT)&quot;</span>
+x</code></pre></div>
+<pre><code>## [1] &quot;Max Konstantin Mustermann (AT)&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(x)</code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+</div>
+<div id="checking-classes" class="section level3">
+<h3><span class="header-section-number">4.3.4</span> Checking classes</h3>
+<p>We can check if an object is of a specific class in several different ways. One handy way are the <code>is.*</code> commands. <code>is.character(&quot;foo&quot;)</code> will return logical <code>TRUE</code> if <code>&quot;foo&quot;</code> is a character object and <code>FALSE</code> else. Functions for all base objects exist such as:</p>
 <ul>
-<li>Structure: <code>if (&lt;condition&gt;) { &lt;action&gt; }</code></li>
-<li>The condition <em>has to be a single logical value</em> (<code>TRUE</code> or <code>FALSE</code>).</li>
-<li>The action between the curly brackets is executed if and only if the condition is <code>TRUE</code>.</li>
+<li><code>is.double</code></li>
+<li><code>is.integer</code></li>
+<li><code>is.logical</code></li>
+<li><code>is.character</code></li>
+<li>… and many more.</li>
 </ul>
-<p><strong>An example:</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define x</span>
-x &lt;-<span class="st"> </span><span class="dv">8</span>
-<span class="co"># Check if x &gt; 10</span>
-<span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span>) { <span class="kw">print</span>(<span class="st">&quot;x is larger than 10&quot;</span>) }
-<span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span>) <span class="kw">print</span>(<span class="st">&quot;x is larger than 10&quot;</span>)</code></pre></div>
-<p>There are different ways how to write <code>if</code> conditions. According to <a href="http://adv-r.had.co.nz/Style.html">Headley Wickhams style guide</a> the following two ways are the preferred ones:</p>
-<p><strong>Short:</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span>) <span class="kw">print</span>(<span class="st">&quot;x is larger than 10&quot;</span>)</code></pre></div>
-<p><strong>For longer <code>&lt;action&gt;</code>s on multiple lines:</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span>) {
-  <span class="kw">print</span>(<span class="st">&quot;x is larger than 10&quot;</span>)
-}</code></pre></div>
-<p>That’s nice, but where can we use it?</p>
-<div id="conditional-return" class="section level3">
-<h3><span class="header-section-number">8.2.1</span> Conditional return</h3>
-<p>Session 03, Exercise B: pool price.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">calculate_costs &lt;-<span class="st"> </span><span class="cf">function</span>(width, height, depth, price) {
-    <span class="co"># If input price is smaller or equal to 0 return NA</span>
-    <span class="cf">if</span> (price <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span>) <span class="kw">return</span>(<span class="ot">NA</span>)
-    <span class="co"># Else do something</span>
-    res &lt;-<span class="st"> </span>width <span class="op">*</span><span class="st"> </span>height <span class="op">*</span><span class="st"> </span>depth <span class="op">*</span><span class="st"> </span>price
-    <span class="kw">return</span>(res)
-}</code></pre></div>
-</div>
-<div id="stop-execution" class="section level3">
-<h3><span class="header-section-number">8.2.2</span> Stop execution</h3>
-<p>We can now use conditions to stop our script conditional on e.g., our input arguments using <code>stop(&quot;...&quot;)</code>. Don’t mix <code>stop</code> with <code>quit(...)</code>! <code>quit</code> will quit RStudio (or <em>R</em> in general), <code>stop</code> stops the execution of a script. In this example the execution will be stopped if the inputs are not numeric (<code>x</code> and/or <code>y</code>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">powfun &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {
-  <span class="co"># Check if x, y are numeric</span>
-  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.numeric</span>(x)) <span class="kw">stop</span>(<span class="st">&quot;input x has to be numeric&quot;</span>)
-  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.numeric</span>(y)) <span class="kw">stop</span>(<span class="st">&quot;input y has to be numeric&quot;</span>)
-  <span class="co"># Return the result</span>
-  <span class="kw">return</span>(x<span class="op">^</span>y)
-}</code></pre></div>
-<p>We can, of course, add a set of different checks, e.g., check that both inputs are numeric and of length 1:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">powfun &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {
-  <span class="co"># Check if x, y are numeric</span>
-  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.numeric</span>(x)) <span class="kw">stop</span>(<span class="st">&quot;input x has to be numeric&quot;</span>)
-  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.numeric</span>(y)) <span class="kw">stop</span>(<span class="st">&quot;input y has to be numeric&quot;</span>)
-  <span class="co"># Both have to be of length one</span>
-  <span class="cf">if</span> (<span class="kw">length</span>(x) <span class="op">!=</span><span class="st"> </span><span class="dv">1</span>) <span class="kw">stop</span>(<span class="st">&quot;input x has to be of length 1&quot;</span>)
-  <span class="cf">if</span> (<span class="kw">length</span>(y) <span class="op">!=</span><span class="st"> </span><span class="dv">1</span>) <span class="kw">stop</span>(<span class="st">&quot;input y has to be of length 1&quot;</span>)
-  <span class="co"># Return the result</span>
-  <span class="kw">return</span>(x<span class="op">^</span>y)
-}</code></pre></div>
-<p>This is the very same (again, check that <code>x</code> and <code>y</code> are numeric of length 1) but using logical or (<code>|</code>):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">powfun &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {
-  <span class="co"># Check if x, y are numeric</span>
-  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.numeric</span>(x) <span class="op">|</span><span class="st"> </span><span class="op">!</span><span class="kw">is.numeric</span>(y)) {
-      <span class="kw">stop</span>(<span class="st">&quot;input x, y have to be numeric&quot;</span>)
-  }
-  <span class="co"># Both have to be of length one</span>
-  <span class="cf">if</span> (<span class="kw">length</span>(x) <span class="op">!=</span><span class="st"> </span><span class="dv">1</span> <span class="op">|</span><span class="st"> </span><span class="kw">length</span>(y) <span class="op">!=</span><span class="st"> </span><span class="dv">1</span>) {
-    <span class="kw">stop</span>(<span class="st">&quot;input x, y have to be of length 1&quot;</span>)
-  }
-  <span class="co"># Return the result</span>
-  <span class="kw">return</span>(x<span class="op">^</span>y)
-}</code></pre></div>
-<p>Or using only one condition. <strong>Note</strong>: compare this version to the one two further up. While they do the same this one is much more compact, however, the error message you will get is much less detailed. Thus, if you get an error here (<code>stop(...)</code> is called) it is not obvious what happened exactly. Thus, it strongly depends on your task whether you want to have compact conditions or detailed messages.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">powfun &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {
-  <span class="co"># Check if x, y are numeric and of length 1</span>
-  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.numeric</span>(x) <span class="op">|</span><span class="st"> </span><span class="op">!</span><span class="kw">is.numeric</span>(y) <span class="op">|</span><span class="st"> </span><span class="kw">length</span>(x) <span class="op">!=</span><span class="st"> </span><span class="dv">1</span> <span class="op">|</span><span class="st"> </span><span class="op">!</span><span class="kw">length</span>(y) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) {
-    <span class="kw">stop</span>(<span class="st">&quot;input x, y have to be numeric of length 1&quot;</span>)
-  }
-  <span class="co"># Return the result</span>
-  <span class="kw">return</span>(x<span class="op">^</span>y)
-}</code></pre></div>
-</div>
-<div id="another-example" class="section level3">
-<h3><span class="header-section-number">8.2.3</span> Another example</h3>
-<p>Another example from Session 03, Exercise A:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">celsius_to_fahrenheit &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
-  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.numeric</span>(x)) <span class="kw">stop</span>(<span class="st">&quot;x must be numeric&quot;</span>)
-  <span class="kw">return</span>(x <span class="op">*</span><span class="st"> </span><span class="dv">9</span> <span class="op">/</span><span class="st"> </span><span class="dv">5</span> <span class="op">+</span><span class="st"> </span><span class="dv">32</span>)
-}
-fahrenheit_to_celsius &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
-  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.numeric</span>(x)) <span class="kw">stop</span>(<span class="st">&quot;x must be numeric&quot;</span>)
-  <span class="kw">return</span>((x <span class="op">-</span><span class="st"> </span><span class="dv">32</span>) <span class="op">*</span><span class="st"> </span><span class="dv">5</span> <span class="op">/</span><span class="st"> </span><span class="dv">9</span>)
-}</code></pre></div>
-<p>We cannot only check input arguments using control statements, we can also use them to check results and other things. Remember: in Session 02, Exercise A one of the tasks was to convert temperatures from degrees Celsius to degrees Fahrenheit and back and check if the temperatures are the same at the end. If not, you have a problem with your functions.</p>
-<p>Let’s start with a numeric vector <code>temp_celsius</code> and convert the temperatures into degrees Fahrenheit and back. The resulting vector is <code>temp_celsius2</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Convert temperatures</span>
-temp_celsius    &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">-5.2</span>, <span class="fl">38.3</span>, <span class="ot">NA</span>, <span class="fl">34.1</span>)
-temp_fahrenheit &lt;-<span class="st"> </span><span class="kw">celsius_to_fahrenheit</span>(temp_celsius)
-temp_celsius2   &lt;-<span class="st"> </span><span class="kw">fahrenheit_to_celsius</span>(temp_fahrenheit)</code></pre></div>
-<p>We could now use an <code>if</code> condition in our script to compare these two vectors and <strong>stop</strong> if they are not equal before using them to calculate something else.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Stop if not equal</span>
-<span class="cf">if</span> (<span class="op">!</span><span class="kw">all.equal</span>(temp_celsius, temp_celsius2)) {
-    <span class="kw">stop</span>(<span class="st">&quot;Whoops, something is wrong with the conversion&quot;</span>)
-}</code></pre></div>
-</div>
-</div>
-<div id="if-else-conditions" class="section level2">
-<h2><span class="header-section-number">8.3</span> If else conditions</h2>
-<p>The next extension of simple <code>if</code> statements are the <code>if-else</code> statements.</p>
-<ul>
-<li>Structure: <code>if (&lt;condition&gt;) \{ &lt;action 1&gt; \} else \{ &lt;action 2&gt; \}</code></li>
-<li>Additional <code>else</code> code block (optional)</li>
-<li>If the condition is <code>TRUE</code> “<code>&lt;action 1&gt;</code>” is executed, else “<code>&lt;action 2&gt;</code>”.</li>
-</ul>
-<p><strong>A simple example:</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create object x</span>
-x &lt;-<span class="st"> </span><span class="dv">22</span>
-<span class="co"># Is a larger than 10?</span>
-<span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span>) { <span class="kw">print</span>(<span class="st">&quot;x is &gt; 10&quot;</span>) } <span class="cf">else</span> { <span class="kw">print</span>(<span class="st">&quot;x is &lt;= 10&quot;</span>) }</code></pre></div>
-<pre><code>## [1] &quot;x is &gt; 10&quot;</code></pre>
-<p>Again, <em>R</em> allows you to write <code>if-else</code> conditions differently. According to the <a href="http://adv-r.had.co.nz/Style.html">style guide</a> the following to ways are good:</p>
-<p><strong>One-liner:</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span>) { <span class="kw">print</span>(<span class="st">&quot;x is larger than 10&quot;</span>) } <span class="cf">else</span> { <span class="kw">print</span>(<span class="st">&quot;x is smaller or equal to 10&quot;</span>) }</code></pre></div>
-<p><strong>Over multiple lines:</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span>) {
-  <span class="kw">print</span>(<span class="st">&quot;x is larger than 10&quot;</span>) 
-} <span class="cf">else</span> {
-  <span class="kw">print</span>(<span class="st">&quot;x is smaller or equal to 10&quot;</span>)
-}</code></pre></div>
-<div id="multiple-conditions" class="section level3">
-<h3><span class="header-section-number">8.3.1</span> Multiple conditions</h3>
-<p>We can also combine multiple <code>if-else</code> conditions and next them. In this example the <code>else</code> action contains another <code>if-else</code> control statement.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">10</span>
-
-<span class="co"># First if-else statement</span>
-<span class="cf">if</span> (x <span class="op">&lt;</span><span class="st"> </span><span class="dv">10</span>) {
-  x &lt;-<span class="st"> </span>x<span class="op">^</span><span class="dv">2</span>
-} <span class="cf">else</span> {
-  <span class="co"># Second if-else statement (nested)</span>
-  <span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span>) {
-     <span class="kw">print</span>(<span class="st">&quot;The result is larger than 10!&quot;</span>)
-  } <span class="cf">else</span> {
-     <span class="kw">print</span>(<span class="st">&quot;Exactly 10!&quot;</span>)
-  }
-}</code></pre></div>
-<p>In this example <code>&quot;Exactly 10!&quot;</code> will be printed. The outer condition (<code>x &lt; 10</code>) is <code>FALSE</code> why “<code>else</code>” will be executed. In <code>else</code> we see a second <code>if-else</code> block. The condition of this inner <code>if-else</code> statement is also <code>FALSE</code> (<code>x &gt; 0</code>) wherefore “<code>else</code>” of the inner control statement will be executed. ### if, else if, else</p>
-<p>The next and last extension are additional <code>else if</code> conditions. They are executed sequentially!</p>
-<ul>
-<li>If the first condition (<code>if</code>) is <code>FALSE</code> check the next condition</li>
-<li>Check first <code>else if</code> condition. If <code>TRUE</code> execute, else check the next one (in this case it’s <code>else</code>).</li>
-<li>Note that only one will be used!</li>
-</ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">4</span>
-
-<span class="co"># One if, else if, else condition</span>
-<span class="cf">if</span> (x <span class="op">&lt;</span><span class="st"> </span><span class="dv">10</span>) {
-  x &lt;-<span class="st"> </span>x<span class="op">^</span><span class="dv">2</span>
-} <span class="cf">else</span> <span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span>) {
-  <span class="kw">print</span>(<span class="st">&quot;The result is larger than 10!&quot;</span>)
-} <span class="cf">else</span> {
-  <span class="kw">print</span>(<span class="st">&quot;Exactly 10!&quot;</span>)
-}</code></pre></div>
-<p>In this example nothing will be printed. The first condition (<code>x &lt; 10</code>) is <code>TRUE</code> and the first action will be executed. All done there is to take <code>x</code> to the power of <code>2</code> (<code>x &lt;- x^2</code>). This will change our <code>x</code> and <code>x</code> will be <code>16</code> at the end (<code>4^2</code>) but we will <em>not run into <code>else if</code></em> as the first <code>if</code> was <code>TRUE</code> and only one will be executed! We can use multiple <code>else if</code> conditions. Again: only one will be executed, the first one that is <code>TRUE</code> (or run into the <code>else</code> if none of them is <code>TRUE</code>. All others will be skipped.</p>
-<p>Another example: what will be printed, if anything?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">4</span>
-
-<span class="co"># First condition</span>
-<span class="cf">if</span> (x <span class="op">&lt;</span><span class="st"> </span><span class="dv">10</span>) {
-  x &lt;-<span class="st"> </span>x<span class="op">^</span><span class="dv">2</span>
-}
-
-<span class="co"># Second condition</span>
-<span class="cf">if</span> (x <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span>) {
-  <span class="kw">print</span>(<span class="st">&quot;The result is larger than 10!&quot;</span>)
-} <span class="cf">else</span> {
-  <span class="kw">print</span>(<span class="st">&quot;Exactly 10!&quot;</span>)
-}</code></pre></div>
-<p>In contrast to the one example two further up we are not using an <code>if</code>, <code>else if</code>, <code>else</code> here, but an <code>if</code>, and a second <code>if-else</code>! Thus, something different happens. These are two separate control structures and the will be executed one after another.</p>
-<ol style="list-style-type: decimal">
-<li><code>x &lt; 10</code> is true, so the action of the upper <code>if</code> statement will be executed. The action is <code>x &lt;- x^2</code> which will <em>overwrite our object <code>x</code></em> and store <code>16</code> on <code>x</code>.</li>
-<li>Now the second <code>if-else</code> statement is considered. As we have modified our <code>x</code> the condition <code>x &gt; 10</code> is <code>TRUE</code> and <code>&quot;The result is larger than 10!&quot;</code> will be printed.</li>
-</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.integer</span>(<span class="fl">1.5</span>)</code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.double</span>(<span class="fl">1.5</span>)</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.logical</span>(<span class="ot">FALSE</span>)</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
 </div>
 </div>
 </div>
@@ -529,8 +460,8 @@ x &lt;-<span class="st"> </span><span class="dv">22</span>
           </div>
         </div>
       </div>
-<a href="style-guide.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="control-structures-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="getting-help.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="vectors.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

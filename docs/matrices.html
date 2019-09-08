@@ -322,7 +322,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number">Chapter 10</span> Matrices</h1>
 <p>In one of the first sessions I’ve shown the following image which explains how the different objects are connected to each other and/or based on each other. So far, we have learned a lot about (atomic) vectors, one of the basic objects in <em>R</em>. In this session we will see how matrices, data frames, and lists work.</p>
 <div style="text-align: center;">
-<p><img src="/home/retos/Documents/Lehre/SS2019_RProgramming/images/06/06_datatypes_3.png"></p>
+<p><img src="images/06/06_datatypes_3.png"></p>
 </div>
 <p>As shown, matrices are based on vectors, while data frames are based on lists, another frequently used object type in <em>R</em>.</p>
 <p>But let’s start with matrices first!</p>
@@ -375,7 +375,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## [3,]    3    6    9</code></pre>
 <strong>Note:</strong> we do not provide the <code>ncol</code> argument. Our data set is of length 9 (<code>length(1:9)</code>) and we are asking for three rows. There is only one way to fulfil the requirements: creating a <span class="math inline">\(3 \times 3\)</span> matrix. A graphical representation of what is happening is shown below:
 <div style="text-align: center; padding: 20px 0;">
-<p><img src="/home/retos/Documents/Lehre/SS2019_RProgramming/images/06/06_vector_to_matrix.png" style="width: 60%;"></p>
+<p><img src="images/06/06_vector_to_matrix.png" style="width: 60%;"></p>
 </div>
 <p>The upper part of the image represents a vector, e.g., the vector of length 9 shown in the example (<code>1:9</code>). The bottom figure shows how the vector is represented in the matrix, a <span class="math inline">\(3 \times 3\)</span> matrix in this example. By default **the data is filled by column, wherefore the first (left) column will contain the values <code>1</code>, <code>2</code>, <code>3</code>, the next column <code>4</code>, <code>5</code>, <code>6</code>, and the last column the remaining values <code>7</code>, <code>8</code>, <code>9</code>. We can change this behavior …</p>
 </div>
@@ -574,7 +574,7 @@ x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">
 </ul>
 <p>When using row and column indizes it is again <em>rows first</em>, <em>columns second</em>. The following image shows the indexing of a matrix. The blue numbers correspond to the row index (thus always <code>1</code> for the top row, <code>2</code> for the second row, …), the red numbers the index of the columns (<code>1</code>s left, <code>2</code> middle, …).</p>
 <div style="text-align: center;">
-<p><img src="/home/retos/Documents/Lehre/SS2019_RProgramming/images/06/06_matrix.png" style="width: 40%"></p>
+<p><img src="images/06/06_matrix.png" style="width: 40%"></p>
 </div>
 <p>Imagine we do have the following matrix:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x <span class="co"># Demo matrix</span></code></pre></div>

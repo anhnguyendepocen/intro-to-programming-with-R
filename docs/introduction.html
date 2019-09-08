@@ -351,7 +351,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <p>Since then (starting with <code>Fortran</code> in 1954) a wide range of programming languages have become available. An up-to-date list of programming languages <a href="https://www.levenez.com/lang/%7D%7Bhttps://www.levenez.com/lang/">can be found here</a>.</p>
 <div class="figure">
-<img src="/home/retos/Documents/Lehre/SS2019_RProgramming/images/01/01_history_of_programming_languages.jpg" />
+<img src="images/01/01_history_of_programming_languages.jpg" />
 
 </div>
 </div>
@@ -407,7 +407,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3><span class="header-section-number">1.5.3</span> <em>R</em> on the job market</h3>
 <p><em>R</em> is one of the leading programming languages for data science on the job market. The figure below shows the frequency which which different programming languages have been mentioned in job announcements for open data science positions (source: <a href="https://fossbytes.com/popular-top-programming-languages-machine-learning-data-science/%7D%7Bfossbytes.com">fossbytes.com</a>).</p>
 <div class="figure">
-<img src="/home/retos/Documents/Lehre/SS2019_RProgramming/images/01/01_fossbytes_com.png" />
+<img src="images/01/01_fossbytes_com.png" />
 
 </div>
 </div>
@@ -415,12 +415,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="the-r-ecosystem" class="section level2">
 <h2><span class="header-section-number">1.6</span> The <em>R</em> Ecosystem</h2>
 <div class="figure">
-<img src="/home/retos/Documents/Lehre/SS2019_RProgramming/images/01/01_R_ecosystem.png" />
+<img src="images/01/01_R_ecosystem.png" />
 
 </div>
 <p>As other programming languages (<code>perl</code>, <code>python</code>, …) the <em>R</em> system is modular. The base installation only provides a ‘small’ set of features (<strong>base</strong>/<strong>recommended</strong> packages) but can easily be extended by installing <strong>additional</strong> packages. <strong>Contributed</strong> packages (main sources) are available via the <a href="https://cran.r-project.org/">Comprehensive R Archive Network</a> (CRAN), however, other sources exist such as <a href="https://www.bioconductor.org/">Bioconductor</a> (focus on bioinformatics), private and community projects on <a href="https://github.com">github</a>, or private packages. Packages exist for nearly everything and different packages may provide similar features, however, not all packages do have the same quality or are carefully maintained. Thus, it is recommended to use packages published via CRAN (or bioconductor) as they undergo some quality control and automated checks while some private packages (e.g., from github) may not work on all operating systems or <em>R</em> versions. One important aspect of all programming languages is to communicate with the outside world to import and export data (see also <a href="https://cran.r-project.org/doc/manuals/R-data.html">R Data Import/Export</a> manual) or to communicate over a network.</p>
 <div class="figure">
-<img src="/home/retos/Documents/Lehre/SS2019_RProgramming/images/01/01_R_outside_world.png" />
+<img src="images/01/01_R_outside_world.png" />
 
 </div>
 <p><em>R</em> comes with a custom binary file format. These binary files are typically called <code>.rda</code>/<code>.rds</code> (<code>.Rda</code>/<code>.Rds</code>) and are used to store/load <em>R</em> objects. Beside its own format <em>R</em> allows to read and write data from and to (nearly) all available file formats. <em>R</em> base provides some high-level functions to easily import data from human readable files (e.g., <code>csv</code> or <code>ASCII</code> in general) which is often used for <em>simple</em> data sets. However, there is basically no limit to read and write data in <em>R</em> and packages exist for nearly all file formats, e.g., <code>XLS</code>/<code>XLSX</code>, <code>XML</code>, <code>JSON</code>, <code>NetCDF</code>, rastered data sets such as <code>geotiff</code>, images in general (<code>png</code>/<code>jpg</code>/<code>gif</code>), databases (<code>sqlite</code>/<code>SQL</code>) and many many more. If no package exists, feel free to develop one yourself and contribute it to the <em>R</em> community! <em>R</em> also provides socket connections for server-to-server connections over the network.</p>
@@ -444,22 +444,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <span class="co"># Call the function</span>
 <span class="kw">fun</span>(x)</code></pre></div>
-<pre><code>## [1] 0.238 0.503 0.752</code></pre>
+<pre><code>## [1] 0.258 0.493 0.742</code></pre>
 <p>We can, of course, use this function over and over again. Let’s draw another 1000 values from the uniform distribution and call the function again (<code>fun(runif(1000))</code>):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fun</span>(<span class="kw">runif</span>(<span class="dv">1000</span>))</code></pre></div>
-<pre><code>## [1] 0.245 0.501 0.758</code></pre>
+<pre><code>## [1] 0.267 0.522 0.780</code></pre>
 <p>Of course there are implementations for this. One could e.g., use the <code>summary()</code> method or the <code>quantile()</code> function. let’s have a look if our function works as intended:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Repeat again, compare to R&#39;s summary function</span>
 x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1000</span>)
 <span class="kw">fun</span>(x, <span class="dt">round =</span> <span class="dv">7</span>)</code></pre></div>
-<pre><code>## [1] 0.2453892 0.5003837 0.7598754</code></pre>
+<pre><code>## [1] 0.2472786 0.4988506 0.7522598</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="kw">quantile</span>(x, <span class="dt">probs =</span> <span class="fl">0.25</span>, <span class="dt">type =</span> <span class="dv">3</span>), <span class="kw">mean</span>(x), <span class="kw">quantile</span>(x, <span class="dt">probs =</span> <span class="fl">0.75</span>, <span class="dt">type =</span> <span class="dv">3</span>))</code></pre></div>
 <pre><code>##       25%                 75% 
-## 0.2453892 0.5003837 0.7598754</code></pre>
+## 0.2472786 0.4988506 0.7522598</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Summary method (uses different quantile approximation function)</span>
 <span class="kw">summary</span>(x)</code></pre></div>
 <pre><code>##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
-## 0.0000424 0.2463313 0.5155113 0.5003837 0.7598980 0.9982036</code></pre>
+## 0.0000327 0.2480395 0.4987626 0.4988506 0.7522809 0.9990405</code></pre>
 <p><strong>Note</strong>: as random data are used you will never get the same results.</p>
 </div>
 <div id="statistical-modeling" class="section level3">
@@ -473,8 +473,8 @@ x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1
 <li><code>supp</code>: factor, supplement type (<code>VC</code> or <code>OJ</code>)</li>
 <li><code>dose</code>: the dose in milligrams per day</li>
 </ul>
-<div id="htmlwidget-592d6dcd74dd3a351598" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-592d6dcd74dd3a351598">{"x":{"filter":"none","data":[[4.2,11.5,7.3,5.8,6.4,10,11.2,11.2,5.2,7,16.5,16.5,15.2,17.3,22.5,17.3,13.6,14.5,18.8,15.5,23.6,18.5,33.9,25.5,26.4,32.5,26.7,21.5,23.3,29.5,15.2,21.5,17.6,9.7,14.5,10,8.2,9.4,16.5,9.7,19.7,23.3,23.6,26.4,20,25.2,25.8,21.2,14.5,27.3,25.5,26.4,22.4,24.5,24.8,30.9,26.4,27.3,29.4,23],["VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ"],[0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>len<\/th>\n      <th>supp<\/th>\n      <th>dose<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[0,2]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-6dd9835ed4041d5bbb40" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6dd9835ed4041d5bbb40">{"x":{"filter":"none","data":[[4.2,11.5,7.3,5.8,6.4,10,11.2,11.2,5.2,7,16.5,16.5,15.2,17.3,22.5,17.3,13.6,14.5,18.8,15.5,23.6,18.5,33.9,25.5,26.4,32.5,26.7,21.5,23.3,29.5,15.2,21.5,17.6,9.7,14.5,10,8.2,9.4,16.5,9.7,19.7,23.3,23.6,26.4,20,25.2,25.8,21.2,14.5,27.3,25.5,26.4,22.4,24.5,24.8,30.9,26.4,27.3,29.4,23],["VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ"],[0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>len<\/th>\n      <th>supp<\/th>\n      <th>dose<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[0,2]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 <p>This is how the data set (<code>data.frame</code>) looks like:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(ToothGrowth, <span class="dv">3</span>)</code></pre></div>
 <pre><code>##    len supp dose
@@ -511,7 +511,7 @@ lmtest<span class="op">::</span><span class="kw">coeftest</span>(mod)</code></pr
 <p><strong><em>R</em> packages used</strong>: <a href="https://cran.r-project.org/package=ecmwfr">ecmwfr</a>, <a href="https://cran.r-project.org/package=ncdf4">ncdf4</a>, <a href="https://cran.r-project.org/package=raster">raster</a>, <a href="https://cran.r-project.org/package=maps">maps</a>, <a href="https://cran.r-project.org/package=colorspace">colorspace</a>.</p>
 <p>Some more (mostly) nice spatial <em>R</em> examples can be found on <a href="01_R_version1_CD.jpeg">Spatial.ly</a>.</p>
 <div class="figure">
-<img src="/home/retos/Documents/Lehre/SS2019_RProgramming/Examples/output_ERA5.png" />
+<img src="Examples/output_ERA5.png" />
 
 </div>
 </div>
@@ -521,17 +521,17 @@ lmtest<span class="op">::</span><span class="kw">coeftest</span>(mod)</code></pr
 <p>State boundaries downloaded form the <a href="https://gadm.org">GADM</a> website which provides national/political boundaries in an <em>R</em> format (rds) for different levels of detail (national and sub-national).</p>
 <p><strong><em>R</em> packages used</strong>: <a href="https://cran.r-project.org/package=sp">sp</a>, <a href="https://cran.r-project.org/package=zoo">zoo</a>, <a href="https://cran.r-project.org/package=colorspace">colorspace</a>.</p>
 <p>For a list of contributed <em>R</em> packages dealing with spatial and spatio-temporal data visit the <a href="https://CRAN.R-project.org/view=Spatial">Spatial</a> and <a href="https://CRAN.R-project.org/view=SpatioTemporal">SpatioTemporal</a> CRAN task views. Some more (mostly) nice spatial <em>R</em> examples can be found on <a href="http://spatial.ly/r/">Spatial.ly</a>.</p>
-<p><img src="/home/retos/Documents/Lehre/SS2019_RProgramming/Examples/output_US_Death.png" /> ### Text Mining</p>
+<p><img src="Examples/output_US_Death.png" /> ### Text Mining</p>
 <p>Beside spatial or geographical data sets <em>R</em> is also often used for <em>text mining</em> applications (automatically classifying texts, find similarities between different texts, study the evolution of language, …).</p>
 <p>The example below shows so called <strong>word clouds</strong> based on the latest 500 tweets (from <a href="https://twitter.com">twitter</a>) from two American politicians. The tweets are downloaded and cleaned (common words as “the” or “A” are removed, URL’s and some special characters or quotes are removed) before counting the frequency of each word. Words which are used more frequent are shown with a larger font size and darker color. <strong>Guess who is who?</strong></p>
 <p><strong><em>R</em> packages used</strong>: <a href="https://cran.r-project.org/package=rtweet">rtweet</a>, <a href="https://cran.r-project.org/package=tm">tm</a>, <a href="https://cran.r-project.org/package=wordcloud">wordcloud</a>, <a href="https://cran.r-project.org/package=colorspace">colorspace</a>.</p>
 <p>The CRAN task view <a href="https://CRAN.R-project.org/view=NaturalLanguageProcessing%3CPaste%3E">Natural Language Processing</a> shows an overview/list of contributed <em>R</em> packages for processing language/words. For some more inspiration of graphical representations of <em>R</em> based text mining applications <a href="https://www.bnosac.be/index.php/blog/56-an-overview-of-text-mining-visualisations-possibilities-with-r-on-the-ceta-trade-agreement">visit bnosac.be</a>.</p>
-<p><img src="/home/retos/Documents/Lehre/SS2019_RProgramming/Examples/output_twitter.png" /> Answer: Donald Trump left (easy), Hillary Clinton right (less obvious but remarkably different to the tweets of the president). ### Three Dimensional Plots</p>
+<p><img src="Examples/output_twitter.png" /> Answer: Donald Trump left (easy), Hillary Clinton right (less obvious but remarkably different to the tweets of the president). ### Three Dimensional Plots</p>
 <p>Three dimensional plots are always a bit more difficult to produce <em>and</em> they often do not make sense (at least not plotting 3D barplots). However, in some cases three dimensional perspective plots can make sense as in this case. The image below shows the area around Innsbruck, a combination of a digital elevation model (<a href="https://asterweb.jpl.nasa.gov/gdem.asp">ASTER</a> data) and an <a href="https://www.openstreetmap.org">OpenStreetMap</a> overlay. Takes quite a while to get this result, but looks cool :).</p>
 <p><strong><em>R</em> packages used</strong>: <a href="https://cran.r-project.org/package=OpenStreetMap">OpenStreetMap</a>, <a href="https://cran.r-project.org/package=rayshader">rayshader</a>, <a href="https://cran.r-project.org/package=raster">raster</a>, <a href="https://cran.r-project.org/package=sp">sp</a>, <a href="https://cran.r-project.org/package=colorspace">colorspace</a>.</p>
 <p>More details available on the <a href="https://www.rayshader.com">rayshader website</a>.</p>
 <div class="figure">
-<img src="/home/retos/Documents/Lehre/SS2019_RProgramming/Examples/output_map.png" />
+<img src="Examples/output_map.png" />
 
 </div>
 

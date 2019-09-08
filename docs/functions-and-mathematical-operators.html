@@ -346,7 +346,7 @@ sd2 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">
 <span class="co"># ... and again ...</span>
 sd3 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">sum</span>((x3<span class="op">-</span><span class="kw">mean</span>(x3))<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(<span class="kw">length</span>(x3)<span class="op">-</span><span class="dv">1</span>))
 <span class="kw">print</span>(<span class="kw">c</span>(sd1, sd2, sd3))</code></pre></div>
-<pre><code>## [1] 0.9135039 1.6645495 5.4322861</code></pre>
+<pre><code>## [1] 0.9795714 1.4533307 4.9951010</code></pre>
 <p>… even if the equation for the standard deviation is rather simple you can easily see that the code is quickly getting complex and prone to errors! Rather than doing this spaghetti-style-coding we write ourself a function. Well, <code>sd</code> is a mathematical function from <em>R</em> base, but here we will use a simple hand-written sd function (I call it <code>sdfun</code>):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define the function once:</span>
 sdfun &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
@@ -361,10 +361,10 @@ sd1 &lt;-<span class="st"> </span><span class="kw">sdfun</span>(x1)
 sd2 &lt;-<span class="st"> </span><span class="kw">sdfun</span>(x2)
 sd3 &lt;-<span class="st"> </span><span class="kw">sdfun</span>(x3)
 <span class="kw">print</span>(<span class="kw">c</span>(sd1, sd2, sd3))</code></pre></div>
-<pre><code>## [1] 0.8895834 1.5284751 5.3359076</code></pre>
+<pre><code>## [1] 0.9989122 1.4655231 5.6259778</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Or even</span>
 <span class="kw">print</span>(<span class="kw">c</span>(<span class="kw">sdfun</span>(x1), <span class="kw">sdfun</span>(x2), <span class="kw">sdfun</span>(x3)))</code></pre></div>
-<pre><code>## [1] 0.8895834 1.5284751 5.3359076</code></pre>
+<pre><code>## [1] 0.9989122 1.4655231 5.6259778</code></pre>
 </div>
 <div id="when-should-i-use-functions" class="section level2">
 <h2><span class="header-section-number">6.2</span> When should I use functions?</h2>

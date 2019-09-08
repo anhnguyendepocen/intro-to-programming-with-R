@@ -323,10 +323,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>TODO this is a copy of the one above, at leas in large parts. Merge.</p>
 <p>Graphical representation:</p>
 <div style="text-align: center;">
-<p><img src="/home/retos/Documents/Lehre/SS2019_RProgramming/images/03/03_controlstructure_ifelse.png" style="with: 50%;"><br /> Simple representation of an if-else control structure.</p>
+<p><img src="images/03/03_controlstructure_ifelse.png" style="with: 50%;"><br /> Simple representation of an if-else control structure.</p>
 </div>
 <div style="text-align: center;">
-<p><img src="/home/retos/Documents/Lehre/SS2019_RProgramming/images/03/03_controlstructure_elseif.png" style="with: 50%;"><br > Simple representation of an if, else if, else control structure.</p>
+<p><img src="images/03/03_controlstructure_elseif.png" style="with: 50%;"><br > Simple representation of an if, else if, else control structure.</p>
 </div>
 <div id="control-structures" class="section level2">
 <h2><span class="header-section-number">9.1</span> Control Structures</h2>
@@ -592,7 +592,7 @@ while (x &lt; 0) {
   x &lt;- x + 1
 }</code></pre>
 <div style="text-align: center;">
-<p><img src="/home/retos/Documents/Lehre/SS2019_RProgramming/images/04/04_flowchart_trap_xkcd.png" style="width: 30%;"></p>
+<p><img src="images/04/04_flowchart_trap_xkcd.png" style="width: 30%;"></p>
 </div>
 <p>An example for a <code>while</code> loop: Print all numbers <code>x</code> in <span class="math inline">\(1, 2, ..., \infty\)</span> as long as <code>x^2</code> is lower than 20. Start with <code>x &lt;- 0</code>.</p>
 <ul>
@@ -642,16 +642,16 @@ x[1L] &lt;-<span class="st"> </span><span class="fl">1.0</span>              <sp
 <pre><code>## [1]  1.00000  1.50000  2.25000  3.37500  5.06250  7.59375 11.39062</code></pre>
 <p>But let us do this step-by-step. In a first step we defined ourself a vector <code>x</code> of length <code>7</code>. We can “visualize” this vector as follows:</p>
 <div>
-<p><img src="/home/retos/Documents/Lehre/SS2019_RProgramming/images/05/05_vector_subsetting1.png" style="width: 50%;"></p>
+<p><img src="images/05/05_vector_subsetting1.png" style="width: 50%;"></p>
 </div>
 <p>By index, the first element of the vector is <code>x[1L]</code>, the second one <code>x[2L]</code> and so far and so on (<em>R</em> starts with 1, not 0). Given a second object <code>i = 1L</code> (a vector index) we can also rewrite this as follows:</p>
 <div>
-<p><img src="/home/retos/Documents/Lehre/SS2019_RProgramming/images/05/05_vector_subsetting2.png" style="width: 50%;"></p>
+<p><img src="images/05/05_vector_subsetting2.png" style="width: 50%;"></p>
 </div>
 <p><code>x[i]</code> is the first element as <code>i = 1L</code>. The second element is <code>x[i + 1L]</code> as <code>i + 1L = 2L</code>, and the last one <code>x[i + 6L]</code> as we have <code>7</code> elements (<code>i + 6L = 7L</code>).</p>
 <p>In our example (multiply <code>1.0</code> six times with <code>1.5</code>) we first define a vector of length <code>7</code> and set <code>x[1L]</code> to <code>1</code> which gives us the following numeric vector:</p>
 <div>
-<p><img src="/home/retos/Documents/Lehre/SS2019_RProgramming/images/05/05_vector_inter1.png" style="width: 50%;"></p>
+<p><img src="images/05/05_vector_inter1.png" style="width: 50%;"></p>
 </div>
 <p>So far, not very impressive.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">N &lt;-<span class="st"> </span><span class="dv">7</span>                    <span class="co"># Length of the vector</span>
@@ -663,25 +663,25 @@ x[1L] &lt;-<span class="st"> </span><span class="fl">1.0</span>              <sp
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span><span class="dv">7</span>) { x[i] &lt;-<span class="st"> </span>x[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>] <span class="op">*</span><span class="st"> </span><span class="fl">1.5</span> }</code></pre></div>
 <p>In the first iteration of the <code>for</code> loop <code>i</code> is set to <code>2L</code>. Inside the loop we compute <code>x[i - 1] * 1.5</code> and directly store it on <code>x[i]</code>. Thus, we store <code>x[1L] * 1.5</code> on <code>x[2L]</code> (or <code>x[2L] &lt;- x[1L] * 1.5</code>).</p>
 <div>
-<p><img src="/home/retos/Documents/Lehre/SS2019_RProgramming/images/05/05_vector_inter2.png" style="width: 50%;"></p>
+<p><img src="images/05/05_vector_inter2.png" style="width: 50%;"></p>
 </div>
 <div>
-<p><img src="/home/retos/Documents/Lehre/SS2019_RProgramming/images/05/05_vector_inter3.png" style="width: 50%;"></p>
+<p><img src="images/05/05_vector_inter3.png" style="width: 50%;"></p>
 </div>
 <p>In the next iteration <code>i</code> is set to <code>3L</code> and we store <code>x[3L] &lt;- x[2L] * 1.5</code> and so far ans so on …</p>
 <div>
-<p><img src="/home/retos/Documents/Lehre/SS2019_RProgramming/images/05/05_vector_inter4.png" style="width: 50%;"></p>
+<p><img src="images/05/05_vector_inter4.png" style="width: 50%;"></p>
 </div>
 <div>
-<p><img src="/home/retos/Documents/Lehre/SS2019_RProgramming/images/05/05_vector_inter5.png" style="width: 50%;"></p>
+<p><img src="images/05/05_vector_inter5.png" style="width: 50%;"></p>
 </div>
 <p>… until we reach <code>x[7L] &lt;- x[6L] * 1.5</code>, the end of our loop.</p>
 <div>
-<p><img src="/home/retos/Documents/Lehre/SS2019_RProgramming/images/05/05_vector_inter6.png" style="width: 50%;"></p>
+<p><img src="images/05/05_vector_inter6.png" style="width: 50%;"></p>
 </div>
 <p>At the end we have stored all the interim results on <code>x</code> which now looks as follows:</p>
 <div>
-<p><img src="/home/retos/Documents/Lehre/SS2019_RProgramming/images/05/05_vector_inter6.png" style="width: 50%;"></p>
+<p><img src="images/05/05_vector_inter6.png" style="width: 50%;"></p>
 </div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span><span class="dv">7</span>) { x[i] &lt;-<span class="st"> </span>x[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>] <span class="op">*</span><span class="st"> </span><span class="fl">1.5</span> }
 <span class="kw">print</span>(x)</code></pre></div>
