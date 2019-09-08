@@ -55,6 +55,29 @@
 <script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
 <link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+
+    // Show/hide solution
+    $.each($("div.solution"), function() {
+        // Manipulate content
+        var content = $(this).html();
+        $(this).html("<div class=\"show-hide\"></div><div class=\"content\"></div>")
+        $(this).find(".show-hide").html("Show/hide solution (click to show/hide)");
+        $(this).find(".content").html(content)
+        // Adding functionality
+        $(this).on("click", ".show-hide", function() {
+            var elem = $(this).closest("div.solution").find(".content");
+            if ($(elem).is(":visible")) {
+                $(elem).fadeOut();
+            } else {
+                $(elem).fadeIn();
+            }
+        });
+    })
+
+});
+</script>
 
 
 <style type="text/css">
@@ -95,6 +118,7 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
+<link rel="stylesheet" href="static/custom.css" type="text/css" />
 </head>
 
 <body>
@@ -321,6 +345,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="preface" class="section level1 unnumbered">
 <h1>Preface</h1>
 <p>This is the preface.</p>
+<div class="exercise">
+<p>Create the following matrix:</p>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    5    9
+## [2,]    2    6   10
+## [3,]    3    7   11
+## [4,]    4    8   12</code></pre>
+</div>
+<div class="solution">
+<p>Well, that’s simple! We just have to do this:</p>
+<div class="sourceCode"><pre class="sourceCode r solution"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)
+x</code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    5    9
+## [2,]    2    6   10
+## [3,]    3    7   11
+## [4,]    4    8   12</code></pre>
+</div>
 
 </div>
             </section>

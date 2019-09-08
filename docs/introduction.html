@@ -55,6 +55,29 @@
 <script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
 <link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+
+    // Show/hide solution
+    $.each($("div.solution"), function() {
+        // Manipulate content
+        var content = $(this).html();
+        $(this).html("<div class=\"show-hide\"></div><div class=\"content\"></div>")
+        $(this).find(".show-hide").html("Show/hide solution (click to show/hide)");
+        $(this).find(".content").html(content)
+        // Adding functionality
+        $(this).on("click", ".show-hide", function() {
+            var elem = $(this).closest("div.solution").find(".content");
+            if ($(elem).is(":visible")) {
+                $(elem).fadeOut();
+            } else {
+                $(elem).fadeIn();
+            }
+        });
+    })
+
+});
+</script>
 
 
 <style type="text/css">
@@ -95,6 +118,7 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
+<link rel="stylesheet" href="static/custom.css" type="text/css" />
 </head>
 
 <body>
@@ -444,22 +468,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <span class="co"># Call the function</span>
 <span class="kw">fun</span>(x)</code></pre></div>
-<pre><code>## [1] 0.258 0.493 0.742</code></pre>
+<pre><code>## [1] 0.239 0.479 0.725</code></pre>
 <p>We can, of course, use this function over and over again. Let’s draw another 1000 values from the uniform distribution and call the function again (<code>fun(runif(1000))</code>):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fun</span>(<span class="kw">runif</span>(<span class="dv">1000</span>))</code></pre></div>
-<pre><code>## [1] 0.267 0.522 0.780</code></pre>
+<pre><code>## [1] 0.263 0.505 0.745</code></pre>
 <p>Of course there are implementations for this. One could e.g., use the <code>summary()</code> method or the <code>quantile()</code> function. let’s have a look if our function works as intended:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Repeat again, compare to R&#39;s summary function</span>
 x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1000</span>)
 <span class="kw">fun</span>(x, <span class="dt">round =</span> <span class="dv">7</span>)</code></pre></div>
-<pre><code>## [1] 0.2472786 0.4988506 0.7522598</code></pre>
+<pre><code>## [1] 0.2423060 0.4962755 0.7478604</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="kw">quantile</span>(x, <span class="dt">probs =</span> <span class="fl">0.25</span>, <span class="dt">type =</span> <span class="dv">3</span>), <span class="kw">mean</span>(x), <span class="kw">quantile</span>(x, <span class="dt">probs =</span> <span class="fl">0.75</span>, <span class="dt">type =</span> <span class="dv">3</span>))</code></pre></div>
 <pre><code>##       25%                 75% 
-## 0.2472786 0.4988506 0.7522598</code></pre>
+## 0.2423060 0.4962755 0.7478604</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Summary method (uses different quantile approximation function)</span>
 <span class="kw">summary</span>(x)</code></pre></div>
 <pre><code>##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
-## 0.0000327 0.2480395 0.4987626 0.4988506 0.7522809 0.9990405</code></pre>
+## 0.0001154 0.2435042 0.5102453 0.4962755 0.7482093 0.9991448</code></pre>
 <p><strong>Note</strong>: as random data are used you will never get the same results.</p>
 </div>
 <div id="statistical-modeling" class="section level3">
@@ -473,8 +497,8 @@ x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1
 <li><code>supp</code>: factor, supplement type (<code>VC</code> or <code>OJ</code>)</li>
 <li><code>dose</code>: the dose in milligrams per day</li>
 </ul>
-<div id="htmlwidget-6dd9835ed4041d5bbb40" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6dd9835ed4041d5bbb40">{"x":{"filter":"none","data":[[4.2,11.5,7.3,5.8,6.4,10,11.2,11.2,5.2,7,16.5,16.5,15.2,17.3,22.5,17.3,13.6,14.5,18.8,15.5,23.6,18.5,33.9,25.5,26.4,32.5,26.7,21.5,23.3,29.5,15.2,21.5,17.6,9.7,14.5,10,8.2,9.4,16.5,9.7,19.7,23.3,23.6,26.4,20,25.2,25.8,21.2,14.5,27.3,25.5,26.4,22.4,24.5,24.8,30.9,26.4,27.3,29.4,23],["VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ"],[0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>len<\/th>\n      <th>supp<\/th>\n      <th>dose<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[0,2]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-166531d8cc03dba5b8c7" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-166531d8cc03dba5b8c7">{"x":{"filter":"none","data":[[4.2,11.5,7.3,5.8,6.4,10,11.2,11.2,5.2,7,16.5,16.5,15.2,17.3,22.5,17.3,13.6,14.5,18.8,15.5,23.6,18.5,33.9,25.5,26.4,32.5,26.7,21.5,23.3,29.5,15.2,21.5,17.6,9.7,14.5,10,8.2,9.4,16.5,9.7,19.7,23.3,23.6,26.4,20,25.2,25.8,21.2,14.5,27.3,25.5,26.4,22.4,24.5,24.8,30.9,26.4,27.3,29.4,23],["VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ"],[0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>len<\/th>\n      <th>supp<\/th>\n      <th>dose<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[0,2]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 <p>This is how the data set (<code>data.frame</code>) looks like:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(ToothGrowth, <span class="dv">3</span>)</code></pre></div>
 <pre><code>##    len supp dose
@@ -486,7 +510,7 @@ x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1
        <span class="dt">data =</span> ToothGrowth,
        <span class="dt">panel =</span> panel.smooth,
        <span class="dt">xlab =</span> <span class="st">&quot;length vs dose, given type&quot;</span>)</code></pre></div>
-<p>And this is the corresponding plot (one way of visualizing this data set). The two <code>supp</code> groups are plotted separately with the orange juice group on the left hand side and the ascorbic acid group on the right hand side. <img src="Introduction-to-R_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>And this is the corresponding plot (one way of visualizing this data set). The two <code>supp</code> groups are plotted separately with the orange juice group on the left hand side and the ascorbic acid group on the right hand side. <img src="Introduction-to-R_files/figure-html/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Estimate a linear model on the <code>ToothGrowth</code> data set. Length (<code>len</code>) of the cells responsible for tooth growth conditional on the treatment (<code>supp</code>) and the dose (<code>dose</code>)</p>
 <p>Rather than only doing a graphical analysis we can also estimate a statistical model. In this case a linear model with might not be the best model (just for illustration) to estimate the overall effect of the two treatments and the effect of increasing the dose (conditional on the treatment).</p>
 <p>Interpretation of such models is part of statistical bachelor courses and will not be part of this programming course!</p>

@@ -55,6 +55,29 @@
 <script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
 <link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+
+    // Show/hide solution
+    $.each($("div.solution"), function() {
+        // Manipulate content
+        var content = $(this).html();
+        $(this).html("<div class=\"show-hide\"></div><div class=\"content\"></div>")
+        $(this).find(".show-hide").html("Show/hide solution (click to show/hide)");
+        $(this).find(".content").html(content)
+        // Adding functionality
+        $(this).on("click", ".show-hide", function() {
+            var elem = $(this).closest("div.solution").find(".content");
+            if ($(elem).is(":visible")) {
+                $(elem).fadeOut();
+            } else {
+                $(elem).fadeIn();
+            }
+        });
+    })
+
+});
+</script>
 
 
 <style type="text/css">
@@ -95,6 +118,7 @@ code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* Com
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 
+<link rel="stylesheet" href="static/custom.css" type="text/css" />
 </head>
 
 <body>
@@ -346,7 +370,7 @@ sd2 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">
 <span class="co"># ... and again ...</span>
 sd3 &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">sum</span>((x3<span class="op">-</span><span class="kw">mean</span>(x3))<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(<span class="kw">length</span>(x3)<span class="op">-</span><span class="dv">1</span>))
 <span class="kw">print</span>(<span class="kw">c</span>(sd1, sd2, sd3))</code></pre></div>
-<pre><code>## [1] 0.9795714 1.4533307 4.9951010</code></pre>
+<pre><code>## [1] 0.927984 1.592251 5.257788</code></pre>
 <p>… even if the equation for the standard deviation is rather simple you can easily see that the code is quickly getting complex and prone to errors! Rather than doing this spaghetti-style-coding we write ourself a function. Well, <code>sd</code> is a mathematical function from <em>R</em> base, but here we will use a simple hand-written sd function (I call it <code>sdfun</code>):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define the function once:</span>
 sdfun &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
@@ -361,10 +385,10 @@ sd1 &lt;-<span class="st"> </span><span class="kw">sdfun</span>(x1)
 sd2 &lt;-<span class="st"> </span><span class="kw">sdfun</span>(x2)
 sd3 &lt;-<span class="st"> </span><span class="kw">sdfun</span>(x3)
 <span class="kw">print</span>(<span class="kw">c</span>(sd1, sd2, sd3))</code></pre></div>
-<pre><code>## [1] 0.9989122 1.4655231 5.6259778</code></pre>
+<pre><code>## [1] 1.057303 1.537626 4.901359</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Or even</span>
 <span class="kw">print</span>(<span class="kw">c</span>(<span class="kw">sdfun</span>(x1), <span class="kw">sdfun</span>(x2), <span class="kw">sdfun</span>(x3)))</code></pre></div>
-<pre><code>## [1] 0.9989122 1.4655231 5.6259778</code></pre>
+<pre><code>## [1] 1.057303 1.537626 4.901359</code></pre>
 </div>
 <div id="when-should-i-use-functions" class="section level2">
 <h2><span class="header-section-number">6.2</span> When should I use functions?</h2>

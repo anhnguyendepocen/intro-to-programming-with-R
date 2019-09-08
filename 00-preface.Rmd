@@ -1,4 +1,25 @@
 
+
 # Preface {-}
 
 This is the preface.
+
+<div class="exercise">
+Create the following matrix:
+
+```{r, echo = FALSE}
+x <- matrix(1:12, ncol = 3)
+x
+```
+
+</div>
+
+<div class="solution">
+
+Well, that's simple! We just have to do this:
+```{r, class.source = "solution"}
+x <- matrix(1:12, ncol = 3)
+x
+```
+</div>
+

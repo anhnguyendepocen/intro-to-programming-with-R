@@ -1,0 +1,26 @@
+
+
+/* Custom blocks */
+div.exercise, div.solution {
+    padding: .2em 1em .2em 4em;
+    margin: 0 0 1em 0;
+    background-image: url("rocket.svg");
+    background-position: 1em .5em;
+    background-size: 2em auto;
+    background-repeat: no-repeat;
+    border-radius: .25em;
+    border: 1px solid #C0C0C0;
+    background-color: #F0F0F0;
+    min-height: 3em;
+}
+div.exercise { background-image: url("exercise.svg"); }
+div.solution { background-image: url("solution.svg"); }
+
+div.solution .content {
+    display: none;
+}
+
+div.show-hide {
+    cursor: pointer;
+    font-weight: bold;
+}

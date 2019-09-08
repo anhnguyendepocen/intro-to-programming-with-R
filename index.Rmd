@@ -3,14 +3,20 @@ title: "Introduction to Programming with R"
 author: "Reto Stauffer, Thorsten Simon"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
-output: bookdown::gitbook
+output: 
+    bookdown::gitbook:
+        includes:
+            in_header: static/custom.html
 documentclass: book
 ##bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: rstudio/bookdown-demo
 description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
+
+css: static/custom.css
 ---
+
 
 # Prerequisites {-}
 
