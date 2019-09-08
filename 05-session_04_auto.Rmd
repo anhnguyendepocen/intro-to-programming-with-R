@@ -1,0 +1,207 @@
+---
+output:
+    html_document:
+        css: custom.css
+---
+Rendered: 2019-09-08 on _marvin_
+
+
+
+## Function Recap
+
+Just a short repetition of writing functions in _R_. During the last practical
+session but also when going trough your submissions on Session 03 Exercise
+A-C I've seen a lot of functions using Rs so called "lexical scoping"
+feature.  Even if this works it is "not recommended to use" (at least not
+for beginners as it might be confusing very quickly). The following two
+images show two _R_ functions. The first one is the suggested way to write
+functions.
+
+
+<div style="text-align: center;">
+ <img style="width: 60%;" src="images/04/04_scoping_A2.png">
+</div>
+
+**Explanation:** The function is, again, the simple power function
+we have used several times. The function takes two inputs, namely
+`x` and `power` and returns `x^power` at the end. Outside the function
+we define a `x` and a `y`, call the function, and store the result
+(the return of the function) on `z`. Several things to mention here:
+
+* Everything you use in the function _should be explicitly defined as input
+   to the function_ (here `x` and `power`).
+* The objects `x` and `power` inside the function are only available inside
+   the function (the gray box is kind of a "function container" or "box").
+* The object `x` (red) defined _outside the function_ is not the same as the
+   object `x` (turquoise) inside the function! Don't mix them up. The "red" `x`
+   is defined in our workspace. We forward the value of the "red" `x` to the
+   function as the first input argument. Inside the function the first
+   input argument is also called `x` but is not the "red" `x`. This is a new
+   object (thus, turquoise) and gets the same value as the "red" `x`.
+* The second element of the function (`power`) is not defined in the workspace
+   but gets the value of `y` as we call the function with `powfun(x, y)`.
+   The function inputs do not have to match the objects outside the function.
+
+
+<div style="text-align: center;">
+ <img style="width: 60%;" src="images/04/04_scoping_B2.png">
+</div>
+
+**Explanation:** This shows what we _should not do_. Scoping is a thing, but
+Try not to use it and try to understand what's happening if you do. In this case
+the function is even wrong. What we wanted to do is to have a function which
+has two inputs and returns the first input (`x`) to the power of the second input
+(`power`). However, if you look closely we actually do something different.
+
+* On our workspace we have two objects `x` and `y`. We then (as in the example
+   above) call our function with `x` and `y` as inputs. So far, so good.
+* The function now gets the input `x` and `power` (with the values from the two
+   objects on our workspace), however **the function returns `x^y` instead of
+   `x^power`**! Why does it still work? Scoping!
+* We are using an object `y` inside the function, which has **never explicitly been
+   defined as an input to the function**. _R_ now tries to find `y` and will find
+   one defined on in our workspace (the "orange" one) and uses this one. Thus,
+   the function works and - in this case - returns the correct result, but
+   **due to the wrong reason**!.
+* The `power` input is never used at all.
+* Try to imagine what will happen if you now call `function(2, 2)`. Instead
+   of returning `4` (`2^2`) the result on `z` will be `5.6568` as the function
+   returns `2^y = 2^2.6 = 5.6568`.
+
+Thus, always (always) define all variables you use inside functions as explicit
+input arguments. And check your functions such that you only use objects you
+specified as input arguments!
+
+## Developing Functions
+
+### Develop functions in steps
+
+For those who have had troubles writing functions: try to develop
+your functions in some kind of a multi-step approach by doing the following:
+
+* 1. Start with a fresh script and develop your code without functions first.
+* 2. As soon as everything works as it should, pack parts of the code into functions.
+* 3. Adjust and check your function.
+### Step 1: start without functions
+
+As an example of a multi-step approach let's use the example from
+Session 02. I start with a fresh script and develop my code to find
+all females in the data set which are taller than the smallest man:
+```{r, echo = TRUE, fig.align = "center"}
+rm(list = objects())        # Clear the whole workspace
+load("height_extended.rds") # Loading the data set
+objects()                   # Check objects
+
+# Smallest male person
+smallest_male <- min(height[gender == "m"])
+print(smallest_male)
+
+# Find females taller than smallest male, store index
+idx <- which(gender == "f" & height > smallest_male)
+print(idx)
+print(name[idx])
+```
+
+### Step 2: pack parts of your code into a function
+
+That works as expected! As I am now sure that the code runs and that
+my script does what it has to do I can pack it into a function. Note
+that the commands to clear the work space and the one command to load
+the data set will be outside the function, the function should only
+find the tall females.
+```{r, echo = TRUE, fig.align = "center"}
+rm(list = objects())        # Clear the whole workspace
+load("height_extended.rds") # Loading the data set
+# Find females taller than the smallest male person
+tall_females <- function(height, gender, name) {
+  # Smallest male person
+  smallest_male <- min(height[gender == "m"])
+
+  # Find females taller than smallest male, store index
+  idx <- which(gender == "f" & height > smallest_male)
+  print(name[idx])
+}
+
+# Call function:
+tall_females(height, gender, name)
+```
+
+### Step 3: adjust your function
+
+Well, that looks good so far, but now we have to adjust our function.
+In this case I've renamed my inputs (now `hgt`, `sex`, and `name`).
+**WARNING:** as soon as you rename your inputs: adjust your code such
+that it only uses these new objects (and not the old names, e.g.,
+`height`). If you would use `height` inside the function you'll run into
+the scoping problem again!
+In addition, I've added some **input checks** and an explicit **return**
+command at the end of the function.
+```{r, echo = TRUE, fig.align = "center"}
+rm(list = objects())        # Clear the whole workspace
+load("height_extended.rds") # Loading the data set
+# Smallest male person
+tall_females <- function(hgt, sex, name) {
+  # Check inputs
+  if(length(hgt) != length(sex) | length(hgt) != length(name)) {
+    stop("Input arguments have to be of the same length")
+  }
+  # Find body size of smallest male person
+  smallest_male <- min(hgt[sex == "m"])
+  # Find females taller than smallest male, store index
+  idx <- which(sex == "f" & hgt > smallest_male)
+  # Return names (character) of females > smallest male
+  return(name[idx])
+}
+
+# Call function:
+tall_females(height, gender, name)
+```
+
+## Advanced: use script files
+
+More advanced: I could now also copy the function into a second `.R` script
+file which takes up all my functions. Once I moved the function to another
+script I do have to `source` this script. `source` executes the script once,
+in this case `example_functions.R`. If we would not do that _R_ would not
+know the function `tall_females` as it has never been defined!
+
+The cool thing of such function files: you can remove the function from your
+main script file. Especially if the functions get longer and longer this helps
+you to keep your main script readable. So far we have not used this, however,
+feel free to try (and you will, for sure, have to start using it in your
+coding career).
+
+Your main script would, in this example, look as follows:
+```{r, echo = FALSE, results = "hide", fig.align = "center"}
+fun <- c("tall_females <- function(hgt, sex, name) {",
+         "    # Check inputs",
+         "    if(length(hgt) != length(sex) | length(hgt) != length(name)) {",
+         "        stop(\"Input arguments have to be of the same length\")",
+         "    }",
+         "    # Find body size of smallest male person",
+         "    smallest_male <- min(hgt[sex == \"m\"])",
+         "    # Find females taller than smallest male, store index",
+         "    idx <- which(sex == \"f\" & hgt > smallest_male)",
+         "    # Return names (character) of females > smallest male",
+         "    return(name[idx])",
+         "}")
+writeLines(fun, "example_functions.R")
+```
+
+```{r, echo = TRUE, fig.align = "center"}
+rm(list = objects())        # Clear the whole workspace
+load("height_extended.rds") # Loading the data set
+
+# Copied the function into a second file called "example_functions.R".
+# Source function file (loads the function into the workspace)
+source("example_functions.R")
+
+# Call function:
+tall_females(height, gender, name)
+```
+
+```{r, echo = FALSE, results = "hide", fig.align = "center"}
+file.remove("example_functions.R")
+```
+
+

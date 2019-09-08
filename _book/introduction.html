@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 1 Introduction | Introduction to Programming with R</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 1 Introduction | Introduction to Programming with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 1 Introduction | Introduction to Programming with R" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Reto Stauffer, Thorsten Simon" />
+
+
+<meta name="date" content="2019-09-08" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="preface.html"/>
+<link rel="next" href="installation.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.5/datatables.js"></script>
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prerequisites</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#programming"><i class="fa fa-check"></i><b>1.1</b> Programming</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#why-not-natural-languages"><i class="fa fa-check"></i><b>1.2</b> Why not Natural Languages?</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#history-of-programming"><i class="fa fa-check"></i><b>1.3</b> History of Programming</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#number-of-languages"><i class="fa fa-check"></i><b>1.4</b> Number of Languages</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#the-r-programming-language"><i class="fa fa-check"></i><b>1.5</b> The <em>R</em> Programming Language</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="introduction.html"><a href="introduction.html#what-is-r"><i class="fa fa-check"></i><b>1.5.1</b> What is <em>R</em>?</a></li>
+<li class="chapter" data-level="1.5.2" data-path="introduction.html"><a href="introduction.html#open-science"><i class="fa fa-check"></i><b>1.5.2</b> Open Science</a></li>
+<li class="chapter" data-level="1.5.3" data-path="introduction.html"><a href="introduction.html#r-on-the-job-market"><i class="fa fa-check"></i><b>1.5.3</b> <em>R</em> on the job market</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#the-r-ecosystem"><i class="fa fa-check"></i><b>1.6</b> The <em>R</em> Ecosystem</a></li>
+<li class="chapter" data-level="1.7" data-path="introduction.html"><a href="introduction.html#examples"><i class="fa fa-check"></i><b>1.7</b> Examples</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="introduction.html"><a href="introduction.html#empirical-mean-and-quartiles"><i class="fa fa-check"></i><b>1.7.1</b> Empirical Mean and Quartiles</a></li>
+<li class="chapter" data-level="1.7.2" data-path="introduction.html"><a href="introduction.html#statistical-modeling"><i class="fa fa-check"></i><b>1.7.2</b> Statistical Modeling</a></li>
+<li class="chapter" data-level="1.7.3" data-path="introduction.html"><a href="introduction.html#spatial-data"><i class="fa fa-check"></i><b>1.7.3</b> Spatial Data</a></li>
+<li class="chapter" data-level="1.7.4" data-path="introduction.html"><a href="introduction.html#geographical-data"><i class="fa fa-check"></i><b>1.7.4</b> Geographical Data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>2</b> Installation</a><ul>
+<li class="chapter" data-level="2.1" data-path="installation.html"><a href="installation.html#interfaces-and-development-environments-ide"><i class="fa fa-check"></i><b>2.1</b> Interfaces and Development Environments (IDE)</a></li>
+<li class="chapter" data-level="2.2" data-path="installation.html"><a href="installation.html#interactive-examples"><i class="fa fa-check"></i><b>2.2</b> Interactive Examples</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="installation.html"><a href="installation.html#r-as-a-basic-calculator"><i class="fa fa-check"></i><b>2.2.1</b> R as a basic calculator</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="getting-help.html"><a href="getting-help.html"><i class="fa fa-check"></i><b>3</b> Getting Help</a><ul>
+<li class="chapter" data-level="3.1" data-path="getting-help.html"><a href="getting-help.html#accessing-r-documentationhelp-pages"><i class="fa fa-check"></i><b>3.1</b> Accessing R documentation/help pages</a></li>
+<li class="chapter" data-level="3.2" data-path="getting-help.html"><a href="getting-help.html#package-documentation-and-vignettes"><i class="fa fa-check"></i><b>3.2</b> Package documentation and vignettes</a></li>
+<li class="chapter" data-level="3.3" data-path="getting-help.html"><a href="getting-help.html#websites"><i class="fa fa-check"></i><b>3.3</b> Websites</a></li>
+<li class="chapter" data-level="3.4" data-path="getting-help.html"><a href="getting-help.html#ask-the-community"><i class="fa fa-check"></i><b>3.4</b> Ask the community</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="nuts-and-bolts.html"><a href="nuts-and-bolts.html"><i class="fa fa-check"></i><b>4</b> Nuts and Bolts</a><ul>
+<li class="chapter" data-level="4.1" data-path="nuts-and-bolts.html"><a href="nuts-and-bolts.html#atomic-classes"><i class="fa fa-check"></i><b>4.1</b> Atomic classes</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="nuts-and-bolts.html"><a href="nuts-and-bolts.html#know-the-basics"><i class="fa fa-check"></i><b>4.1.1</b> Know the basics!</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="nuts-and-bolts.html"><a href="nuts-and-bolts.html#input-and-output"><i class="fa fa-check"></i><b>4.2</b> Input and Output</a></li>
+<li class="chapter" data-level="4.3" data-path="nuts-and-bolts.html"><a href="nuts-and-bolts.html#atomic-classes-1"><i class="fa fa-check"></i><b>4.3</b> Atomic Classes</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="nuts-and-bolts.html"><a href="nuts-and-bolts.html#double"><i class="fa fa-check"></i><b>4.3.1</b> Double</a></li>
+<li class="chapter" data-level="4.3.2" data-path="nuts-and-bolts.html"><a href="nuts-and-bolts.html#integers"><i class="fa fa-check"></i><b>4.3.2</b> Integers</a></li>
+<li class="chapter" data-level="4.3.3" data-path="nuts-and-bolts.html"><a href="nuts-and-bolts.html#characters"><i class="fa fa-check"></i><b>4.3.3</b> Characters</a></li>
+<li class="chapter" data-level="4.3.4" data-path="nuts-and-bolts.html"><a href="nuts-and-bolts.html#checking-classes"><i class="fa fa-check"></i><b>4.3.4</b> Checking classes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="vectors.html"><a href="vectors.html"><i class="fa fa-check"></i><b>5</b> Vectors</a><ul>
+<li class="chapter" data-level="5.1" data-path="vectors.html"><a href="vectors.html#create-vectors"><i class="fa fa-check"></i><b>5.1</b> Create Vectors</a></li>
+<li class="chapter" data-level="5.2" data-path="vectors.html"><a href="vectors.html#vectors-1"><i class="fa fa-check"></i><b>5.2</b> Vectors</a></li>
+<li class="chapter" data-level="5.3" data-path="vectors.html"><a href="vectors.html#missing-values"><i class="fa fa-check"></i><b>5.3</b> Missing values</a></li>
+<li class="chapter" data-level="5.4" data-path="vectors.html"><a href="vectors.html#coercion"><i class="fa fa-check"></i><b>5.4</b> Coercion</a></li>
+<li class="chapter" data-level="5.5" data-path="vectors.html"><a href="vectors.html#attributes"><i class="fa fa-check"></i><b>5.5</b> Attributes</a></li>
+<li class="chapter" data-level="5.6" data-path="vectors.html"><a href="vectors.html#vector-attributes"><i class="fa fa-check"></i><b>5.6</b> Vector Attributes</a></li>
+<li class="chapter" data-level="5.7" data-path="vectors.html"><a href="vectors.html#vector-subsetting"><i class="fa fa-check"></i><b>5.7</b> Vector Subsetting</a><ul>
+<li class="chapter" data-level="5.7.1" data-path="vectors.html"><a href="vectors.html#subsetting-by-indizes"><i class="fa fa-check"></i><b>5.7.1</b> Subsetting by indizes</a></li>
+<li class="chapter" data-level="5.7.2" data-path="vectors.html"><a href="vectors.html#subsetting-by-name"><i class="fa fa-check"></i><b>5.7.2</b> Subsetting by name</a></li>
+<li class="chapter" data-level="5.7.3" data-path="vectors.html"><a href="vectors.html#subsetting-by-logical-vectors"><i class="fa fa-check"></i><b>5.7.3</b> Subsetting by logical vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="vectors.html"><a href="vectors.html#relational-and-logical-operators"><i class="fa fa-check"></i><b>5.8</b> Relational and Logical Operators</a><ul>
+<li class="chapter" data-level="5.8.1" data-path="vectors.html"><a href="vectors.html#rational-operators"><i class="fa fa-check"></i><b>5.8.1</b> Rational Operators</a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="vectors.html"><a href="vectors.html#practical-session"><i class="fa fa-check"></i><b>5.9</b> Practical Session</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html"><i class="fa fa-check"></i><b>6</b> Functions and mathematical operators</a><ul>
+<li class="chapter" data-level="6.1" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#functions"><i class="fa fa-check"></i><b>6.1</b> Functions</a></li>
+<li class="chapter" data-level="6.2" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#when-should-i-use-functions"><i class="fa fa-check"></i><b>6.2</b> When should I use functions?</a></li>
+<li class="chapter" data-level="6.3" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#the-structure-of-functions"><i class="fa fa-check"></i><b>6.3</b> The structure of functions</a></li>
+<li class="chapter" data-level="6.4" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#functions-in-r"><i class="fa fa-check"></i><b>6.4</b> Functions in <em>R</em></a></li>
+<li class="chapter" data-level="6.5" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#calling-functions"><i class="fa fa-check"></i><b>6.5</b> Calling functions</a></li>
+<li class="chapter" data-level="6.6" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#naming-functions"><i class="fa fa-check"></i><b>6.6</b> Naming functions</a></li>
+<li class="chapter" data-level="6.7" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#functions-in-real-life"><i class="fa fa-check"></i><b>6.7</b> Functions In Real Life</a></li>
+<li class="chapter" data-level="6.8" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#declare-functions-in-r"><i class="fa fa-check"></i><b>6.8</b> Declare Functions in <em>R</em></a></li>
+<li class="chapter" data-level="6.9" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#the-null-value-in-r"><i class="fa fa-check"></i><b>6.9</b> The NULL value in <em>R</em></a></li>
+<li class="chapter" data-level="6.10" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#back-to-functions"><i class="fa fa-check"></i><b>6.10</b> Back to functions</a><ul>
+<li class="chapter" data-level="6.10.1" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#multiple-input-arguments"><i class="fa fa-check"></i><b>6.10.1</b> Multiple input arguments</a></li>
+</ul></li>
+<li class="chapter" data-level="6.11" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#practical-session-1"><i class="fa fa-check"></i><b>6.11</b> Practical Session</a><ul>
+<li class="chapter" data-level="6.11.1" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#exercise-1"><i class="fa fa-check"></i><b>6.11.1</b> Exercise 1</a></li>
+<li class="chapter" data-level="6.11.2" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#exercise-2"><i class="fa fa-check"></i><b>6.11.2</b> Exercise 2</a></li>
+<li class="chapter" data-level="6.11.3" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#exercise-3"><i class="fa fa-check"></i><b>6.11.3</b> Exercise 3</a></li>
+</ul></li>
+<li class="chapter" data-level="6.12" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#function-recap"><i class="fa fa-check"></i><b>6.12</b> Function Recap</a></li>
+<li class="chapter" data-level="6.13" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#developing-functions"><i class="fa fa-check"></i><b>6.13</b> Developing Functions</a><ul>
+<li class="chapter" data-level="6.13.1" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#develop-functions-in-steps"><i class="fa fa-check"></i><b>6.13.1</b> Develop functions in steps</a></li>
+<li class="chapter" data-level="6.13.2" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#step-2-pack-parts-of-your-code-into-a-function"><i class="fa fa-check"></i><b>6.13.2</b> Step 2: pack parts of your code into a function</a></li>
+<li class="chapter" data-level="6.13.3" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#step-3-adjust-your-function"><i class="fa fa-check"></i><b>6.13.3</b> Step 3: adjust your function</a></li>
+</ul></li>
+<li class="chapter" data-level="6.14" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#advanced-use-script-files"><i class="fa fa-check"></i><b>6.14</b> Advanced: use script files</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="style-guide.html"><a href="style-guide.html"><i class="fa fa-check"></i><b>7</b> Style guide</a><ul>
+<li class="chapter" data-level="7.0.1" data-path="style-guide.html"><a href="style-guide.html#what-is-a-coding-style"><i class="fa fa-check"></i><b>7.0.1</b> What is a coding style?</a></li>
+<li class="chapter" data-level="7.0.2" data-path="style-guide.html"><a href="style-guide.html#special-characters"><i class="fa fa-check"></i><b>7.0.2</b> Special characters</a></li>
+<li class="chapter" data-level="7.0.3" data-path="style-guide.html"><a href="style-guide.html#language"><i class="fa fa-check"></i><b>7.0.3</b> Language</a></li>
+<li class="chapter" data-level="7.0.4" data-path="style-guide.html"><a href="style-guide.html#script-file-names"><i class="fa fa-check"></i><b>7.0.4</b> Script file names</a></li>
+<li class="chapter" data-level="7.0.5" data-path="style-guide.html"><a href="style-guide.html#object-names"><i class="fa fa-check"></i><b>7.0.5</b> Object names</a></li>
+<li class="chapter" data-level="7.0.6" data-path="style-guide.html"><a href="style-guide.html#spaces-infix-operators"><i class="fa fa-check"></i><b>7.0.6</b> Spaces: infix operators</a></li>
+<li class="chapter" data-level="7.0.7" data-path="style-guide.html"><a href="style-guide.html#spaces-colons"><i class="fa fa-check"></i><b>7.0.7</b> Spaces: colons</a></li>
+<li class="chapter" data-level="7.0.8" data-path="style-guide.html"><a href="style-guide.html#spaces-multiple-spaces"><i class="fa fa-check"></i><b>7.0.8</b> Spaces: multiple spaces</a></li>
+<li class="chapter" data-level="7.0.9" data-path="style-guide.html"><a href="style-guide.html#spaces-brackets"><i class="fa fa-check"></i><b>7.0.9</b> Spaces: brackets</a></li>
+<li class="chapter" data-level="7.0.10" data-path="style-guide.html"><a href="style-guide.html#spaces-commas"><i class="fa fa-check"></i><b>7.0.10</b> Spaces: commas</a></li>
+<li class="chapter" data-level="7.0.11" data-path="style-guide.html"><a href="style-guide.html#openingclosing-brackets"><i class="fa fa-check"></i><b>7.0.11</b> Opening/closing brackets</a></li>
+<li class="chapter" data-level="7.0.12" data-path="style-guide.html"><a href="style-guide.html#indention"><i class="fa fa-check"></i><b>7.0.12</b> Indention</a></li>
+<li class="chapter" data-level="7.0.13" data-path="style-guide.html"><a href="style-guide.html#explicit-return"><i class="fa fa-check"></i><b>7.0.13</b> Explicit return</a></li>
+<li class="chapter" data-level="7.0.14" data-path="style-guide.html"><a href="style-guide.html#line-breaks"><i class="fa fa-check"></i><b>7.0.14</b> Line breaks</a></li>
+<li class="chapter" data-level="7.0.15" data-path="style-guide.html"><a href="style-guide.html#nested-indention"><i class="fa fa-check"></i><b>7.0.15</b> Nested indention</a></li>
+<li class="chapter" data-level="7.0.16" data-path="style-guide.html"><a href="style-guide.html#object-assignment"><i class="fa fa-check"></i><b>7.0.16</b> Object assignment</a></li>
+<li class="chapter" data-level="7.0.17" data-path="style-guide.html"><a href="style-guide.html#comments"><i class="fa fa-check"></i><b>7.0.17</b> Comments</a></li>
+<li class="chapter" data-level="7.0.18" data-path="style-guide.html"><a href="style-guide.html#all-together"><i class="fa fa-check"></i><b>7.0.18</b> All together</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="control-structures-1.html"><a href="control-structures-1.html"><i class="fa fa-check"></i><b>8</b> Control Structures (1)</a><ul>
+<li class="chapter" data-level="8.1" data-path="control-structures-1.html"><a href="control-structures-1.html#logical-operators"><i class="fa fa-check"></i><b>8.1</b> Logical Operators</a></li>
+<li class="chapter" data-level="8.2" data-path="control-structures-1.html"><a href="control-structures-1.html#if-conditions"><i class="fa fa-check"></i><b>8.2</b> If conditions</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="control-structures-1.html"><a href="control-structures-1.html#conditional-return"><i class="fa fa-check"></i><b>8.2.1</b> Conditional return</a></li>
+<li class="chapter" data-level="8.2.2" data-path="control-structures-1.html"><a href="control-structures-1.html#stop-execution"><i class="fa fa-check"></i><b>8.2.2</b> Stop execution</a></li>
+<li class="chapter" data-level="8.2.3" data-path="control-structures-1.html"><a href="control-structures-1.html#another-example"><i class="fa fa-check"></i><b>8.2.3</b> Another example</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="control-structures-1.html"><a href="control-structures-1.html#if-else-conditions"><i class="fa fa-check"></i><b>8.3</b> If else conditions</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="control-structures-1.html"><a href="control-structures-1.html#multiple-conditions"><i class="fa fa-check"></i><b>8.3.1</b> Multiple conditions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="control-structures-2.html"><a href="control-structures-2.html"><i class="fa fa-check"></i><b>9</b> Control Structures (2)</a><ul>
+<li class="chapter" data-level="9.1" data-path="control-structures-2.html"><a href="control-structures-2.html#control-structures"><i class="fa fa-check"></i><b>9.1</b> Control Structures</a></li>
+<li class="chapter" data-level="9.2" data-path="control-structures-2.html"><a href="control-structures-2.html#for-loops"><i class="fa fa-check"></i><b>9.2</b> <code>for</code> loops</a></li>
+<li class="chapter" data-level="9.3" data-path="control-structures-2.html"><a href="control-structures-2.html#basic-usage"><i class="fa fa-check"></i><b>9.3</b> Basic usage</a></li>
+<li class="chapter" data-level="9.4" data-path="control-structures-2.html"><a href="control-structures-2.html#for-loops-over-vectors"><i class="fa fa-check"></i><b>9.4</b> For loops over vectors</a></li>
+<li class="chapter" data-level="9.5" data-path="control-structures-2.html"><a href="control-structures-2.html#combine-loops-and-ifelse-conditions"><i class="fa fa-check"></i><b>9.5</b> Combine loops and if/else conditions</a></li>
+<li class="chapter" data-level="9.6" data-path="control-structures-2.html"><a href="control-structures-2.html#use-next-and-break"><i class="fa fa-check"></i><b>9.6</b> Use next and break</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="control-structures-2.html"><a href="control-structures-2.html#how-to-use-next"><i class="fa fa-check"></i><b>9.6.1</b> How to use next</a></li>
+<li class="chapter" data-level="9.6.2" data-path="control-structures-2.html"><a href="control-structures-2.html#how-to-use-break"><i class="fa fa-check"></i><b>9.6.2</b> How to use break</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="control-structures-2.html"><a href="control-structures-2.html#practical-exercises"><i class="fa fa-check"></i><b>9.7</b> Practical exercises</a></li>
+<li class="chapter" data-level="9.8" data-path="control-structures-2.html"><a href="control-structures-2.html#looping-over-vector-indices"><i class="fa fa-check"></i><b>9.8</b> Looping over vector indices</a></li>
+<li class="chapter" data-level="9.9" data-path="control-structures-2.html"><a href="control-structures-2.html#using-next-and-break"><i class="fa fa-check"></i><b>9.9</b> Using next and break</a></li>
+<li class="chapter" data-level="9.10" data-path="control-structures-2.html"><a href="control-structures-2.html#while-loops"><i class="fa fa-check"></i><b>9.10</b> while loops</a></li>
+<li class="chapter" data-level="9.11" data-path="control-structures-2.html"><a href="control-structures-2.html#store-interim-results"><i class="fa fa-check"></i><b>9.11</b> Store Interim Results</a></li>
+<li class="chapter" data-level="9.12" data-path="control-structures-2.html"><a href="control-structures-2.html#practical-session-2"><i class="fa fa-check"></i><b>9.12</b> Practical Session</a><ul>
+<li class="chapter" data-level="9.12.1" data-path="control-structures-2.html"><a href="control-structures-2.html#exercise-1-arithmetic-mean"><i class="fa fa-check"></i><b>9.12.1</b> Exercise 1: Arithmetic mean</a></li>
+<li class="chapter" data-level="9.12.2" data-path="control-structures-2.html"><a href="control-structures-2.html#exercise-2-conditional-for-loop"><i class="fa fa-check"></i><b>9.12.2</b> Exercise 2: Conditional for loop</a></li>
+<li class="chapter" data-level="9.12.3" data-path="control-structures-2.html"><a href="control-structures-2.html#exercise-3-factorial"><i class="fa fa-check"></i><b>9.12.3</b> Exercise 3: Factorial</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="matrices.html"><a href="matrices.html"><i class="fa fa-check"></i><b>10</b> Matrices</a><ul>
+<li class="chapter" data-level="10.1" data-path="matrices.html"><a href="matrices.html#matrices-in-r"><i class="fa fa-check"></i><b>10.1</b> Matrices in <em>R</em></a></li>
+<li class="chapter" data-level="10.2" data-path="matrices.html"><a href="matrices.html#create-a-matrix"><i class="fa fa-check"></i><b>10.2</b> Create a matrix</a></li>
+<li class="chapter" data-level="10.3" data-path="matrices.html"><a href="matrices.html#fill-by-rowcolumn"><i class="fa fa-check"></i><b>10.3</b> Fill by row/column</a></li>
+<li class="chapter" data-level="10.4" data-path="matrices.html"><a href="matrices.html#column-binding-and-row-binding-vectors"><i class="fa fa-check"></i><b>10.4</b> Column-binding and row-binding (vectors)</a></li>
+<li class="chapter" data-level="10.5" data-path="matrices.html"><a href="matrices.html#column-binding-and-row-binding-matrices"><i class="fa fa-check"></i><b>10.5</b> Column-binding and row-binding (matrices)</a></li>
+<li class="chapter" data-level="10.6" data-path="matrices.html"><a href="matrices.html#matrix-attributes"><i class="fa fa-check"></i><b>10.6</b> Matrix attributes</a></li>
+<li class="chapter" data-level="10.7" data-path="matrices.html"><a href="matrices.html#setting-dimension-names"><i class="fa fa-check"></i><b>10.7</b> Setting dimension names (, )</a></li>
+<li class="chapter" data-level="10.8" data-path="matrices.html"><a href="matrices.html#set-dimension-names-when-creating-the-object"><i class="fa fa-check"></i><b>10.8</b> Set dimension names when creating the object</a></li>
+<li class="chapter" data-level="10.9" data-path="matrices.html"><a href="matrices.html#practical-exercises-part-1"><i class="fa fa-check"></i><b>10.9</b> Practical Exercises (part 1)</a><ul>
+<li class="chapter" data-level="10.9.1" data-path="matrices.html"><a href="matrices.html#practical-exercise-2"><i class="fa fa-check"></i><b>10.9.1</b> Practical exercise 2</a></li>
+</ul></li>
+<li class="chapter" data-level="10.10" data-path="matrices.html"><a href="matrices.html#subsetting-matrices"><i class="fa fa-check"></i><b>10.10</b> Subsetting matrices</a></li>
+<li class="chapter" data-level="10.11" data-path="matrices.html"><a href="matrices.html#subsetting-matrices-with-logical-vectors"><i class="fa fa-check"></i><b>10.11</b> Subsetting matrices with logical vectors</a></li>
+<li class="chapter" data-level="10.12" data-path="matrices.html"><a href="matrices.html#subsetting-by-name-1"><i class="fa fa-check"></i><b>10.12</b> Subsetting by name</a></li>
+<li class="chapter" data-level="10.13" data-path="matrices.html"><a href="matrices.html#non-existing-elements-in-matrices"><i class="fa fa-check"></i><b>10.13</b> Non-existing elements in matrices</a></li>
+<li class="chapter" data-level="10.14" data-path="matrices.html"><a href="matrices.html#the-subset-method"><i class="fa fa-check"></i><b>10.14</b> The subset method</a></li>
+<li class="chapter" data-level="10.15" data-path="matrices.html"><a href="matrices.html#matrix-arithmetic"><i class="fa fa-check"></i><b>10.15</b> Matrix Arithmetic</a><ul>
+<li class="chapter" data-level="10.15.1" data-path="matrices.html"><a href="matrices.html#matrices-and-scalars"><i class="fa fa-check"></i><b>10.15.1</b> Matrices and scalars</a></li>
+<li class="chapter" data-level="10.15.2" data-path="matrices.html"><a href="matrices.html#matrices-and-vectors"><i class="fa fa-check"></i><b>10.15.2</b> Matrices and vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="10.16" data-path="matrices.html"><a href="matrices.html#further-functions"><i class="fa fa-check"></i><b>10.16</b> Further functions</a></li>
+<li class="chapter" data-level="10.17" data-path="matrices.html"><a href="matrices.html#practical-exercises-part-2"><i class="fa fa-check"></i><b>10.17</b> Practical Exercises (part 2)</a><ul>
+<li class="chapter" data-level="10.17.1" data-path="matrices.html"><a href="matrices.html#practical-exercise-3"><i class="fa fa-check"></i><b>10.17.1</b> Practical exercise 3</a></li>
+<li class="chapter" data-level="10.17.2" data-path="matrices.html"><a href="matrices.html#practical-exercise-4"><i class="fa fa-check"></i><b>10.17.2</b> Practical exercise 4</a></li>
+<li class="chapter" data-level="10.17.3" data-path="matrices.html"><a href="matrices.html#practical-exercise-5"><i class="fa fa-check"></i><b>10.17.3</b> Practical exercise 5</a></li>
+</ul></li>
+<li class="chapter" data-level="10.18" data-path="matrices.html"><a href="matrices.html#typical-examples"><i class="fa fa-check"></i><b>10.18</b> Typical Examples</a><ul>
+<li class="chapter" data-level="10.18.1" data-path="matrices.html"><a href="matrices.html#convert-matrix-to-data-frame"><i class="fa fa-check"></i><b>10.18.1</b> Convert matrix to data frame</a></li>
+<li class="chapter" data-level="10.18.2" data-path="matrices.html"><a href="matrices.html#convert-data-frame-to-matrix"><i class="fa fa-check"></i><b>10.18.2</b> Convert data frame to matrix</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="factors.html"><a href="factors.html"><i class="fa fa-check"></i><b>11</b> Factors</a><ul>
+<li class="chapter" data-level="11.1" data-path="factors.html"><a href="factors.html#practical-exercises-1"><i class="fa fa-check"></i><b>11.1</b> Practical Exercises</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="factors.html"><a href="factors.html#practical-exercises-1-1"><i class="fa fa-check"></i><b>11.1.1</b> Practical Exercises 1</a></li>
+<li class="chapter" data-level="11.1.2" data-path="factors.html"><a href="factors.html#practical-exercises-2"><i class="fa fa-check"></i><b>11.1.2</b> Practical Exercises 2</a></li>
+<li class="chapter" data-level="11.1.3" data-path="factors.html"><a href="factors.html#practical-exercises-3"><i class="fa fa-check"></i><b>11.1.3</b> Practical Exercises 3</a></li>
+<li class="chapter" data-level="11.1.4" data-path="factors.html"><a href="factors.html#descriptive-data-analysis"><i class="fa fa-check"></i><b>11.1.4</b> Descriptive Data Analysis</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="lists.html"><a href="lists.html"><i class="fa fa-check"></i><b>12</b> Lists</a></li>
+<li class="chapter" data-level="13" data-path="data-frames.html"><a href="data-frames.html"><i class="fa fa-check"></i><b>13</b> Data frames</a><ul>
+<li class="chapter" data-level="13.1" data-path="data-frames.html"><a href="data-frames.html#convert-objects"><i class="fa fa-check"></i><b>13.1</b> Convert Objects</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="sort-order.html"><a href="sort-order.html"><i class="fa fa-check"></i><b>14</b> Sort &amp; Order</a><ul>
+<li class="chapter" data-level="14.1" data-path="sort-order.html"><a href="sort-order.html#sorting-a-vector"><i class="fa fa-check"></i><b>14.1</b> Sorting a vector</a></li>
+<li class="chapter" data-level="14.2" data-path="sort-order.html"><a href="sort-order.html#order-of-a-vector"><i class="fa fa-check"></i><b>14.2</b> Order of a vector</a></li>
+<li class="chapter" data-level="14.3" data-path="sort-order.html"><a href="sort-order.html#sort-to-get-order-order-to-sort"><i class="fa fa-check"></i><b>14.3</b> Sort to get order, order to sort</a><ul>
+<li class="chapter" data-level="14.3.1" data-path="sort-order.html"><a href="sort-order.html#sort-to-get-order"><i class="fa fa-check"></i><b>14.3.1</b> Sort to get order</a></li>
+<li class="chapter" data-level="14.3.2" data-path="sort-order.html"><a href="sort-order.html#order-to-sort"><i class="fa fa-check"></i><b>14.3.2</b> Order to sort</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="sort-order.html"><a href="sort-order.html#sort-a-matrix"><i class="fa fa-check"></i><b>14.4</b> Sort a matrix</a></li>
+<li class="chapter" data-level="14.5" data-path="sort-order.html"><a href="sort-order.html#sorting-a-data.frame"><i class="fa fa-check"></i><b>14.5</b> Sorting a data.frame</a></li>
+<li class="chapter" data-level="14.6" data-path="sort-order.html"><a href="sort-order.html#practical-exercise"><i class="fa fa-check"></i><b>14.6</b> Practical Exercise</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Programming with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introduction" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
+<div id="programming" class="section level2">
+<h2><span class="header-section-number">1.1</span> Programming</h2>
+<p><strong>Programming</strong> is the way of telling a computer how to do certain things by giving it (unambiguous) instructions. The person who writes these instructions (you) is called a <strong>programmer</strong>, the instructions itself are called a <strong>program</strong>. Instructions can be written in many different ways, depending on the task which has to be done. The format in which instructions are written are called <strong>programming languages</strong>.</p>
+<p><strong>Why should I learn to code?</strong> Nowadays, tech is everywhere: laptops, smart phones, the display panel at the bus stop, the automatic doors at this university, and even in your coffee machine. Learning to code improves your problem-solving and logical skills and teaches you how to efficiently solve a specific problem. You’ll quickly see that there is a solution for everything and being able to write small or large programs will make things (much!) easier. Spending less time on solving a complex and/or repetitive problem gives you more time to learn new things, think outside the box, and to think of new and interesting (research) questions.</p>
+<p>Furthermore, being able to code will also increase your chances on the job market. Understanding what programs can do and how they can be deployed is more and more required in companies of all sizes and sectors. Even if you might not be employed as a full-time programmer having a programming background helps you to improve communication, e.g., between you and your colleagues, customers, or team mates.</p>
+<p>And, last but not least, <strong>programming is so much fun!</strong> Writing programs can be extremely creative, if one allows it to be.</p>
+</div>
+<div id="why-not-natural-languages" class="section level2">
+<h2><span class="header-section-number">1.2</span> Why not Natural Languages?</h2>
+<p>Natural languages, such as German or English, are ambiguous (the same sentence/words in different situations may have different meanings), are fuzzily structured (we all know that there are <em>always</em> exceptions to the basic grammar rules), and have large (changing) vocabularies. For a computer, understanding natural languages is extremely difficult.</p>
+<p>Examples:</p>
+<ul>
+<li><strong>I got struck by a bolt.</strong> (A bolt can be a small piece of metal, or a lightning. One hurts, the other one is quite likely life threatening)</li>
+<li><strong>Ich sollte den Baum umfahren.</strong> (In German umfahren can be “drive around the obstacle” or “run it down”/“run over it”)</li>
+</ul>
+<p>Thus different explicit languages have been developed for different tasks. Mathematicians designed a very strict mathematical notation (e.g., <code>10 + 1 = 11</code>, <code>100/5000 = 0.2</code>). Another example are chemists who use a very strict notation for chemical equations (e.g., <span class="math inline">\(CH_4 + 2\,O_2 \rightarrow CO_2 + 2\,H_2O\)</span>). Very similar, computer scientists had to define a language which allows them to give a machine some instructions such that it does what it should do. This is we call a programming language. As computers are “stupid” (they have no common sense) programming languages have to have relatively few and exactly defined rules and strictly controlled vocabularies. Every word (can be a variable name, a function, or a command) <em>has to be defined</em> before it can be used and can only be defined once (at a time).</p>
+</div>
+<div id="history-of-programming" class="section level2">
+<h2><span class="header-section-number">1.3</span> History of Programming</h2>
+<p>Modern programming goes back to the first part of the last century. The Z1, developed by Konradu Zuse (Germany) is known as the first modern programmable binary calculator. The Z1 was still a mechanical machine and, unfortunately, very complex and unreliable. Modern electronic computers were developed during/after the second world war. Back in these early years programs were often stored on so called <em>punched cards</em> (pieces of cardboard/paper with holes). The first high-level programming language was <code>Fortran</code> developed back in 1954 - and still in use. Some more facts:</p>
+<ul>
+<li>1938: Z1 by Konrad Zuse (GER)</li>
+<li>1945: first operational modern computer (U.S.)</li>
+<li>1950: first computer where the program was stored in memory</li>
+<li>1954: first high-level programming language (<code>Fortran</code>)</li>
+<li>1974: Xerox Alto, first workstation</li>
+<li>1976: IBM 5100, first laptop (weight: 25 kg; display size: 5’’)</li>
+<li>2000+: first smart phones</li>
+</ul>
+<p>Since then (starting with <code>Fortran</code> in 1954) a wide range of programming languages have become available. An up-to-date list of programming languages <a href="https://www.levenez.com/lang/%7D%7Bhttps://www.levenez.com/lang/">can be found here</a>.</p>
+<div class="figure">
+<img src="/home/retos/Documents/Lehre/SS2019_RProgramming/images/01/01_history_of_programming_languages.jpg" />
+
+</div>
+</div>
+<div id="number-of-languages" class="section level2">
+<h2><span class="header-section-number">1.4</span> Number of Languages</h2>
+<p>Today, 7111 different living natural languages are known (<a href="\href%7Bhttps://www.ethnologue.com%7D%7Bethnologue.com%7D">recognized by ISO~639</a>) and 8945 programming languages (including different versions of the same software; <a href="http://hopl.info/%7D%7Bhopl.info">see hopl.info</a>).</p>
+<p>If programming languages are <strong>explicit</strong> and <strong>well defined</strong>, <strong>why do we need so many different ones?</strong> Well, depending on the task different languages have different advantages and drawbacks. Different programming languages have been designed for different tasks, devices, and/or requirements. Some are designed to run on different operating systems, others for web applications or for highly efficient parallel computing. A “<em>one for all</em>” programming language does not exist and will quite likely never exist in the future.</p>
+<p>For those interested:</p>
+<ul>
+<li><a href="https://en.wikibooks.org/wiki/Computer_Programming/Hello_world%7D%7Bwikibooks.org">“Hello world” in 250 languages</a></li>
+<li><a href="http://www.99-bottles-of-beer.net%7D%7B99-bottles-of-beer.net">“99 bottles of beer” in 1500 languages</a></li>
+<li><a href="http://rosettacode.org/wiki/Rosetta_Code%7D%7Brosettacode.org">“Rosetta Code” in over 700 languages</a></li>
+</ul>
+</div>
+<div id="the-r-programming-language" class="section level2">
+<h2><span class="header-section-number">1.5</span> The <em>R</em> Programming Language</h2>
+<div id="what-is-r" class="section level3">
+<h3><span class="header-section-number">1.5.1</span> What is <em>R</em>?</h3>
+<p>For short: <strong><em>R</em> is a dialect of <em>S</em></strong>!</p>
+<p>To be more specific: <em>R</em> is a programming language and <strong>free software</strong> environment for <strong>statistical computing</strong> and <strong>graphics</strong> supported by the <a href="https://www.r-project.org">R Foundation for Statistical Computing</a>. And, of course, <em>R</em> also has its own history. The software we use today originates from <em>S</em> developed by John Chambers back in 1976 and was originally written to make his own life easier (Bell Labs, a toolbox for internal data analysis). The software originally written as a set of <code>Fortran</code> libraries but has been rewritten in <code>C</code> back in 1988. Ten years later, 1998, version 4 of <em>S</em> has been released, but then <em>S</em> got sold to a private company (and further developed to <code>S-PLUS</code>).</p>
+<p>As <em>S</em> was no longer available for public use Ross Ihaka and Robert Gentleman (Department of Statistics at the University of Auckland) started to develop <em>R</em> back in 1991 based on <em>S</em> version 4 (the last free open source version). Officially, <em>R</em> got announced in 1993 (26 years ago). The current version (version <code>3.5.2</code>) has been released just before Christmas last year, the next minor update should become available these days.</p>
+<ul>
+<li><em>S</em> was invented by John Chambers 1976 (`Fortran)</li>
+<li><em>S</em> rewritten in <code>C</code> in 1988</li>
+<li><em>S</em> version 4 released in 1998 (the one we use today)</li>
+<li><em>S</em> got sold (further developed to <code>S-PLUS</code>)</li>
+<li><em>R</em> developed in 1991 by <strong>R</strong>oss Ihaka and <strong>R</strong>obert Gentleman</li>
+<li><em>R</em> first official release in 1993</li>
+<li>Current release candidate: <em>R</em> version <code>3.5.2</code></li>
+</ul>
+<p>Why is it important to know the history of <em>R</em>? Well, first of all because a lot of people will ask you why <em>R</em> is called <em>R</em> (for sure). And secondly because <strong>it is important to keep in mind</strong> that <em>R</em> (also <code>S</code> and <code>S-PLUS</code>) is <strong>written from statisticians for statisticians</strong>. This is the biggest advantage of <em>R</em>, and at the same time also one of the biggest disadvantages :).</p>
+<p>An important aspect of <em>R</em> is that <strong><em>R</em> is free!</strong> It’s <strong>free</strong> as in <strong>free speech</strong>, not as in <strong>free beer</strong> and released under the <a href="https://www.gnu.org/">GNU Public License</a> which guarantees four essential freedoms:</p>
+<ul>
+<li><strong>Freedom 0</strong>: The freedom to run the program as you wish, <strong>for any purpose</strong>.</li>
+<li><strong>Freedom 1</strong>: The freedom to <strong>study</strong> how the program works, and <strong>change</strong> it so it does your computing as you wish. <strong>Access</strong> to the <strong>source code</strong> is a precondition for this.</li>
+<li><strong>Freedom 2</strong>: The freedom to <strong>redistribute</strong> copies so you can <strong>help others</strong>.</li>
+<li><strong>Freedom 3</strong>: The freedom to <strong>distribute copies</strong> of your <strong>modified versions</strong> to others. By doing this you can give the whole <strong>community</strong> a chance to <strong>benefit</strong> from your changes. <strong>Access</strong> to the <strong>source code</strong> is a precondition for this.</li>
+</ul>
+</div>
+<div id="open-science" class="section level3">
+<h3><span class="header-section-number">1.5.2</span> Open Science</h3>
+<p>Open source languages are an <strong>important part</strong> of good <strong>open science practice</strong> and help to make research transparent and reproducible. <strong>The backbone of good open science</strong>:</p>
+<ul>
+<li><strong>open data</strong></li>
+<li><strong>open source software/code</strong></li>
+<li><strong>open methodology</strong></li>
+<li>open peer review</li>
+<li>open access publications</li>
+</ul>
+<p>Furthermore, open source software (open science in general) allows to learn and benefit from others, improve existing methods, and help each other.</p>
+</div>
+<div id="r-on-the-job-market" class="section level3">
+<h3><span class="header-section-number">1.5.3</span> <em>R</em> on the job market</h3>
+<p><em>R</em> is one of the leading programming languages for data science on the job market. The figure below shows the frequency which which different programming languages have been mentioned in job announcements for open data science positions (source: <a href="https://fossbytes.com/popular-top-programming-languages-machine-learning-data-science/%7D%7Bfossbytes.com">fossbytes.com</a>).</p>
+<div class="figure">
+<img src="/home/retos/Documents/Lehre/SS2019_RProgramming/images/01/01_fossbytes_com.png" />
+
+</div>
+</div>
+</div>
+<div id="the-r-ecosystem" class="section level2">
+<h2><span class="header-section-number">1.6</span> The <em>R</em> Ecosystem</h2>
+<div class="figure">
+<img src="/home/retos/Documents/Lehre/SS2019_RProgramming/images/01/01_R_ecosystem.png" />
+
+</div>
+<p>As other programming languages (<code>perl</code>, <code>python</code>, …) the <em>R</em> system is modular. The base installation only provides a ‘small’ set of features (<strong>base</strong>/<strong>recommended</strong> packages) but can easily be extended by installing <strong>additional</strong> packages. <strong>Contributed</strong> packages (main sources) are available via the <a href="https://cran.r-project.org/">Comprehensive R Archive Network</a> (CRAN), however, other sources exist such as <a href="https://www.bioconductor.org/">Bioconductor</a> (focus on bioinformatics), private and community projects on <a href="https://github.com">github</a>, or private packages. Packages exist for nearly everything and different packages may provide similar features, however, not all packages do have the same quality or are carefully maintained. Thus, it is recommended to use packages published via CRAN (or bioconductor) as they undergo some quality control and automated checks while some private packages (e.g., from github) may not work on all operating systems or <em>R</em> versions. One important aspect of all programming languages is to communicate with the outside world to import and export data (see also <a href="https://cran.r-project.org/doc/manuals/R-data.html">R Data Import/Export</a> manual) or to communicate over a network.</p>
+<div class="figure">
+<img src="/home/retos/Documents/Lehre/SS2019_RProgramming/images/01/01_R_outside_world.png" />
+
+</div>
+<p><em>R</em> comes with a custom binary file format. These binary files are typically called <code>.rda</code>/<code>.rds</code> (<code>.Rda</code>/<code>.Rds</code>) and are used to store/load <em>R</em> objects. Beside its own format <em>R</em> allows to read and write data from and to (nearly) all available file formats. <em>R</em> base provides some high-level functions to easily import data from human readable files (e.g., <code>csv</code> or <code>ASCII</code> in general) which is often used for <em>simple</em> data sets. However, there is basically no limit to read and write data in <em>R</em> and packages exist for nearly all file formats, e.g., <code>XLS</code>/<code>XLSX</code>, <code>XML</code>, <code>JSON</code>, <code>NetCDF</code>, rastered data sets such as <code>geotiff</code>, images in general (<code>png</code>/<code>jpg</code>/<code>gif</code>), databases (<code>sqlite</code>/<code>SQL</code>) and many many more. If no package exists, feel free to develop one yourself and contribute it to the <em>R</em> community! <em>R</em> also provides socket connections for server-to-server connections over the network.</p>
+</div>
+<div id="examples" class="section level2">
+<h2><span class="header-section-number">1.7</span> Examples</h2>
+<p><strong>Now as we know what <em>R</em> is, what can we do with it?</strong> Well, basically everything you can think of! Your own creativity is the limit - and your programming skills. In this course we will start with basic programming in <em>R</em> to get used to the language, data types and objects, and main control features and functions. The more complex the task, the more complex the program, but <strong>the fundamentals wont change</strong>. Thus it is very <strong>important</strong> to <strong>acquire solid knowledge</strong> of the <strong>basics</strong> before proceeding to more <strong>complex tasks</strong>.</p>
+<p>Below you can see some motivational examples of what you can do with <em>R</em>:</p>
+<div id="empirical-mean-and-quartiles" class="section level3">
+<h3><span class="header-section-number">1.7.1</span> Empirical Mean and Quartiles</h3>
+<p>A simple example of a program (one function) to calculate the empirical <em>mean</em> and the <em>1th</em> and <em>3th</em> empirical quartile of a set of <code>1000</code> random numbers of a standard uniform distribution (random values between <code>0</code> and <code>1</code>).</p>
+<p>Side note: As the distribution is symmetric, the mean is asymptotically identical to the median (or the <em>2th</em> quartile). by theory the thee quartiles should be <code>0.25</code>, <code>0.50</code>, and <code>0.75</code>. let’s try and draw <code>1000</code> random numbers, store them on variable <code>x</code>. <code>x</code> will thus get a numeric vector of length <code>1000</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1000</span>)</code></pre></div>
+<p>Step two is to create a function which does the job for us. We are creating a function called <code>fun</code> which takes one input argument <code>x</code> and calculates the empirical mean (<code>m</code>), the <em>1th</em> quartile (<code>q1</code>) and the <em>3th</em> quartile (<code>q3</code>). At the end a numeric vector of length <code>3</code> will be returned containing all three values (<code>c(q1, m, q3)</code>), rounded to three digits. Once our function <code>fun</code> is defined we can call it using our random numbers as input (<code>fun(x)</code>) to get the result. Et voila.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fun &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">round =</span> <span class="dv">3</span>) {
+    m  &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(x) <span class="op">*</span><span class="st"> </span><span class="kw">sum</span>(x)
+    q1 &lt;-<span class="st"> </span><span class="kw">sort</span>(x)[<span class="kw">round</span>(<span class="kw">length</span>(x)<span class="op">*</span>.<span class="dv">25</span>)]
+    q3 &lt;-<span class="st"> </span><span class="kw">sort</span>(x)[<span class="kw">round</span>(<span class="kw">length</span>(x)<span class="op">*</span>.<span class="dv">75</span>)]
+    <span class="kw">return</span>(<span class="kw">round</span>(<span class="kw">c</span>(q1, m, q3), round))
+}
+
+<span class="co"># Call the function</span>
+<span class="kw">fun</span>(x)</code></pre></div>
+<pre><code>## [1] 0.238 0.503 0.752</code></pre>
+<p>We can, of course, use this function over and over again. Let’s draw another 1000 values from the uniform distribution and call the function again (<code>fun(runif(1000))</code>):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fun</span>(<span class="kw">runif</span>(<span class="dv">1000</span>))</code></pre></div>
+<pre><code>## [1] 0.245 0.501 0.758</code></pre>
+<p>Of course there are implementations for this. One could e.g., use the <code>summary()</code> method or the <code>quantile()</code> function. let’s have a look if our function works as intended:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Repeat again, compare to R&#39;s summary function</span>
+x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1000</span>)
+<span class="kw">fun</span>(x, <span class="dt">round =</span> <span class="dv">7</span>)</code></pre></div>
+<pre><code>## [1] 0.2453892 0.5003837 0.7598754</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="kw">quantile</span>(x, <span class="dt">probs =</span> <span class="fl">0.25</span>, <span class="dt">type =</span> <span class="dv">3</span>), <span class="kw">mean</span>(x), <span class="kw">quantile</span>(x, <span class="dt">probs =</span> <span class="fl">0.75</span>, <span class="dt">type =</span> <span class="dv">3</span>))</code></pre></div>
+<pre><code>##       25%                 75% 
+## 0.2453892 0.5003837 0.7598754</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Summary method (uses different quantile approximation function)</span>
+<span class="kw">summary</span>(x)</code></pre></div>
+<pre><code>##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+## 0.0000424 0.2463313 0.5155113 0.5003837 0.7598980 0.9982036</code></pre>
+<p><strong>Note</strong>: as random data are used you will never get the same results.</p>
+</div>
+<div id="statistical-modeling" class="section level3">
+<h3><span class="header-section-number">1.7.2</span> Statistical Modeling</h3>
+<p>One of the biggest strengths of <em>R</em> is, of course the wide range of functions and methods for data analysis and statistical modeling from simple linear regression models to complex and highly nonlinear frameworks.</p>
+<p>This is just a very small example how easy it can be to do some data analysis. We are using a data set which is contained in <code>datasets</code> package (comes with <em>R</em> base) called <code>ToothGrowth</code> (see <code>?ToothGrowth</code> for details).</p>
+<p>The data set contains observations of the length of a special cell which is responsible for the growth of the teeth. The longer (length) the cells, the stronger the teeth are growing (they grow for the entire life). The experiment investigates the impact of vitamin C on these cells. One group got orange juice (<code>OJ</code>), the other one ascorbic acid (a form of vitamin C; <code>VC</code>). Each individuum got either <code>0.5</code>, <code>1.0</code>, or <code>2.0</code> mg/day.</p>
+<p>Variables:</p>
+<ul>
+<li><code>len</code>: numeric, length of the tooth (cells)</li>
+<li><code>supp</code>: factor, supplement type (<code>VC</code> or <code>OJ</code>)</li>
+<li><code>dose</code>: the dose in milligrams per day</li>
+</ul>
+<div id="htmlwidget-592d6dcd74dd3a351598" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-592d6dcd74dd3a351598">{"x":{"filter":"none","data":[[4.2,11.5,7.3,5.8,6.4,10,11.2,11.2,5.2,7,16.5,16.5,15.2,17.3,22.5,17.3,13.6,14.5,18.8,15.5,23.6,18.5,33.9,25.5,26.4,32.5,26.7,21.5,23.3,29.5,15.2,21.5,17.6,9.7,14.5,10,8.2,9.4,16.5,9.7,19.7,23.3,23.6,26.4,20,25.2,25.8,21.2,14.5,27.3,25.5,26.4,22.4,24.5,24.8,30.9,26.4,27.3,29.4,23],["VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","VC","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ","OJ"],[0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>len<\/th>\n      <th>supp<\/th>\n      <th>dose<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[0,2]}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<p>This is how the data set (<code>data.frame</code>) looks like:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(ToothGrowth, <span class="dv">3</span>)</code></pre></div>
+<pre><code>##    len supp dose
+## 1  4.2   VC  0.5
+## 2 11.5   VC  0.5
+## 3  7.3   VC  0.5</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(graphics)
+<span class="kw">coplot</span>(len <span class="op">~</span><span class="st"> </span>dose <span class="op">|</span><span class="st"> </span>supp,
+       <span class="dt">data =</span> ToothGrowth,
+       <span class="dt">panel =</span> panel.smooth,
+       <span class="dt">xlab =</span> <span class="st">&quot;length vs dose, given type&quot;</span>)</code></pre></div>
+<p>And this is the corresponding plot (one way of visualizing this data set). The two <code>supp</code> groups are plotted separately with the orange juice group on the left hand side and the ascorbic acid group on the right hand side. <img src="Introduction-to-R_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Estimate a linear model on the <code>ToothGrowth</code> data set. Length (<code>len</code>) of the cells responsible for tooth growth conditional on the treatment (<code>supp</code>) and the dose (<code>dose</code>)</p>
+<p>Rather than only doing a graphical analysis we can also estimate a statistical model. In this case a linear model with might not be the best model (just for illustration) to estimate the overall effect of the two treatments and the effect of increasing the dose (conditional on the treatment).</p>
+<p>Interpretation of such models is part of statistical bachelor courses and will not be part of this programming course!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Estimate the model:</span>
+mod &lt;-<span class="st"> </span><span class="kw">lm</span>(len <span class="op">~</span><span class="st"> </span>supp<span class="op">/</span>dose, <span class="dt">data =</span> ToothGrowth)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Coefficient test statistics:</span>
+lmtest<span class="op">::</span><span class="kw">coeftest</span>(mod)</code></pre></div>
+<pre><code>## 
+## t test of coefficients:
+## 
+##             Estimate Std. Error t value  Pr(&gt;|t|)    
+## (Intercept)  11.5500     1.5814  7.3037 1.090e-09 ***
+## suppVC       -8.2550     2.2364 -3.6912 0.0005073 ***
+## suppOJ:dose   7.8114     1.1954  6.5345 2.028e-08 ***
+## suppVC:dose  11.7157     1.1954  9.8005 9.442e-14 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div id="spatial-data" class="section level3">
+<h3><span class="header-section-number">1.7.3</span> Spatial Data</h3>
+<p><em>R</em> is also capable of plotting geo-referenced data sets, e.g., spatial data as in this example. This figure shows the surface air temperature in degrees Celsius for March 7, 2018 at 12 UTC (which is 1 pm local time) based on the ECMWF ERA-5 reanalysis data set using <a href="https://cds.climate.copernicus.eu/#!/search?text=ERA5">Copernicus Climate Change Service information</a>.</p>
+<p><strong><em>R</em> packages used</strong>: <a href="https://cran.r-project.org/package=ecmwfr">ecmwfr</a>, <a href="https://cran.r-project.org/package=ncdf4">ncdf4</a>, <a href="https://cran.r-project.org/package=raster">raster</a>, <a href="https://cran.r-project.org/package=maps">maps</a>, <a href="https://cran.r-project.org/package=colorspace">colorspace</a>.</p>
+<p>Some more (mostly) nice spatial <em>R</em> examples can be found on <a href="01_R_version1_CD.jpeg">Spatial.ly</a>.</p>
+<div class="figure">
+<img src="/home/retos/Documents/Lehre/SS2019_RProgramming/Examples/output_ERA5.png" />
+
+</div>
+</div>
+<div id="geographical-data" class="section level3">
+<h3><span class="header-section-number">1.7.4</span> Geographical Data</h3>
+<p>Another common type of visualizations are geo-referenced data on an e.g., national or international level. The figure below is based on a public data set by the <a href="https://www.cdc.gov/nchs/index.htm">National Center for Health Statistics</a> (id <a href="https://data.cdc.gov/api/views/bi63-dtpu/">bi63-dtpu</a>, <a href="https://data.cdc.gov/api/views/bi63-dtpu/rows.csv?accessType=DOWNLOAD">csv format</a>) and shows the mean increase in the number of suicides on a state level (excluding Alaska and Hawaii) over the years 1999-2016 in percent. The barplot on the right hand side shows the very same information as the spatial plot on the right hand side.</p>
+<p>State boundaries downloaded form the <a href="https://gadm.org">GADM</a> website which provides national/political boundaries in an <em>R</em> format (rds) for different levels of detail (national and sub-national).</p>
+<p><strong><em>R</em> packages used</strong>: <a href="https://cran.r-project.org/package=sp">sp</a>, <a href="https://cran.r-project.org/package=zoo">zoo</a>, <a href="https://cran.r-project.org/package=colorspace">colorspace</a>.</p>
+<p>For a list of contributed <em>R</em> packages dealing with spatial and spatio-temporal data visit the <a href="https://CRAN.R-project.org/view=Spatial">Spatial</a> and <a href="https://CRAN.R-project.org/view=SpatioTemporal">SpatioTemporal</a> CRAN task views. Some more (mostly) nice spatial <em>R</em> examples can be found on <a href="http://spatial.ly/r/">Spatial.ly</a>.</p>
+<p><img src="/home/retos/Documents/Lehre/SS2019_RProgramming/Examples/output_US_Death.png" /> ### Text Mining</p>
+<p>Beside spatial or geographical data sets <em>R</em> is also often used for <em>text mining</em> applications (automatically classifying texts, find similarities between different texts, study the evolution of language, …).</p>
+<p>The example below shows so called <strong>word clouds</strong> based on the latest 500 tweets (from <a href="https://twitter.com">twitter</a>) from two American politicians. The tweets are downloaded and cleaned (common words as “the” or “A” are removed, URL’s and some special characters or quotes are removed) before counting the frequency of each word. Words which are used more frequent are shown with a larger font size and darker color. <strong>Guess who is who?</strong></p>
+<p><strong><em>R</em> packages used</strong>: <a href="https://cran.r-project.org/package=rtweet">rtweet</a>, <a href="https://cran.r-project.org/package=tm">tm</a>, <a href="https://cran.r-project.org/package=wordcloud">wordcloud</a>, <a href="https://cran.r-project.org/package=colorspace">colorspace</a>.</p>
+<p>The CRAN task view <a href="https://CRAN.R-project.org/view=NaturalLanguageProcessing%3CPaste%3E">Natural Language Processing</a> shows an overview/list of contributed <em>R</em> packages for processing language/words. For some more inspiration of graphical representations of <em>R</em> based text mining applications <a href="https://www.bnosac.be/index.php/blog/56-an-overview-of-text-mining-visualisations-possibilities-with-r-on-the-ceta-trade-agreement">visit bnosac.be</a>.</p>
+<p><img src="/home/retos/Documents/Lehre/SS2019_RProgramming/Examples/output_twitter.png" /> Answer: Donald Trump left (easy), Hillary Clinton right (less obvious but remarkably different to the tweets of the president). ### Three Dimensional Plots</p>
+<p>Three dimensional plots are always a bit more difficult to produce <em>and</em> they often do not make sense (at least not plotting 3D barplots). However, in some cases three dimensional perspective plots can make sense as in this case. The image below shows the area around Innsbruck, a combination of a digital elevation model (<a href="https://asterweb.jpl.nasa.gov/gdem.asp">ASTER</a> data) and an <a href="https://www.openstreetmap.org">OpenStreetMap</a> overlay. Takes quite a while to get this result, but looks cool :).</p>
+<p><strong><em>R</em> packages used</strong>: <a href="https://cran.r-project.org/package=OpenStreetMap">OpenStreetMap</a>, <a href="https://cran.r-project.org/package=rayshader">rayshader</a>, <a href="https://cran.r-project.org/package=raster">raster</a>, <a href="https://cran.r-project.org/package=sp">sp</a>, <a href="https://cran.r-project.org/package=colorspace">colorspace</a>.</p>
+<p>More details available on the <a href="https://www.rayshader.com">rayshader website</a>.</p>
+<div class="figure">
+<img src="/home/retos/Documents/Lehre/SS2019_RProgramming/Examples/output_map.png" />
+
+</div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="preface.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="installation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

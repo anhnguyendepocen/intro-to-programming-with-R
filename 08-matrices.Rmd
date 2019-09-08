@@ -1,0 +1,822 @@
+
+# Matrices
+
+In one of the first sessions I've shown the following image
+which explains how the different objects are connected to
+each other and/or based on each other. So far, we have 
+learned a lot about (atomic) vectors, one of the basic 
+objects in _R_. In this session we will see how matrices,
+data frames, and lists work.
+
+<div style="text-align: center;">
+   <img src="images/06/06_datatypes_3.png">
+</div>
+
+As shown, matrices are based on vectors, while data frames
+are based on lists, another frequently used object type in _R_. 
+
+But let's start with matrices first!
+
+## Matrices in _R_
+
+* matrices are **based on vectors**
+* can only contain data of **one class** (or mode; as vectors)
+* have a **dimension** attribute (`dim`)
+* **can have** row and column **names** (`rownames`, `colnames`)
+
+Matrices can be created using the `matrix` function (see `?matrix` or `help("matrix")`.
+According to the _R_ documentation the usage of the `matrix` function is as follows:
+
+```
+matrix(data = NA, nrow = 1, ncol = 1, byrow = FALSE, dimnames = NULL)
+```
+* `data`: a data vector (default `NA`)
+* `nrow`: integer, number of rows (default `1`)
+* `ncol`: integer, number of columns (default `1`)
+* `byrow`: logical, whether or not to fill by row (default by column)
+* `dimnames`: optional list of length 2 with rownames and column names.
+
+**Function defaults:** functions can have required inputs (as seen in 
+the lecture), but also optional input arguments with defaults. If an
+input has a default (e.g., `data = NA`) the default value as defined
+is used if we do not define this input. Thus, the call
+`matrix()` will create a matrix containing `NA` (`data = NA`)
+with one row (`nrow = 1`) and one column (`ncol = 1`).
+
+**Generic methods for matrices**
+
+For matrices (and most other objects) a set of so called
+generic methods or functions exist. Some useful methods
+for matrices are:
+
+* `head(x, n = N)`: show first $N$ rows
+* `tail(x, n = N)`: show last $N$ rows
+* `summary(x)`: object summary
+* `rbind(x1, x2)`: row-bind two matrices
+* `cbind(x1, x2)`: column-bind and column-bind
+* `subset`: subsetting a matrix
+* ... and many others ...
+
+Note that these are generic methods and they will also
+work on other objects (e.g., vectors or data frames).
+
+## Create a matrix
+
+The following examples show how to create matrices of different
+dimensions with and without data.
+To create a matrix of the dimension $2 \times 3$ without data
+we can call:
+
+```{r, fig.align = "center"}
+# NA matrix, dimension 2x3
+matrix(nrow = 2, ncol = 3)
+```
+
+Remember that the default for the input `data` is `NA`. As we
+have not specified `data` the whole matrix will be filled with
+missing values. The two additional arguments define the matrix
+size with two rows and three columns ($2 \times 3$ matrix).
+
+Instead of creating an empty matrix we can also directly provide
+data. In this case, an integer sequence `1:9` is used.
+
+```{r, fig.align = "center"}
+# Matrix containing 1-9 (3x3)
+matrix(data = 1:9, nrow = 3)
+```
+
+**Note:** we do not provide the `ncol` argument. Our data set is
+of length 9 (`length(1:9)`) and we are asking for three rows.
+There is only one way to fulfil the requirements: creating a
+$3 \times 3$ matrix.
+A graphical representation of what is happening is shown below:
+<div style="text-align: center; padding: 20px 0;">
+  <img src="images/06/06_vector_to_matrix.png" style="width: 60%;">
+</div>
+
+The upper part of the image represents a vector, e.g., the vector
+of length 9 shown in the example (`1:9`). The bottom figure shows
+how the vector is represented in the matrix, a $3 \times 3$ matrix
+in this example. By default **the data is filled by column, wherefore
+the first (left) column will contain the values `1`, `2`, `3`, the
+next column `4`, `5`, `6`, and the last column the remaining values
+`7`, `8`, `9`. We can change this behavior ...
+
+## Fill by row/column
+
+The `matrix` by default uses `byrow = FALSE` and fills in the
+data by column (as shown above). However, we can set `byrow = TRUE`
+to fill in the data by row (top row first).
+The following two chunks show the effect:
+
+```{r, fig.align = "center"}
+# byrow = FALSE (default)
+x <- matrix(data = 1:9, ncol = 3,
+            byrow = FALSE)
+# Print the object
+print(x)
+```
+
+```{r, fig.align = "center"}
+# byrow = TRUE
+x <- matrix(data = 1:9, ncol = 3,
+            byrow = TRUE)
+# Print the object
+print(x)
+```
+
+## Column-binding and row-binding (vectors)
+
+Another way to create matrices in _R_ is to row-bind or
+column-bind vectors. This is very useful if you do have a set
+of vectors and you want to combine or store them in one matrix
+object.
+
+Imagine we have two numeric vectors `x` and `y` of length
+3 and we want to create a matrix which contains
+`x` in the first column and `y` in the second column.
+To do so, we can simply call the `cbind` function.
+
+```{r, fig.align = "center"}
+# Two numeric vectors
+x <- c(5, 5, 5)
+y <- c(11, 22, 33)
+# column-binding
+z <- cbind(x, y)
+```
+
+```{r, fig.align = "center"}
+class(z)
+print(z)
+```
+
+The result of `cbind(x, y)` is a $3 \times 2$ matrix. `cbind`
+can also be used to combine more than two vectors **but note**
+that not all combinations of lengths are allowed (well, _R_
+tries to recycle the vectors to match the length of the longest
+vector and will warn you if this is not possible. Try it out!).
+
+**Column names:** note that, in case of `cbind` and also `rbind`
+_R_ automatically uses the names of the vectors (here `x` and `y`)
+as row or column name. We will learn how to access and specify
+row names and column names later in this document.
+
+The counterpart of `cbind` is `rbind` which works the very same,
+but combines the vectors row-wise and not column-wise.
+
+```{r, fig.align = "center"}
+# Two numeric vectors
+x <- c(5, 5, 5)
+y <- c(11, 22, 33)
+# column-binding
+z <- rbind(x, y)
+class(z)
+print(z)
+```
+
+## Column-binding and row-binding (matrices)
+
+`cbind` and `rbind` can also be used to combine matrices.
+Again, you have to take care of the dimensions of the matrices.
+However, let's assume we have two matrices of the very same
+dimension (both, `x1` and `x2` are $3 \times 2$ matrices).
+Row-binding and column-binding of matrices works just the same
+as for vectors:
+
+```{r, fig.align = "center"}
+# Two matrices
+x1 <- matrix(1:6,     ncol = 2)
+x2 <- matrix(101:106, ncol = 2)
+# column-binding
+cbind(x1, x2)
+```
+
+```{r, fig.align = "center"}
+# Two matrices
+x1 <- matrix(1:6,     ncol = 2)
+x2 <- matrix(101:106, ncol = 2)
+# column-binding
+rbind(x1, x2)
+```
+
+... except that no automatic row/column names are set. 
+If `x1` and/or `x2` would have had row and/or column names
+they would have been kept, of course.
+
+## Matrix attributes
+
+As we now know how to create simple matrices let's check
+the attributes. Remember:  matrices are "just" vectors with
+additional attributes! While a vector only has a `class` and
+a certain `length`, matrices come with an additional dimension
+attribute.
+
+The function `dim` returns the dimension of the matrix, an
+integer vector of length $2$ where the first element corresponds
+to the number of rows (always rows first), the second element
+corresponds to the number of column.s
+
+```{r, echo = TRUE, fig.align = "center"}
+x <- matrix(1:12, nrow = 4)
+x # Show matrix
+dim(x) # Matrix dimension
+```
+
+As we all know how 'vector subsetting by index' works we 
+can now easily pick the number of rows and columns using:
+
+* `dim(x)[1L]}: number of rows,
+* `dim(x)[2L]}: number of columns.
+
+... or use `nrow` and `ncol`, two convenient functions
+to either get the number of rows or columns.
+```{r, fig.align = "center"}
+nrow(x)      # Number of rows
+ncol(x)      # Number of columns
+length(x)    # Length
+class(x)     # Class
+is.matrix(x) # Check if is matrix
+```
+
+**Note:** a matrix also always has a length! This length
+corresponds to the underlying vector. A $3 \times 3$ matrix
+is of length 9 (has 9 elements), a $5 \times 5$ matrix
+is of length 25 and so far and so on.
+
+As for all objects we can retrieve the class of the object
+by calling the `class` function, and use `is.matrix` to check
+whether or not a certain object is of class `matrix` or not
+(returns `TRUE` or `FALSE`).
+
+## Setting dimension names (\code{rownames}, \code{colnames})
+
+Another important attribute of a matrix are the dimension names,
+or row names and column names (in case of two-dimensional matrices).
+
+They can be accessed and specified using the `rownames` and
+`colnames` functions.
+Let us create a $3 \times 3$ matrix ...
+```{r, fig.align = "center"}
+# Same matrix again
+x <- matrix(data = 1:9, nrow = 3, ncol = 3)
+```
+
+... and set row and column names using character vectors.
+As our matrix `x` has three rows and three columns, we do
+have to provide three row names and three column names.
+Note that the naming here is not very useful but demonstrates
+how they can be defined:
+```{r, fig.align = "center"}
+rownames(x) <- c("Row 1", "Row 2", "Row 3")
+colnames(x) <- c("Col A", "Col B", "Col C")
+```
+
+If we print the matrix `x` again we can see that all our
+rows and columns are now labeled.
+```{r, fig.align = "center"}
+print(x)
+```
+
+`rownames` and `colnames` cannot only be used to **set**
+the names but also to **get** the names from an existing
+object:
+```{r, fig.align = "center"}
+rownames(x)
+colnames(x)
+dim(x)
+```
+
+**Additional hint:** we don't always have to set all
+row names and column names, we could also only set or
+change one specific element by e.g.,
+calling `rownames(x)[1L] <- "Fooo"` to overwrite the
+rowname of the first row (`1L`) with `"Fooo"`.
+
+## Set dimension names when creating the object
+
+Another way is to directly specify the dimension names
+when calling the `matrix` function. The function takes
+up an optional input `dimnames` (by default this is set to `NULL`).
+We can specify a list containing two character vectors
+(`dimnames = list(<rownames>, <colnames>)`)  where the
+first vector contains the row names, the second one the
+column names:
+
+```{r, fig.align = "center"}
+# Create matrix with dimension names
+x <- matrix(data = 1:9, ncol = 3,
+            dimnames = list(c("Row 1", "Row 2", "Row 3"),
+                            c("Col A", "Col B", "Col C")))
+# Print the object
+print(x)
+```
+
+... to get the very same result as in the section above.
+
+## Practical Exercises (part 1)
+
+Note that there are no solutions in this file, there's an
+extra file on OLAT with a detailed solution to the following
+short exercises.
+### Practical exercise 1
+
+Create the following matrices using `matrix(...)`:
+
+```{r, echo = FALSE, fig.align = "center"}
+x <- matrix(NA, ncol = 2, nrow = 2)
+print(x)
+```
+
+```{r, echo = FALSE, fig.align = "center"}
+x <- matrix(1:15, ncol = 5, byrow = TRUE)
+print(x)
+```
+
+```{r, echo = FALSE, fig.align = "center"}
+z <- matrix(rep(c(1,2,3), each = 5), ncol = 3)
+rownames(z) <- sprintf("row_%d", 1:5)
+colnames(z) <- c("A", "B", "C")
+print(z)
+```
+
+Furthermore, check attributes, length, dimension.
+
+### Practical exercise 2
+
+Create the following matrices based on
+three (logical/numeric) vectors (`A`/`B`/`C`;`X1`/`X2`/`X3`)
+and row and/or column bind:
+
+```{r, echo = FALSE, fig.align = "center"}
+A <- c(TRUE, TRUE, TRUE)
+B <- c(FALSE, TRUE, TRUE)
+C <- c(FALSE, FALSE, TRUE)
+print(cbind(A, B, C))
+```
+
+```{r, echo = FALSE, fig.align = "center"}
+A <- c(TRUE, TRUE, TRUE)
+B <- c(FALSE, TRUE, TRUE)
+C <- c(FALSE, FALSE, TRUE)
+print(rbind(A, B, C))
+```
+
+```{r, echo = FALSE, fig.align = "center"}
+X1 <- c(1.1, 2.2)
+X2 <- c(100, 200)
+X3 <- c(-500, 500)
+print(cbind(X1, X2, X3))
+```
+
+Furthermore, check attributes, length, dimension.
+
+## Subsetting matrices
+
+Subsetting matrices is similar to subsetting vectors except
+that we can subset by row and/or column. As for vectors we can:
+
+* subsetting **by index**
+* subsetting **by name** (if set)
+* typically (not necessarily) two-dimensional!
+
+When using row and column indizes it is again _rows first_,
+_columns second_. The following image shows the indexing
+of a matrix. The blue numbers correspond to the row index
+(thus always `1` for the top row, `2` for the second row, ...),
+the red numbers the index of the columns (`1`s left, `2` middle, ...).
+
+<div style="text-align: center;">
+  <img src="images/06/06_matrix.png" style="width: 40%">
+</div>
+
+```{r, echo = FALSE, fig.align = "center"}
+x <- matrix(1:12 + 100,
+            nrow = 4,
+            dimnames = list(c("Row 1", "Row 2", "Row 3", "Row 4"),
+                            c("Col A", "Col B", "Col C")))
+```
+
+Imagine we do have the following matrix:
+
+```{r, fig.align = "center"}
+x # Demo matrix
+```
+
+Using subsetting by index we can now access specific
+elements by calling:
+
+```{r, fig.align = "center"}
+x[3, 2]
+x[1, 3]
+```
+
+The first call picks the element in the **third row** and **second column**,
+the second call the element in **row 1** and **column three**.
+
+What happens if we use one single value instead of two
+(one for the rows, one for the columns) as above?
+```{r, fig.align = "center"}
+x[10]   # What happens here?
+```
+
+Well, a matrix is built on a vector. `x[10L]` gives us the
+tenth element of the vector! As matrices are filled by column
+(!even if you specify `byrow = TRUE`; that just stores the
+data in a different order) the tenth element of our $4 times 3$
+matrix is `x[3, 2]`.
+
+You can number them (top down, starting top left). The first
+column contains the elements `1L`, `2L`, `3L`, `4L`, the second
+column the elements `5L` to `8L`, the third column starts with
+`9L` followed by the one we are interested in, `x[10L]`
+(the element `x[2, 3]`).
+
+```{r, fig.align = "center"}
+print(x)
+```
+
+Instead of picking single elements of the matrix we can also
+subset specific rows or columns. We can do this by leaving
+one index empty (empty means "all"). E.g. `x[3, ]` means
+"_give me the third row, all columns_":
+```{r, fig.align = "center"}
+# Subsetting 3th row
+x[3, ]
+class(x[3, ])
+length(x[3, ])
+dim(x[3, ]) # Is a vector!
+```
+
+Note that, by default, _R_ returns us a **vector** if we
+subset one specific row or column! The result is no longer
+a matrix.
+
+The counterpart to row-subsetting is column-subsetting which
+works the very same way:
+
+```{r, fig.align = "center"}
+# Subsetting 3th column
+x[, 3]
+class(x[, 3])
+length(x[, 3])
+dim(x[, 3]) # Is a vector!
+```
+
+If you do algebra with _R_ you may need a row or column
+vector:
+
+* Column vector: `matrix` with only one column (an $N \times 1$ matrix)
+* Row vector: `matrix` with only one row (an $1 \times N$ matrix)
+
+This can be achieved by setting the `drop = FALSE` argument.
+If `drop = FALSE` is set _R_ does not drop the matrix
+attributes (i.e., row names, column names, dimension, class)
+and the result will be of class `matrix`:
+```{r, fig.align = "center"}
+# Row vector
+x[3, , drop = FALSE]
+class(x[3, , drop = FALSE])
+# Column vector
+x[, 3, drop = FALSE]
+class(x[, 3, drop = FALSE])
+```
+
+We can, of course, also combine row and column subsetting.
+The following calls:
+
+* extract the **second and third row** (`c(2, 3)`), but only
+     the **first column** (`1`).
+* extract the **fourth row**, but only the **first and second column**
+     (`c(1,2)`).
+
+```{r, fig.align = "center"}
+x # Our matrix
+# 2nd and 3th row, 1th column
+x[c(2, 3), 1]
+# 4th row, 1th and 2nd column
+x[4, c(1, 2)]
+```
+
+Again, if the result contains only one row or only 
+one column _R_ drops the matrix attributes and simplifies
+the result to a vector. To avoid that, we can set `drop = FALSE` again:
+
+```{r, fig.align = "center"}
+# 2nd and 3th row, 1th column
+x[c(2, 3), 1, drop = FALSE]
+# 4th row, 1th and 2nd column
+x[4, c(1, 2), drop = FALSE]
+```
+
+## Subsetting matrices with logical vectors
+
+We can also subset matrices with logical vectors.
+This is used for subsetting with logics. When using
+logical vectors, these vectors have to match the
+dimensions (have the same length as the number of rows
+or columns). An example "doing it by hand":
+
+* Rows: `c(FALSE, TRUE, FALSE, FALSE)` (only 2_nd_ row)
+* Columns: `c(TRUE, FALSE, TRUE)` (only 1_th_ \& 3_th_ column)
+* Attributes: `drop = FALSE` (do not drop)
+
+```{r, fig.align = "center"}
+# Our matrix
+x
+```
+
+```{r, fig.align = "center"}
+# Subsetting
+x[c(FALSE, TRUE, FALSE, FALSE),
+  c(TRUE, FALSE, TRUE),
+  drop = FALSE]
+```
+
+## Subsetting by name
+
+Very useful is subsetting by name. This is, again, similar
+to subsetting named vectors, except that we do have two
+dimensions here:
+
+```{r, fig.align = "center"}
+# Only "Col A"
+x[, "Col A"]
+# The element "Row 3", "Col B"
+x["Row 3", "Col B"]
+```
+
+```{r, fig.align = "center"}
+# Or "Col A" * "Col C"
+z <- x[, "Col A"] - x[, "Col C"]
+z
+class(z)
+names(z)
+```
+
+You may again use `drop = FALSE`. If not (`drop = TRUE`, the default)
+the result will be a named vector.
+
+## Non-existing elements in matrices
+
+From vectors we know that an `NA` will be returned
+if we access an element which does not exist, e.g.,
+if we try to access element 10 (`x[10L]`) in a vector `x`
+which only contains `5` elements.
+
+```{r, fig.align = "center"}
+x <- c(1L, 2L, 3L)
+x[10]       # non-existent, returns NA
+```
+
+For matrices, when using `x[<rowindex>, <colindex>]` the stroy
+is a bit different: we will run into an ERROR which looks
+as follows:
+
+```r
+x <- matrix(1:9, nrow = 3)
+x[10,10]  # non-existent, error!
+Error in x[10, 10] : subscript out of bounds
+```
+
+Whenever you run into this error: check your indices/names/matrix dimension!
+
+## The subset method
+
+There is a generic method called `subset`. The method can
+also be used on vectors (but not very useful). However, when
+dealing with matrices the `subset` method becomes interesting,
+and will be even more important on data.frames.
+
+`subset` can be used to subset a matrix similar to the ways
+we have learned above, however, the usage is different
+and may be more convenient. According to the _R_ documentation
+(see `?subset` or `help("subset")`):
+
+```r
+## S3 method for class 'matrix'
+subset(x, subset, select, drop = FALSE, ...)
+```
+
+* `x`: object to be subsetted
+* `subset`: logical expression, indicating rows to keep
+* `select`: expression, indicating columns to keep
+* `drop`: drop attributes (default for `subset` is `FALSE`)
+
+**Note:** that the default for `drop` is `FALSE` when calling
+`subset(...)`!
+
+```{r, echo = FALSE, fig.align = "center"}
+x <- matrix(NA, ncol = 3, nrow = 4)
+rownames(x) <- c("Tom", "Lea", "Reto", "Emma")
+colnames(x) <- c("age", "size", "kids")
+x[,1] <- c(23, 34, 22, 28)
+x[,2] <- c(1.79, 1.73, 1.80, 1.51)
+x[,3] <- c(1, 3, 0, 0)
+```
+
+Imagine we have a matrix `x` which looks as follows:
+```{r, fig.align = "center"}
+x # Our matrix
+```
+
+
+The row names correspond to the given name of a set 
+of people, the column names to some attributes
+(age of the person, body size, and number of kids).
+We can easily use `subset` to extract all individuals
+smaller than 1.75 using the `subset` argument:
+
+```{r, fig.align = "center"}
+subset(x, subset = x[, "size"] < 1.75)
+```
+
+
+**Note:** `x[, "size"] < 1.75` does column subsetting by
+name (takes the column `"size"`) and checks whether or not
+each element in `x[, "size"]` is smaller than 1.75. If so,
+a logical `TRUE` will be returned, `FALSE` else. Thus,
+`x[, "size"] < 1.75` is doing nothing else than creating
+**a logical vector** (try to execute this to see what's
+returned by `x[, "size"] < 1.75`)!
+
+We can, of course, also use a more complex logical statement,
+e.g., searching for all individuals smaller than 1.80 and
+not younger than 30 years old (`&`, the logical and):
+
+```{r, fig.align = "center"}
+subset(x, subset = x[, "size"] < 1.80 & x[, "age"] < 30)
+```
+
+So far we have only used the `subset` input argument which
+subsets on rows. The `select` argument can be used to subset
+columns. An example:
+```{r, fig.align = "center"}
+subset(x, select = "kids")
+```
+
+This only returns us the `kids` column.
+```{r, fig.align = "center"}
+x[, c("kids"), drop = TRUE]
+```
+
+
+Or we **combine** `subset` and `select:
+
+```{r, fig.align = "center"}
+subset(x, subset = x[, "size"] < 1.80 & x[, "age"] < 30,
+          select = c("size", "kids"))
+```
+
+
+## Matrix Arithmetic
+
+### Matrices and scalars
+
+Matrices in _R_ are often used for arithmetics when solving
+mathematical problems. In principle, all basic arithmetic
+operations work element-wise as for vectors:
+
+```{r, echo = FALSE, fig.align = "center"}
+x <- matrix(1:4, ncol = 2)
+```
+
+```{r, fig.align = "center"}
+x # Demo matrix
+```
+
+```{r, fig.align = "center"}
+# Addition
+x + 2
+# Multiplication
+x * 1.5
+```
+
+The same is true for all other operations
+(e.g., `+`, `-`, `*`, `/`, `**`, `%%`, `sin(...)`, `cos(...)`, ...).
+
+### Matrices and vectors
+
+What happens if we e.g., multiply a matrix of
+dimension $2 \times 2$ with a vector of length $2$?
+```{r, echo = FALSE, fig.align = "center"}
+x <- matrix(1:4, ncol = 2)
+y <- c(10, 100)
+```
+
+```{r, fig.align = "center"}
+x # Demo matrix
+dim(x)
+y # Demo vector
+length(y)
+```
+
+```{r, fig.align = "center"}
+# Multiplication
+x * y
+```
+
+**Note:*** _R_ recycles the vector! The vector is shorter than
+the matrix (vector length 2, matrix length 4). Thus, _R_ simply
+re-uses the vector two times!
+
+In detail, the following happens: _R_ spans up a matrix
+`y` which matches `x` and looks as follows:
+```{r, fig.align = "center"}
+matrix(y, ncol = 2, nrow = 2)
+```
+
+Afterwards, `x` and this "`y` matrix" are multiplied.
+This does not result in an error or warning as the length
+of the matrix (4) is divisible by the length of the vector (2).
+
+## Further functions
+
+I don't want to talk about matrix arithmetics in detail. However,
+_R_ can do 'all' you need, e.g.,:
+
+* `t(x)`: transpose `x`
+* `diag(x)`: diagonal of `x`
+* `x \%*\% y`: matrix multiplication
+* `solve(x)`: compute the inverse of `x`
+* `crossprod(x, y)`: cross product
+* `outer(x, y)`: outer product
+* `det(x)`: calculate determinant
+* `qr(x)`: QR decomposition
+* ...
+for those interested in linear algebra/math with _R_, you
+may have a look at:
+* See `?matmult` or `help("matmult")` for more details
+* [https://www.math.uh.edu/~jmorgan/Math6397/day13/LinearAlgebraR-Handout.pdf](https://www.math.uh.edu/~jmorgan/Math6397/day13/LinearAlgebraR-Handout.pdf)
+* [https://www.amazon.com/Hands-On-Matrix-Algebra-Using-Applications/dp/9814313696](https://www.amazon.com/Hands-On-Matrix-Algebra-Using-Applications/dp/9814313696)
+* or simply use the internet search engine of your choice to find more material.
+
+
+## Practical Exercises (part 2)
+
+Note that there are no solutions in this file, there's an
+extra file on OLAT with a detailed solution to the following
+short exercises.
+
+### Practical exercise 3
+
+Create the following matrix:
+
+```{r, echo = FALSE, fig.align = "center"}
+x <- matrix(rep(c(10, 20), each = 3), ncol = 2,
+            dimnames = list(c("Row 1", "Row 2", "Row 3"), c("Column A", "Column B")))
+print(x)
+```
+
+From the matrix above, create:
+
+```{r, echo = FALSE, fig.align = "center"}
+t(x)
+```
+
+and:
+
+```{r, echo = FALSE, fig.align = "center"}
+x * rep(c(0.5, 2), each = 3)
+```
+
+### Practical exercise 4
+
+Create the following matrix (medals table, Olympic winter games 2018).
+```{r, echo = FALSE, fig.align = "center"}
+Bronce <- c(11L, 7L, 10L, 6L)
+Silver <- c(14L, 10L, 8L, 8L)
+Gold   <- c(14L, 14L, 11L, 9L)
+x <- cbind(Bronce, Silver, Gold)
+rownames(x) <- c("Norway", "Germany", "Canada", "USA")
+print(x)
+```
+
+Compute the sum of medals per country (e.g., use a `for`
+loop) and add it to the matrix to get:
+
+```{r, echo = FALSE, fig.align = "center"}
+Total <- rowSums(x)
+x <- cbind(x, Total)
+print(x)
+```
+
+### Practical exercise 5
+
+Create the following matrix:
+```{r, fig.align = "center"}
+set.seed(1234)
+x <- matrix(sample(-20:20, size = 25),
+            nrow = 5, ncol = 5)
+x
+```
+
+Create a nested `for` loop:
+
+* first, loop over the rows
+* second, loop over the columns
+
+Check if the element `x[i, j]` is
+**negative**. If so, multiply it with itself
+and store it on `x[i, j]`.
+
+

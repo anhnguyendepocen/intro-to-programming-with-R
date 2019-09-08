@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 10 Matrices | Introduction to Programming with R</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 10 Matrices | Introduction to Programming with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 10 Matrices | Introduction to Programming with R" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Reto Stauffer, Thorsten Simon" />
+
+
+<meta name="date" content="2019-09-08" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="control-structures-2.html"/>
+<link rel="next" href="factors.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.5/datatables.js"></script>
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Prerequisites</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#programming"><i class="fa fa-check"></i><b>1.1</b> Programming</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#why-not-natural-languages"><i class="fa fa-check"></i><b>1.2</b> Why not Natural Languages?</a></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#history-of-programming"><i class="fa fa-check"></i><b>1.3</b> History of Programming</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#number-of-languages"><i class="fa fa-check"></i><b>1.4</b> Number of Languages</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#the-r-programming-language"><i class="fa fa-check"></i><b>1.5</b> The <em>R</em> Programming Language</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="introduction.html"><a href="introduction.html#what-is-r"><i class="fa fa-check"></i><b>1.5.1</b> What is <em>R</em>?</a></li>
+<li class="chapter" data-level="1.5.2" data-path="introduction.html"><a href="introduction.html#open-science"><i class="fa fa-check"></i><b>1.5.2</b> Open Science</a></li>
+<li class="chapter" data-level="1.5.3" data-path="introduction.html"><a href="introduction.html#r-on-the-job-market"><i class="fa fa-check"></i><b>1.5.3</b> <em>R</em> on the job market</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#the-r-ecosystem"><i class="fa fa-check"></i><b>1.6</b> The <em>R</em> Ecosystem</a></li>
+<li class="chapter" data-level="1.7" data-path="introduction.html"><a href="introduction.html#examples"><i class="fa fa-check"></i><b>1.7</b> Examples</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="introduction.html"><a href="introduction.html#empirical-mean-and-quartiles"><i class="fa fa-check"></i><b>1.7.1</b> Empirical Mean and Quartiles</a></li>
+<li class="chapter" data-level="1.7.2" data-path="introduction.html"><a href="introduction.html#statistical-modeling"><i class="fa fa-check"></i><b>1.7.2</b> Statistical Modeling</a></li>
+<li class="chapter" data-level="1.7.3" data-path="introduction.html"><a href="introduction.html#spatial-data"><i class="fa fa-check"></i><b>1.7.3</b> Spatial Data</a></li>
+<li class="chapter" data-level="1.7.4" data-path="introduction.html"><a href="introduction.html#geographical-data"><i class="fa fa-check"></i><b>1.7.4</b> Geographical Data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>2</b> Installation</a><ul>
+<li class="chapter" data-level="2.1" data-path="installation.html"><a href="installation.html#interfaces-and-development-environments-ide"><i class="fa fa-check"></i><b>2.1</b> Interfaces and Development Environments (IDE)</a></li>
+<li class="chapter" data-level="2.2" data-path="installation.html"><a href="installation.html#interactive-examples"><i class="fa fa-check"></i><b>2.2</b> Interactive Examples</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="installation.html"><a href="installation.html#r-as-a-basic-calculator"><i class="fa fa-check"></i><b>2.2.1</b> R as a basic calculator</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="getting-help.html"><a href="getting-help.html"><i class="fa fa-check"></i><b>3</b> Getting Help</a><ul>
+<li class="chapter" data-level="3.1" data-path="getting-help.html"><a href="getting-help.html#accessing-r-documentationhelp-pages"><i class="fa fa-check"></i><b>3.1</b> Accessing R documentation/help pages</a></li>
+<li class="chapter" data-level="3.2" data-path="getting-help.html"><a href="getting-help.html#package-documentation-and-vignettes"><i class="fa fa-check"></i><b>3.2</b> Package documentation and vignettes</a></li>
+<li class="chapter" data-level="3.3" data-path="getting-help.html"><a href="getting-help.html#websites"><i class="fa fa-check"></i><b>3.3</b> Websites</a></li>
+<li class="chapter" data-level="3.4" data-path="getting-help.html"><a href="getting-help.html#ask-the-community"><i class="fa fa-check"></i><b>3.4</b> Ask the community</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="nuts-and-bolts.html"><a href="nuts-and-bolts.html"><i class="fa fa-check"></i><b>4</b> Nuts and Bolts</a><ul>
+<li class="chapter" data-level="4.1" data-path="nuts-and-bolts.html"><a href="nuts-and-bolts.html#atomic-classes"><i class="fa fa-check"></i><b>4.1</b> Atomic classes</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="nuts-and-bolts.html"><a href="nuts-and-bolts.html#know-the-basics"><i class="fa fa-check"></i><b>4.1.1</b> Know the basics!</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="nuts-and-bolts.html"><a href="nuts-and-bolts.html#input-and-output"><i class="fa fa-check"></i><b>4.2</b> Input and Output</a></li>
+<li class="chapter" data-level="4.3" data-path="nuts-and-bolts.html"><a href="nuts-and-bolts.html#atomic-classes-1"><i class="fa fa-check"></i><b>4.3</b> Atomic Classes</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="nuts-and-bolts.html"><a href="nuts-and-bolts.html#double"><i class="fa fa-check"></i><b>4.3.1</b> Double</a></li>
+<li class="chapter" data-level="4.3.2" data-path="nuts-and-bolts.html"><a href="nuts-and-bolts.html#integers"><i class="fa fa-check"></i><b>4.3.2</b> Integers</a></li>
+<li class="chapter" data-level="4.3.3" data-path="nuts-and-bolts.html"><a href="nuts-and-bolts.html#characters"><i class="fa fa-check"></i><b>4.3.3</b> Characters</a></li>
+<li class="chapter" data-level="4.3.4" data-path="nuts-and-bolts.html"><a href="nuts-and-bolts.html#checking-classes"><i class="fa fa-check"></i><b>4.3.4</b> Checking classes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="vectors.html"><a href="vectors.html"><i class="fa fa-check"></i><b>5</b> Vectors</a><ul>
+<li class="chapter" data-level="5.1" data-path="vectors.html"><a href="vectors.html#create-vectors"><i class="fa fa-check"></i><b>5.1</b> Create Vectors</a></li>
+<li class="chapter" data-level="5.2" data-path="vectors.html"><a href="vectors.html#vectors-1"><i class="fa fa-check"></i><b>5.2</b> Vectors</a></li>
+<li class="chapter" data-level="5.3" data-path="vectors.html"><a href="vectors.html#missing-values"><i class="fa fa-check"></i><b>5.3</b> Missing values</a></li>
+<li class="chapter" data-level="5.4" data-path="vectors.html"><a href="vectors.html#coercion"><i class="fa fa-check"></i><b>5.4</b> Coercion</a></li>
+<li class="chapter" data-level="5.5" data-path="vectors.html"><a href="vectors.html#attributes"><i class="fa fa-check"></i><b>5.5</b> Attributes</a></li>
+<li class="chapter" data-level="5.6" data-path="vectors.html"><a href="vectors.html#vector-attributes"><i class="fa fa-check"></i><b>5.6</b> Vector Attributes</a></li>
+<li class="chapter" data-level="5.7" data-path="vectors.html"><a href="vectors.html#vector-subsetting"><i class="fa fa-check"></i><b>5.7</b> Vector Subsetting</a><ul>
+<li class="chapter" data-level="5.7.1" data-path="vectors.html"><a href="vectors.html#subsetting-by-indizes"><i class="fa fa-check"></i><b>5.7.1</b> Subsetting by indizes</a></li>
+<li class="chapter" data-level="5.7.2" data-path="vectors.html"><a href="vectors.html#subsetting-by-name"><i class="fa fa-check"></i><b>5.7.2</b> Subsetting by name</a></li>
+<li class="chapter" data-level="5.7.3" data-path="vectors.html"><a href="vectors.html#subsetting-by-logical-vectors"><i class="fa fa-check"></i><b>5.7.3</b> Subsetting by logical vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="vectors.html"><a href="vectors.html#relational-and-logical-operators"><i class="fa fa-check"></i><b>5.8</b> Relational and Logical Operators</a><ul>
+<li class="chapter" data-level="5.8.1" data-path="vectors.html"><a href="vectors.html#rational-operators"><i class="fa fa-check"></i><b>5.8.1</b> Rational Operators</a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="vectors.html"><a href="vectors.html#practical-session"><i class="fa fa-check"></i><b>5.9</b> Practical Session</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html"><i class="fa fa-check"></i><b>6</b> Functions and mathematical operators</a><ul>
+<li class="chapter" data-level="6.1" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#functions"><i class="fa fa-check"></i><b>6.1</b> Functions</a></li>
+<li class="chapter" data-level="6.2" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#when-should-i-use-functions"><i class="fa fa-check"></i><b>6.2</b> When should I use functions?</a></li>
+<li class="chapter" data-level="6.3" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#the-structure-of-functions"><i class="fa fa-check"></i><b>6.3</b> The structure of functions</a></li>
+<li class="chapter" data-level="6.4" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#functions-in-r"><i class="fa fa-check"></i><b>6.4</b> Functions in <em>R</em></a></li>
+<li class="chapter" data-level="6.5" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#calling-functions"><i class="fa fa-check"></i><b>6.5</b> Calling functions</a></li>
+<li class="chapter" data-level="6.6" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#naming-functions"><i class="fa fa-check"></i><b>6.6</b> Naming functions</a></li>
+<li class="chapter" data-level="6.7" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#functions-in-real-life"><i class="fa fa-check"></i><b>6.7</b> Functions In Real Life</a></li>
+<li class="chapter" data-level="6.8" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#declare-functions-in-r"><i class="fa fa-check"></i><b>6.8</b> Declare Functions in <em>R</em></a></li>
+<li class="chapter" data-level="6.9" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#the-null-value-in-r"><i class="fa fa-check"></i><b>6.9</b> The NULL value in <em>R</em></a></li>
+<li class="chapter" data-level="6.10" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#back-to-functions"><i class="fa fa-check"></i><b>6.10</b> Back to functions</a><ul>
+<li class="chapter" data-level="6.10.1" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#multiple-input-arguments"><i class="fa fa-check"></i><b>6.10.1</b> Multiple input arguments</a></li>
+</ul></li>
+<li class="chapter" data-level="6.11" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#practical-session-1"><i class="fa fa-check"></i><b>6.11</b> Practical Session</a><ul>
+<li class="chapter" data-level="6.11.1" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#exercise-1"><i class="fa fa-check"></i><b>6.11.1</b> Exercise 1</a></li>
+<li class="chapter" data-level="6.11.2" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#exercise-2"><i class="fa fa-check"></i><b>6.11.2</b> Exercise 2</a></li>
+<li class="chapter" data-level="6.11.3" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#exercise-3"><i class="fa fa-check"></i><b>6.11.3</b> Exercise 3</a></li>
+</ul></li>
+<li class="chapter" data-level="6.12" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#function-recap"><i class="fa fa-check"></i><b>6.12</b> Function Recap</a></li>
+<li class="chapter" data-level="6.13" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#developing-functions"><i class="fa fa-check"></i><b>6.13</b> Developing Functions</a><ul>
+<li class="chapter" data-level="6.13.1" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#develop-functions-in-steps"><i class="fa fa-check"></i><b>6.13.1</b> Develop functions in steps</a></li>
+<li class="chapter" data-level="6.13.2" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#step-2-pack-parts-of-your-code-into-a-function"><i class="fa fa-check"></i><b>6.13.2</b> Step 2: pack parts of your code into a function</a></li>
+<li class="chapter" data-level="6.13.3" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#step-3-adjust-your-function"><i class="fa fa-check"></i><b>6.13.3</b> Step 3: adjust your function</a></li>
+</ul></li>
+<li class="chapter" data-level="6.14" data-path="functions-and-mathematical-operators.html"><a href="functions-and-mathematical-operators.html#advanced-use-script-files"><i class="fa fa-check"></i><b>6.14</b> Advanced: use script files</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="style-guide.html"><a href="style-guide.html"><i class="fa fa-check"></i><b>7</b> Style guide</a><ul>
+<li class="chapter" data-level="7.0.1" data-path="style-guide.html"><a href="style-guide.html#what-is-a-coding-style"><i class="fa fa-check"></i><b>7.0.1</b> What is a coding style?</a></li>
+<li class="chapter" data-level="7.0.2" data-path="style-guide.html"><a href="style-guide.html#special-characters"><i class="fa fa-check"></i><b>7.0.2</b> Special characters</a></li>
+<li class="chapter" data-level="7.0.3" data-path="style-guide.html"><a href="style-guide.html#language"><i class="fa fa-check"></i><b>7.0.3</b> Language</a></li>
+<li class="chapter" data-level="7.0.4" data-path="style-guide.html"><a href="style-guide.html#script-file-names"><i class="fa fa-check"></i><b>7.0.4</b> Script file names</a></li>
+<li class="chapter" data-level="7.0.5" data-path="style-guide.html"><a href="style-guide.html#object-names"><i class="fa fa-check"></i><b>7.0.5</b> Object names</a></li>
+<li class="chapter" data-level="7.0.6" data-path="style-guide.html"><a href="style-guide.html#spaces-infix-operators"><i class="fa fa-check"></i><b>7.0.6</b> Spaces: infix operators</a></li>
+<li class="chapter" data-level="7.0.7" data-path="style-guide.html"><a href="style-guide.html#spaces-colons"><i class="fa fa-check"></i><b>7.0.7</b> Spaces: colons</a></li>
+<li class="chapter" data-level="7.0.8" data-path="style-guide.html"><a href="style-guide.html#spaces-multiple-spaces"><i class="fa fa-check"></i><b>7.0.8</b> Spaces: multiple spaces</a></li>
+<li class="chapter" data-level="7.0.9" data-path="style-guide.html"><a href="style-guide.html#spaces-brackets"><i class="fa fa-check"></i><b>7.0.9</b> Spaces: brackets</a></li>
+<li class="chapter" data-level="7.0.10" data-path="style-guide.html"><a href="style-guide.html#spaces-commas"><i class="fa fa-check"></i><b>7.0.10</b> Spaces: commas</a></li>
+<li class="chapter" data-level="7.0.11" data-path="style-guide.html"><a href="style-guide.html#openingclosing-brackets"><i class="fa fa-check"></i><b>7.0.11</b> Opening/closing brackets</a></li>
+<li class="chapter" data-level="7.0.12" data-path="style-guide.html"><a href="style-guide.html#indention"><i class="fa fa-check"></i><b>7.0.12</b> Indention</a></li>
+<li class="chapter" data-level="7.0.13" data-path="style-guide.html"><a href="style-guide.html#explicit-return"><i class="fa fa-check"></i><b>7.0.13</b> Explicit return</a></li>
+<li class="chapter" data-level="7.0.14" data-path="style-guide.html"><a href="style-guide.html#line-breaks"><i class="fa fa-check"></i><b>7.0.14</b> Line breaks</a></li>
+<li class="chapter" data-level="7.0.15" data-path="style-guide.html"><a href="style-guide.html#nested-indention"><i class="fa fa-check"></i><b>7.0.15</b> Nested indention</a></li>
+<li class="chapter" data-level="7.0.16" data-path="style-guide.html"><a href="style-guide.html#object-assignment"><i class="fa fa-check"></i><b>7.0.16</b> Object assignment</a></li>
+<li class="chapter" data-level="7.0.17" data-path="style-guide.html"><a href="style-guide.html#comments"><i class="fa fa-check"></i><b>7.0.17</b> Comments</a></li>
+<li class="chapter" data-level="7.0.18" data-path="style-guide.html"><a href="style-guide.html#all-together"><i class="fa fa-check"></i><b>7.0.18</b> All together</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="control-structures-1.html"><a href="control-structures-1.html"><i class="fa fa-check"></i><b>8</b> Control Structures (1)</a><ul>
+<li class="chapter" data-level="8.1" data-path="control-structures-1.html"><a href="control-structures-1.html#logical-operators"><i class="fa fa-check"></i><b>8.1</b> Logical Operators</a></li>
+<li class="chapter" data-level="8.2" data-path="control-structures-1.html"><a href="control-structures-1.html#if-conditions"><i class="fa fa-check"></i><b>8.2</b> If conditions</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="control-structures-1.html"><a href="control-structures-1.html#conditional-return"><i class="fa fa-check"></i><b>8.2.1</b> Conditional return</a></li>
+<li class="chapter" data-level="8.2.2" data-path="control-structures-1.html"><a href="control-structures-1.html#stop-execution"><i class="fa fa-check"></i><b>8.2.2</b> Stop execution</a></li>
+<li class="chapter" data-level="8.2.3" data-path="control-structures-1.html"><a href="control-structures-1.html#another-example"><i class="fa fa-check"></i><b>8.2.3</b> Another example</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="control-structures-1.html"><a href="control-structures-1.html#if-else-conditions"><i class="fa fa-check"></i><b>8.3</b> If else conditions</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="control-structures-1.html"><a href="control-structures-1.html#multiple-conditions"><i class="fa fa-check"></i><b>8.3.1</b> Multiple conditions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="control-structures-2.html"><a href="control-structures-2.html"><i class="fa fa-check"></i><b>9</b> Control Structures (2)</a><ul>
+<li class="chapter" data-level="9.1" data-path="control-structures-2.html"><a href="control-structures-2.html#control-structures"><i class="fa fa-check"></i><b>9.1</b> Control Structures</a></li>
+<li class="chapter" data-level="9.2" data-path="control-structures-2.html"><a href="control-structures-2.html#for-loops"><i class="fa fa-check"></i><b>9.2</b> <code>for</code> loops</a></li>
+<li class="chapter" data-level="9.3" data-path="control-structures-2.html"><a href="control-structures-2.html#basic-usage"><i class="fa fa-check"></i><b>9.3</b> Basic usage</a></li>
+<li class="chapter" data-level="9.4" data-path="control-structures-2.html"><a href="control-structures-2.html#for-loops-over-vectors"><i class="fa fa-check"></i><b>9.4</b> For loops over vectors</a></li>
+<li class="chapter" data-level="9.5" data-path="control-structures-2.html"><a href="control-structures-2.html#combine-loops-and-ifelse-conditions"><i class="fa fa-check"></i><b>9.5</b> Combine loops and if/else conditions</a></li>
+<li class="chapter" data-level="9.6" data-path="control-structures-2.html"><a href="control-structures-2.html#use-next-and-break"><i class="fa fa-check"></i><b>9.6</b> Use next and break</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="control-structures-2.html"><a href="control-structures-2.html#how-to-use-next"><i class="fa fa-check"></i><b>9.6.1</b> How to use next</a></li>
+<li class="chapter" data-level="9.6.2" data-path="control-structures-2.html"><a href="control-structures-2.html#how-to-use-break"><i class="fa fa-check"></i><b>9.6.2</b> How to use break</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="control-structures-2.html"><a href="control-structures-2.html#practical-exercises"><i class="fa fa-check"></i><b>9.7</b> Practical exercises</a></li>
+<li class="chapter" data-level="9.8" data-path="control-structures-2.html"><a href="control-structures-2.html#looping-over-vector-indices"><i class="fa fa-check"></i><b>9.8</b> Looping over vector indices</a></li>
+<li class="chapter" data-level="9.9" data-path="control-structures-2.html"><a href="control-structures-2.html#using-next-and-break"><i class="fa fa-check"></i><b>9.9</b> Using next and break</a></li>
+<li class="chapter" data-level="9.10" data-path="control-structures-2.html"><a href="control-structures-2.html#while-loops"><i class="fa fa-check"></i><b>9.10</b> while loops</a></li>
+<li class="chapter" data-level="9.11" data-path="control-structures-2.html"><a href="control-structures-2.html#store-interim-results"><i class="fa fa-check"></i><b>9.11</b> Store Interim Results</a></li>
+<li class="chapter" data-level="9.12" data-path="control-structures-2.html"><a href="control-structures-2.html#practical-session-2"><i class="fa fa-check"></i><b>9.12</b> Practical Session</a><ul>
+<li class="chapter" data-level="9.12.1" data-path="control-structures-2.html"><a href="control-structures-2.html#exercise-1-arithmetic-mean"><i class="fa fa-check"></i><b>9.12.1</b> Exercise 1: Arithmetic mean</a></li>
+<li class="chapter" data-level="9.12.2" data-path="control-structures-2.html"><a href="control-structures-2.html#exercise-2-conditional-for-loop"><i class="fa fa-check"></i><b>9.12.2</b> Exercise 2: Conditional for loop</a></li>
+<li class="chapter" data-level="9.12.3" data-path="control-structures-2.html"><a href="control-structures-2.html#exercise-3-factorial"><i class="fa fa-check"></i><b>9.12.3</b> Exercise 3: Factorial</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="matrices.html"><a href="matrices.html"><i class="fa fa-check"></i><b>10</b> Matrices</a><ul>
+<li class="chapter" data-level="10.1" data-path="matrices.html"><a href="matrices.html#matrices-in-r"><i class="fa fa-check"></i><b>10.1</b> Matrices in <em>R</em></a></li>
+<li class="chapter" data-level="10.2" data-path="matrices.html"><a href="matrices.html#create-a-matrix"><i class="fa fa-check"></i><b>10.2</b> Create a matrix</a></li>
+<li class="chapter" data-level="10.3" data-path="matrices.html"><a href="matrices.html#fill-by-rowcolumn"><i class="fa fa-check"></i><b>10.3</b> Fill by row/column</a></li>
+<li class="chapter" data-level="10.4" data-path="matrices.html"><a href="matrices.html#column-binding-and-row-binding-vectors"><i class="fa fa-check"></i><b>10.4</b> Column-binding and row-binding (vectors)</a></li>
+<li class="chapter" data-level="10.5" data-path="matrices.html"><a href="matrices.html#column-binding-and-row-binding-matrices"><i class="fa fa-check"></i><b>10.5</b> Column-binding and row-binding (matrices)</a></li>
+<li class="chapter" data-level="10.6" data-path="matrices.html"><a href="matrices.html#matrix-attributes"><i class="fa fa-check"></i><b>10.6</b> Matrix attributes</a></li>
+<li class="chapter" data-level="10.7" data-path="matrices.html"><a href="matrices.html#setting-dimension-names"><i class="fa fa-check"></i><b>10.7</b> Setting dimension names (, )</a></li>
+<li class="chapter" data-level="10.8" data-path="matrices.html"><a href="matrices.html#set-dimension-names-when-creating-the-object"><i class="fa fa-check"></i><b>10.8</b> Set dimension names when creating the object</a></li>
+<li class="chapter" data-level="10.9" data-path="matrices.html"><a href="matrices.html#practical-exercises-part-1"><i class="fa fa-check"></i><b>10.9</b> Practical Exercises (part 1)</a><ul>
+<li class="chapter" data-level="10.9.1" data-path="matrices.html"><a href="matrices.html#practical-exercise-2"><i class="fa fa-check"></i><b>10.9.1</b> Practical exercise 2</a></li>
+</ul></li>
+<li class="chapter" data-level="10.10" data-path="matrices.html"><a href="matrices.html#subsetting-matrices"><i class="fa fa-check"></i><b>10.10</b> Subsetting matrices</a></li>
+<li class="chapter" data-level="10.11" data-path="matrices.html"><a href="matrices.html#subsetting-matrices-with-logical-vectors"><i class="fa fa-check"></i><b>10.11</b> Subsetting matrices with logical vectors</a></li>
+<li class="chapter" data-level="10.12" data-path="matrices.html"><a href="matrices.html#subsetting-by-name-1"><i class="fa fa-check"></i><b>10.12</b> Subsetting by name</a></li>
+<li class="chapter" data-level="10.13" data-path="matrices.html"><a href="matrices.html#non-existing-elements-in-matrices"><i class="fa fa-check"></i><b>10.13</b> Non-existing elements in matrices</a></li>
+<li class="chapter" data-level="10.14" data-path="matrices.html"><a href="matrices.html#the-subset-method"><i class="fa fa-check"></i><b>10.14</b> The subset method</a></li>
+<li class="chapter" data-level="10.15" data-path="matrices.html"><a href="matrices.html#matrix-arithmetic"><i class="fa fa-check"></i><b>10.15</b> Matrix Arithmetic</a><ul>
+<li class="chapter" data-level="10.15.1" data-path="matrices.html"><a href="matrices.html#matrices-and-scalars"><i class="fa fa-check"></i><b>10.15.1</b> Matrices and scalars</a></li>
+<li class="chapter" data-level="10.15.2" data-path="matrices.html"><a href="matrices.html#matrices-and-vectors"><i class="fa fa-check"></i><b>10.15.2</b> Matrices and vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="10.16" data-path="matrices.html"><a href="matrices.html#further-functions"><i class="fa fa-check"></i><b>10.16</b> Further functions</a></li>
+<li class="chapter" data-level="10.17" data-path="matrices.html"><a href="matrices.html#practical-exercises-part-2"><i class="fa fa-check"></i><b>10.17</b> Practical Exercises (part 2)</a><ul>
+<li class="chapter" data-level="10.17.1" data-path="matrices.html"><a href="matrices.html#practical-exercise-3"><i class="fa fa-check"></i><b>10.17.1</b> Practical exercise 3</a></li>
+<li class="chapter" data-level="10.17.2" data-path="matrices.html"><a href="matrices.html#practical-exercise-4"><i class="fa fa-check"></i><b>10.17.2</b> Practical exercise 4</a></li>
+<li class="chapter" data-level="10.17.3" data-path="matrices.html"><a href="matrices.html#practical-exercise-5"><i class="fa fa-check"></i><b>10.17.3</b> Practical exercise 5</a></li>
+</ul></li>
+<li class="chapter" data-level="10.18" data-path="matrices.html"><a href="matrices.html#typical-examples"><i class="fa fa-check"></i><b>10.18</b> Typical Examples</a><ul>
+<li class="chapter" data-level="10.18.1" data-path="matrices.html"><a href="matrices.html#convert-matrix-to-data-frame"><i class="fa fa-check"></i><b>10.18.1</b> Convert matrix to data frame</a></li>
+<li class="chapter" data-level="10.18.2" data-path="matrices.html"><a href="matrices.html#convert-data-frame-to-matrix"><i class="fa fa-check"></i><b>10.18.2</b> Convert data frame to matrix</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="factors.html"><a href="factors.html"><i class="fa fa-check"></i><b>11</b> Factors</a><ul>
+<li class="chapter" data-level="11.1" data-path="factors.html"><a href="factors.html#practical-exercises-1"><i class="fa fa-check"></i><b>11.1</b> Practical Exercises</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="factors.html"><a href="factors.html#practical-exercises-1-1"><i class="fa fa-check"></i><b>11.1.1</b> Practical Exercises 1</a></li>
+<li class="chapter" data-level="11.1.2" data-path="factors.html"><a href="factors.html#practical-exercises-2"><i class="fa fa-check"></i><b>11.1.2</b> Practical Exercises 2</a></li>
+<li class="chapter" data-level="11.1.3" data-path="factors.html"><a href="factors.html#practical-exercises-3"><i class="fa fa-check"></i><b>11.1.3</b> Practical Exercises 3</a></li>
+<li class="chapter" data-level="11.1.4" data-path="factors.html"><a href="factors.html#descriptive-data-analysis"><i class="fa fa-check"></i><b>11.1.4</b> Descriptive Data Analysis</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="lists.html"><a href="lists.html"><i class="fa fa-check"></i><b>12</b> Lists</a></li>
+<li class="chapter" data-level="13" data-path="data-frames.html"><a href="data-frames.html"><i class="fa fa-check"></i><b>13</b> Data frames</a><ul>
+<li class="chapter" data-level="13.1" data-path="data-frames.html"><a href="data-frames.html#convert-objects"><i class="fa fa-check"></i><b>13.1</b> Convert Objects</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="sort-order.html"><a href="sort-order.html"><i class="fa fa-check"></i><b>14</b> Sort &amp; Order</a><ul>
+<li class="chapter" data-level="14.1" data-path="sort-order.html"><a href="sort-order.html#sorting-a-vector"><i class="fa fa-check"></i><b>14.1</b> Sorting a vector</a></li>
+<li class="chapter" data-level="14.2" data-path="sort-order.html"><a href="sort-order.html#order-of-a-vector"><i class="fa fa-check"></i><b>14.2</b> Order of a vector</a></li>
+<li class="chapter" data-level="14.3" data-path="sort-order.html"><a href="sort-order.html#sort-to-get-order-order-to-sort"><i class="fa fa-check"></i><b>14.3</b> Sort to get order, order to sort</a><ul>
+<li class="chapter" data-level="14.3.1" data-path="sort-order.html"><a href="sort-order.html#sort-to-get-order"><i class="fa fa-check"></i><b>14.3.1</b> Sort to get order</a></li>
+<li class="chapter" data-level="14.3.2" data-path="sort-order.html"><a href="sort-order.html#order-to-sort"><i class="fa fa-check"></i><b>14.3.2</b> Order to sort</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="sort-order.html"><a href="sort-order.html#sort-a-matrix"><i class="fa fa-check"></i><b>14.4</b> Sort a matrix</a></li>
+<li class="chapter" data-level="14.5" data-path="sort-order.html"><a href="sort-order.html#sorting-a-data.frame"><i class="fa fa-check"></i><b>14.5</b> Sorting a data.frame</a></li>
+<li class="chapter" data-level="14.6" data-path="sort-order.html"><a href="sort-order.html#practical-exercise"><i class="fa fa-check"></i><b>14.6</b> Practical Exercise</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Programming with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="matrices" class="section level1">
+<h1><span class="header-section-number">Chapter 10</span> Matrices</h1>
+<p>In one of the first sessions I’ve shown the following image which explains how the different objects are connected to each other and/or based on each other. So far, we have learned a lot about (atomic) vectors, one of the basic objects in <em>R</em>. In this session we will see how matrices, data frames, and lists work.</p>
+<div style="text-align: center;">
+<p><img src="/home/retos/Documents/Lehre/SS2019_RProgramming/images/06/06_datatypes_3.png"></p>
+</div>
+<p>As shown, matrices are based on vectors, while data frames are based on lists, another frequently used object type in <em>R</em>.</p>
+<p>But let’s start with matrices first!</p>
+<div id="matrices-in-r" class="section level2">
+<h2><span class="header-section-number">10.1</span> Matrices in <em>R</em></h2>
+<ul>
+<li>matrices are <strong>based on vectors</strong></li>
+<li>can only contain data of <strong>one class</strong> (or mode; as vectors)</li>
+<li>have a <strong>dimension</strong> attribute (<code>dim</code>)</li>
+<li><strong>can have</strong> row and column <strong>names</strong> (<code>rownames</code>, <code>colnames</code>)</li>
+</ul>
+<p>Matrices can be created using the <code>matrix</code> function (see <code>?matrix</code> or <code>help(&quot;matrix&quot;)</code>. According to the <em>R</em> documentation the usage of the <code>matrix</code> function is as follows:</p>
+<pre><code>matrix(data = NA, nrow = 1, ncol = 1, byrow = FALSE, dimnames = NULL)</code></pre>
+<ul>
+<li><code>data</code>: a data vector (default <code>NA</code>)</li>
+<li><code>nrow</code>: integer, number of rows (default <code>1</code>)</li>
+<li><code>ncol</code>: integer, number of columns (default <code>1</code>)</li>
+<li><code>byrow</code>: logical, whether or not to fill by row (default by column)</li>
+<li><code>dimnames</code>: optional list of length 2 with rownames and column names.</li>
+</ul>
+<p><strong>Function defaults:</strong> functions can have required inputs (as seen in the lecture), but also optional input arguments with defaults. If an input has a default (e.g., <code>data = NA</code>) the default value as defined is used if we do not define this input. Thus, the call <code>matrix()</code> will create a matrix containing <code>NA</code> (<code>data = NA</code>) with one row (<code>nrow = 1</code>) and one column (<code>ncol = 1</code>).</p>
+<p><strong>Generic methods for matrices</strong></p>
+<p>For matrices (and most other objects) a set of so called generic methods or functions exist. Some useful methods for matrices are:</p>
+<ul>
+<li><code>head(x, n = N)</code>: show first <span class="math inline">\(N\)</span> rows</li>
+<li><code>tail(x, n = N)</code>: show last <span class="math inline">\(N\)</span> rows</li>
+<li><code>summary(x)</code>: object summary</li>
+<li><code>rbind(x1, x2)</code>: row-bind two matrices</li>
+<li><code>cbind(x1, x2)</code>: column-bind and column-bind</li>
+<li><code>subset</code>: subsetting a matrix</li>
+<li>… and many others …</li>
+</ul>
+<p>Note that these are generic methods and they will also work on other objects (e.g., vectors or data frames).</p>
+</div>
+<div id="create-a-matrix" class="section level2">
+<h2><span class="header-section-number">10.2</span> Create a matrix</h2>
+<p>The following examples show how to create matrices of different dimensions with and without data. To create a matrix of the dimension <span class="math inline">\(2 \times 3\)</span> without data we can call:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># NA matrix, dimension 2x3</span>
+<span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)</code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]   NA   NA   NA
+## [2,]   NA   NA   NA</code></pre>
+<p>Remember that the default for the input <code>data</code> is <code>NA</code>. As we have not specified <code>data</code> the whole matrix will be filled with missing values. The two additional arguments define the matrix size with two rows and three columns (<span class="math inline">\(2 \times 3\)</span> matrix).</p>
+<p>Instead of creating an empty matrix we can also directly provide data. In this case, an integer sequence <code>1:9</code> is used.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Matrix containing 1-9 (3x3)</span>
+<span class="kw">matrix</span>(<span class="dt">data =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dt">nrow =</span> <span class="dv">3</span>)</code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9</code></pre>
+<strong>Note:</strong> we do not provide the <code>ncol</code> argument. Our data set is of length 9 (<code>length(1:9)</code>) and we are asking for three rows. There is only one way to fulfil the requirements: creating a <span class="math inline">\(3 \times 3\)</span> matrix. A graphical representation of what is happening is shown below:
+<div style="text-align: center; padding: 20px 0;">
+<p><img src="/home/retos/Documents/Lehre/SS2019_RProgramming/images/06/06_vector_to_matrix.png" style="width: 60%;"></p>
+</div>
+<p>The upper part of the image represents a vector, e.g., the vector of length 9 shown in the example (<code>1:9</code>). The bottom figure shows how the vector is represented in the matrix, a <span class="math inline">\(3 \times 3\)</span> matrix in this example. By default **the data is filled by column, wherefore the first (left) column will contain the values <code>1</code>, <code>2</code>, <code>3</code>, the next column <code>4</code>, <code>5</code>, <code>6</code>, and the last column the remaining values <code>7</code>, <code>8</code>, <code>9</code>. We can change this behavior …</p>
+</div>
+<div id="fill-by-rowcolumn" class="section level2">
+<h2><span class="header-section-number">10.3</span> Fill by row/column</h2>
+<p>The <code>matrix</code> by default uses <code>byrow = FALSE</code> and fills in the data by column (as shown above). However, we can set <code>byrow = TRUE</code> to fill in the data by row (top row first). The following two chunks show the effect:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># byrow = FALSE (default)</span>
+x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">data =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dt">ncol =</span> <span class="dv">3</span>,
+            <span class="dt">byrow =</span> <span class="ot">FALSE</span>)
+<span class="co"># Print the object</span>
+<span class="kw">print</span>(x)</code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># byrow = TRUE</span>
+x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">data =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dt">ncol =</span> <span class="dv">3</span>,
+            <span class="dt">byrow =</span> <span class="ot">TRUE</span>)
+<span class="co"># Print the object</span>
+<span class="kw">print</span>(x)</code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    2    3
+## [2,]    4    5    6
+## [3,]    7    8    9</code></pre>
+</div>
+<div id="column-binding-and-row-binding-vectors" class="section level2">
+<h2><span class="header-section-number">10.4</span> Column-binding and row-binding (vectors)</h2>
+<p>Another way to create matrices in <em>R</em> is to row-bind or column-bind vectors. This is very useful if you do have a set of vectors and you want to combine or store them in one matrix object.</p>
+<p>Imagine we have two numeric vectors <code>x</code> and <code>y</code> of length 3 and we want to create a matrix which contains <code>x</code> in the first column and <code>y</code> in the second column. To do so, we can simply call the <code>cbind</code> function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Two numeric vectors</span>
+x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>)
+y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">11</span>, <span class="dv">22</span>, <span class="dv">33</span>)
+<span class="co"># column-binding</span>
+z &lt;-<span class="st"> </span><span class="kw">cbind</span>(x, y)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(z)</code></pre></div>
+<pre><code>## [1] &quot;matrix&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(z)</code></pre></div>
+<pre><code>##      x  y
+## [1,] 5 11
+## [2,] 5 22
+## [3,] 5 33</code></pre>
+<p>The result of <code>cbind(x, y)</code> is a <span class="math inline">\(3 \times 2\)</span> matrix. <code>cbind</code> can also be used to combine more than two vectors <strong>but note</strong> that not all combinations of lengths are allowed (well, <em>R</em> tries to recycle the vectors to match the length of the longest vector and will warn you if this is not possible. Try it out!).</p>
+<p><strong>Column names:</strong> note that, in case of <code>cbind</code> and also <code>rbind</code> <em>R</em> automatically uses the names of the vectors (here <code>x</code> and <code>y</code>) as row or column name. We will learn how to access and specify row names and column names later in this document.</p>
+<p>The counterpart of <code>cbind</code> is <code>rbind</code> which works the very same, but combines the vectors row-wise and not column-wise.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Two numeric vectors</span>
+x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>)
+y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">11</span>, <span class="dv">22</span>, <span class="dv">33</span>)
+<span class="co"># column-binding</span>
+z &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, y)
+<span class="kw">class</span>(z)</code></pre></div>
+<pre><code>## [1] &quot;matrix&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(z)</code></pre></div>
+<pre><code>##   [,1] [,2] [,3]
+## x    5    5    5
+## y   11   22   33</code></pre>
+</div>
+<div id="column-binding-and-row-binding-matrices" class="section level2">
+<h2><span class="header-section-number">10.5</span> Column-binding and row-binding (matrices)</h2>
+<p><code>cbind</code> and <code>rbind</code> can also be used to combine matrices. Again, you have to take care of the dimensions of the matrices. However, let’s assume we have two matrices of the very same dimension (both, <code>x1</code> and <code>x2</code> are <span class="math inline">\(3 \times 2\)</span> matrices). Row-binding and column-binding of matrices works just the same as for vectors:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Two matrices</span>
+x1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>,     <span class="dt">ncol =</span> <span class="dv">2</span>)
+x2 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">101</span><span class="op">:</span><span class="dv">106</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)
+<span class="co"># column-binding</span>
+<span class="kw">cbind</span>(x1, x2)</code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    4  101  104
+## [2,]    2    5  102  105
+## [3,]    3    6  103  106</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Two matrices</span>
+x1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>,     <span class="dt">ncol =</span> <span class="dv">2</span>)
+x2 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">101</span><span class="op">:</span><span class="dv">106</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)
+<span class="co"># column-binding</span>
+<span class="kw">rbind</span>(x1, x2)</code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    4
+## [2,]    2    5
+## [3,]    3    6
+## [4,]  101  104
+## [5,]  102  105
+## [6,]  103  106</code></pre>
+<p>… except that no automatic row/column names are set. If <code>x1</code> and/or <code>x2</code> would have had row and/or column names they would have been kept, of course.</p>
+</div>
+<div id="matrix-attributes" class="section level2">
+<h2><span class="header-section-number">10.6</span> Matrix attributes</h2>
+<p>As we now know how to create simple matrices let’s check the attributes. Remember: matrices are “just” vectors with additional attributes! While a vector only has a <code>class</code> and a certain <code>length</code>, matrices come with an additional dimension attribute.</p>
+<p>The function <code>dim</code> returns the dimension of the matrix, an integer vector of length <span class="math inline">\(2\)</span> where the first element corresponds to the number of rows (always rows first), the second element corresponds to the number of column.s</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="dt">nrow =</span> <span class="dv">4</span>)
+x <span class="co"># Show matrix</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    5    9
+## [2,]    2    6   10
+## [3,]    3    7   11
+## [4,]    4    8   12</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(x) <span class="co"># Matrix dimension</span></code></pre></div>
+<pre><code>## [1] 4 3</code></pre>
+<p>As we all know how ‘vector subsetting by index’ works we can now easily pick the number of rows and columns using:</p>
+<ul>
+<li>`dim(x)[1L]}: number of rows,</li>
+<li>`dim(x)[2L]}: number of columns.</li>
+</ul>
+<p>… or use <code>nrow</code> and <code>ncol</code>, two convenient functions to either get the number of rows or columns.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nrow</span>(x)      <span class="co"># Number of rows</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ncol</span>(x)      <span class="co"># Number of columns</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(x)    <span class="co"># Length</span></code></pre></div>
+<pre><code>## [1] 12</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(x)     <span class="co"># Class</span></code></pre></div>
+<pre><code>## [1] &quot;matrix&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.matrix</span>(x) <span class="co"># Check if is matrix</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p><strong>Note:</strong> a matrix also always has a length! This length corresponds to the underlying vector. A <span class="math inline">\(3 \times 3\)</span> matrix is of length 9 (has 9 elements), a <span class="math inline">\(5 \times 5\)</span> matrix is of length 25 and so far and so on.</p>
+<p>As for all objects we can retrieve the class of the object by calling the <code>class</code> function, and use <code>is.matrix</code> to check whether or not a certain object is of class <code>matrix</code> or not (returns <code>TRUE</code> or <code>FALSE</code>).</p>
+</div>
+<div id="setting-dimension-names" class="section level2">
+<h2><span class="header-section-number">10.7</span> Setting dimension names (, )</h2>
+<p>Another important attribute of a matrix are the dimension names, or row names and column names (in case of two-dimensional matrices).</p>
+<p>They can be accessed and specified using the <code>rownames</code> and <code>colnames</code> functions. Let us create a <span class="math inline">\(3 \times 3\)</span> matrix …</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Same matrix again</span>
+x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">data =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)</code></pre></div>
+<p>… and set row and column names using character vectors. As our matrix <code>x</code> has three rows and three columns, we do have to provide three row names and three column names. Note that the naming here is not very useful but demonstrates how they can be defined:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rownames</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Row 1&quot;</span>, <span class="st">&quot;Row 2&quot;</span>, <span class="st">&quot;Row 3&quot;</span>)
+<span class="kw">colnames</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Col A&quot;</span>, <span class="st">&quot;Col B&quot;</span>, <span class="st">&quot;Col C&quot;</span>)</code></pre></div>
+<p>If we print the matrix <code>x</code> again we can see that all our rows and columns are now labeled.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(x)</code></pre></div>
+<pre><code>##       Col A Col B Col C
+## Row 1     1     4     7
+## Row 2     2     5     8
+## Row 3     3     6     9</code></pre>
+<p><code>rownames</code> and <code>colnames</code> cannot only be used to <strong>set</strong> the names but also to <strong>get</strong> the names from an existing object:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rownames</span>(x)</code></pre></div>
+<pre><code>## [1] &quot;Row 1&quot; &quot;Row 2&quot; &quot;Row 3&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(x)</code></pre></div>
+<pre><code>## [1] &quot;Col A&quot; &quot;Col B&quot; &quot;Col C&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(x)</code></pre></div>
+<pre><code>## [1] 3 3</code></pre>
+<p><strong>Additional hint:</strong> we don’t always have to set all row names and column names, we could also only set or change one specific element by e.g., calling <code>rownames(x)[1L] &lt;- &quot;Fooo&quot;</code> to overwrite the rowname of the first row (<code>1L</code>) with <code>&quot;Fooo&quot;</code>.</p>
+</div>
+<div id="set-dimension-names-when-creating-the-object" class="section level2">
+<h2><span class="header-section-number">10.8</span> Set dimension names when creating the object</h2>
+<p>Another way is to directly specify the dimension names when calling the <code>matrix</code> function. The function takes up an optional input <code>dimnames</code> (by default this is set to <code>NULL</code>). We can specify a list containing two character vectors (<code>dimnames = list(&lt;rownames&gt;, &lt;colnames&gt;)</code>) where the first vector contains the row names, the second one the column names:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create matrix with dimension names</span>
+x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">data =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dt">ncol =</span> <span class="dv">3</span>,
+            <span class="dt">dimnames =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;Row 1&quot;</span>, <span class="st">&quot;Row 2&quot;</span>, <span class="st">&quot;Row 3&quot;</span>),
+                            <span class="kw">c</span>(<span class="st">&quot;Col A&quot;</span>, <span class="st">&quot;Col B&quot;</span>, <span class="st">&quot;Col C&quot;</span>)))
+<span class="co"># Print the object</span>
+<span class="kw">print</span>(x)</code></pre></div>
+<pre><code>##       Col A Col B Col C
+## Row 1     1     4     7
+## Row 2     2     5     8
+## Row 3     3     6     9</code></pre>
+<p>… to get the very same result as in the section above.</p>
+</div>
+<div id="practical-exercises-part-1" class="section level2">
+<h2><span class="header-section-number">10.9</span> Practical Exercises (part 1)</h2>
+<p>Note that there are no solutions in this file, there’s an extra file on OLAT with a detailed solution to the following short exercises. ### Practical exercise 1</p>
+<p>Create the following matrices using <code>matrix(...)</code>:</p>
+<pre><code>##      [,1] [,2]
+## [1,]   NA   NA
+## [2,]   NA   NA</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    1    2    3    4    5
+## [2,]    6    7    8    9   10
+## [3,]   11   12   13   14   15</code></pre>
+<pre><code>##       A B C
+## row_1 1 2 3
+## row_2 1 2 3
+## row_3 1 2 3
+## row_4 1 2 3
+## row_5 1 2 3</code></pre>
+<p>Furthermore, check attributes, length, dimension.</p>
+<div id="practical-exercise-2" class="section level3">
+<h3><span class="header-section-number">10.9.1</span> Practical exercise 2</h3>
+<p>Create the following matrices based on three (logical/numeric) vectors (<code>A</code>/<code>B</code>/<code>C</code>;<code>X1</code>/<code>X2</code>/<code>X3</code>) and row and/or column bind:</p>
+<pre><code>##         A     B     C
+## [1,] TRUE FALSE FALSE
+## [2,] TRUE  TRUE FALSE
+## [3,] TRUE  TRUE  TRUE</code></pre>
+<pre><code>##    [,1]  [,2] [,3]
+## A  TRUE  TRUE TRUE
+## B FALSE  TRUE TRUE
+## C FALSE FALSE TRUE</code></pre>
+<pre><code>##       X1  X2   X3
+## [1,] 1.1 100 -500
+## [2,] 2.2 200  500</code></pre>
+<p>Furthermore, check attributes, length, dimension.</p>
+</div>
+</div>
+<div id="subsetting-matrices" class="section level2">
+<h2><span class="header-section-number">10.10</span> Subsetting matrices</h2>
+<p>Subsetting matrices is similar to subsetting vectors except that we can subset by row and/or column. As for vectors we can:</p>
+<ul>
+<li>subsetting <strong>by index</strong></li>
+<li>subsetting <strong>by name</strong> (if set)</li>
+<li>typically (not necessarily) two-dimensional!</li>
+</ul>
+<p>When using row and column indizes it is again <em>rows first</em>, <em>columns second</em>. The following image shows the indexing of a matrix. The blue numbers correspond to the row index (thus always <code>1</code> for the top row, <code>2</code> for the second row, …), the red numbers the index of the columns (<code>1</code>s left, <code>2</code> middle, …).</p>
+<div style="text-align: center;">
+<p><img src="/home/retos/Documents/Lehre/SS2019_RProgramming/images/06/06_matrix.png" style="width: 40%"></p>
+</div>
+<p>Imagine we do have the following matrix:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x <span class="co"># Demo matrix</span></code></pre></div>
+<pre><code>##       Col A Col B Col C
+## Row 1   101   105   109
+## Row 2   102   106   110
+## Row 3   103   107   111
+## Row 4   104   108   112</code></pre>
+<p>Using subsetting by index we can now access specific elements by calling:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="dv">3</span>, <span class="dv">2</span>]</code></pre></div>
+<pre><code>## [1] 107</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="dv">1</span>, <span class="dv">3</span>]</code></pre></div>
+<pre><code>## [1] 109</code></pre>
+<p>The first call picks the element in the <strong>third row</strong> and <strong>second column</strong>, the second call the element in <strong>row 1</strong> and <strong>column three</strong>.</p>
+<p>What happens if we use one single value instead of two (one for the rows, one for the columns) as above?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="dv">10</span>]   <span class="co"># What happens here?</span></code></pre></div>
+<pre><code>## [1] 110</code></pre>
+<p>Well, a matrix is built on a vector. <code>x[10L]</code> gives us the tenth element of the vector! As matrices are filled by column (!even if you specify <code>byrow = TRUE</code>; that just stores the data in a different order) the tenth element of our <span class="math inline">\(4 times 3\)</span> matrix is <code>x[3, 2]</code>.</p>
+<p>You can number them (top down, starting top left). The first column contains the elements <code>1L</code>, <code>2L</code>, <code>3L</code>, <code>4L</code>, the second column the elements <code>5L</code> to <code>8L</code>, the third column starts with <code>9L</code> followed by the one we are interested in, <code>x[10L]</code> (the element <code>x[2, 3]</code>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(x)</code></pre></div>
+<pre><code>##       Col A Col B Col C
+## Row 1   101   105   109
+## Row 2   102   106   110
+## Row 3   103   107   111
+## Row 4   104   108   112</code></pre>
+<p>Instead of picking single elements of the matrix we can also subset specific rows or columns. We can do this by leaving one index empty (empty means “all”). E.g. <code>x[3, ]</code> means “<em>give me the third row, all columns</em>”:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Subsetting 3th row</span>
+x[<span class="dv">3</span>, ]</code></pre></div>
+<pre><code>## Col A Col B Col C 
+##   103   107   111</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(x[<span class="dv">3</span>, ])</code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(x[<span class="dv">3</span>, ])</code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(x[<span class="dv">3</span>, ]) <span class="co"># Is a vector!</span></code></pre></div>
+<pre><code>## NULL</code></pre>
+<p>Note that, by default, <em>R</em> returns us a <strong>vector</strong> if we subset one specific row or column! The result is no longer a matrix.</p>
+<p>The counterpart to row-subsetting is column-subsetting which works the very same way:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Subsetting 3th column</span>
+x[, <span class="dv">3</span>]</code></pre></div>
+<pre><code>## Row 1 Row 2 Row 3 Row 4 
+##   109   110   111   112</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(x[, <span class="dv">3</span>])</code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(x[, <span class="dv">3</span>])</code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(x[, <span class="dv">3</span>]) <span class="co"># Is a vector!</span></code></pre></div>
+<pre><code>## NULL</code></pre>
+<p>If you do algebra with <em>R</em> you may need a row or column vector:</p>
+<ul>
+<li>Column vector: <code>matrix</code> with only one column (an <span class="math inline">\(N \times 1\)</span> matrix)</li>
+<li>Row vector: <code>matrix</code> with only one row (an <span class="math inline">\(1 \times N\)</span> matrix)</li>
+</ul>
+<p>This can be achieved by setting the <code>drop = FALSE</code> argument. If <code>drop = FALSE</code> is set <em>R</em> does not drop the matrix attributes (i.e., row names, column names, dimension, class) and the result will be of class <code>matrix</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Row vector</span>
+x[<span class="dv">3</span>, , drop =<span class="st"> </span><span class="ot">FALSE</span>]</code></pre></div>
+<pre><code>##       Col A Col B Col C
+## Row 3   103   107   111</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(x[<span class="dv">3</span>, , <span class="dt">drop =</span> <span class="ot">FALSE</span>])</code></pre></div>
+<pre><code>## [1] &quot;matrix&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Column vector</span>
+x[, <span class="dv">3</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>]</code></pre></div>
+<pre><code>##       Col C
+## Row 1   109
+## Row 2   110
+## Row 3   111
+## Row 4   112</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(x[, <span class="dv">3</span>, <span class="dt">drop =</span> <span class="ot">FALSE</span>])</code></pre></div>
+<pre><code>## [1] &quot;matrix&quot;</code></pre>
+<p>We can, of course, also combine row and column subsetting. The following calls:</p>
+<ul>
+<li>extract the <strong>second and third row</strong> (<code>c(2, 3)</code>), but only the <strong>first column</strong> (<code>1</code>).</li>
+<li>extract the <strong>fourth row</strong>, but only the <strong>first and second column</strong> (<code>c(1,2)</code>).</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x <span class="co"># Our matrix</span></code></pre></div>
+<pre><code>##       Col A Col B Col C
+## Row 1   101   105   109
+## Row 2   102   106   110
+## Row 3   103   107   111
+## Row 4   104   108   112</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 2nd and 3th row, 1th column</span>
+x[<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>), <span class="dv">1</span>]</code></pre></div>
+<pre><code>## Row 2 Row 3 
+##   102   103</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 4th row, 1th and 2nd column</span>
+x[<span class="dv">4</span>, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)]</code></pre></div>
+<pre><code>## Col A Col B 
+##   104   108</code></pre>
+<p>Again, if the result contains only one row or only one column <em>R</em> drops the matrix attributes and simplifies the result to a vector. To avoid that, we can set <code>drop = FALSE</code> again:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 2nd and 3th row, 1th column</span>
+x[<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>), <span class="dv">1</span>, drop =<span class="st"> </span><span class="ot">FALSE</span>]</code></pre></div>
+<pre><code>##       Col A
+## Row 2   102
+## Row 3   103</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 4th row, 1th and 2nd column</span>
+x[<span class="dv">4</span>, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), drop =<span class="st"> </span><span class="ot">FALSE</span>]</code></pre></div>
+<pre><code>##       Col A Col B
+## Row 4   104   108</code></pre>
+</div>
+<div id="subsetting-matrices-with-logical-vectors" class="section level2">
+<h2><span class="header-section-number">10.11</span> Subsetting matrices with logical vectors</h2>
+<p>We can also subset matrices with logical vectors. This is used for subsetting with logics. When using logical vectors, these vectors have to match the dimensions (have the same length as the number of rows or columns). An example “doing it by hand”:</p>
+<ul>
+<li>Rows: <code>c(FALSE, TRUE, FALSE, FALSE)</code> (only 2_nd_ row)</li>
+<li>Columns: <code>c(TRUE, FALSE, TRUE)</code> (only 1_th_ &amp; 3_th_ column)</li>
+<li>Attributes: <code>drop = FALSE</code> (do not drop)</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Our matrix</span>
+x</code></pre></div>
+<pre><code>##       Col A Col B Col C
+## Row 1   101   105   109
+## Row 2   102   106   110
+## Row 3   103   107   111
+## Row 4   104   108   112</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Subsetting</span>
+x[<span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>),
+  <span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>),
+  drop =<span class="st"> </span><span class="ot">FALSE</span>]</code></pre></div>
+<pre><code>##       Col A Col C
+## Row 2   102   110</code></pre>
+</div>
+<div id="subsetting-by-name-1" class="section level2">
+<h2><span class="header-section-number">10.12</span> Subsetting by name</h2>
+<p>Very useful is subsetting by name. This is, again, similar to subsetting named vectors, except that we do have two dimensions here:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Only &quot;Col A&quot;</span>
+x[, <span class="st">&quot;Col A&quot;</span>]</code></pre></div>
+<pre><code>## Row 1 Row 2 Row 3 Row 4 
+##   101   102   103   104</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The element &quot;Row 3&quot;, &quot;Col B&quot;</span>
+x[<span class="st">&quot;Row 3&quot;</span>, <span class="st">&quot;Col B&quot;</span>]</code></pre></div>
+<pre><code>## [1] 107</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Or &quot;Col A&quot; * &quot;Col C&quot;</span>
+z &lt;-<span class="st"> </span>x[, <span class="st">&quot;Col A&quot;</span>] <span class="op">-</span><span class="st"> </span>x[, <span class="st">&quot;Col C&quot;</span>]
+z</code></pre></div>
+<pre><code>## Row 1 Row 2 Row 3 Row 4 
+##    -8    -8    -8    -8</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(z)</code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(z)</code></pre></div>
+<pre><code>## [1] &quot;Row 1&quot; &quot;Row 2&quot; &quot;Row 3&quot; &quot;Row 4&quot;</code></pre>
+<p>You may again use <code>drop = FALSE</code>. If not (<code>drop = TRUE</code>, the default) the result will be a named vector.</p>
+</div>
+<div id="non-existing-elements-in-matrices" class="section level2">
+<h2><span class="header-section-number">10.13</span> Non-existing elements in matrices</h2>
+<p>From vectors we know that an <code>NA</code> will be returned if we access an element which does not exist, e.g., if we try to access element 10 (<code>x[10L]</code>) in a vector <code>x</code> which only contains <code>5</code> elements.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(1L, 2L, 3L)
+x[<span class="dv">10</span>]       <span class="co"># non-existent, returns NA</span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<p>For matrices, when using <code>x[&lt;rowindex&gt;, &lt;colindex&gt;]</code> the stroy is a bit different: we will run into an ERROR which looks as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dt">nrow =</span> <span class="dv">3</span>)
+x[<span class="dv">10</span>,<span class="dv">10</span>]  <span class="co"># non-existent, error!</span>
+Error <span class="cf">in</span> x[<span class="dv">10</span>, <span class="dv">10</span>] <span class="op">:</span><span class="st"> </span>subscript out of bounds</code></pre></div>
+<p>Whenever you run into this error: check your indices/names/matrix dimension!</p>
+</div>
+<div id="the-subset-method" class="section level2">
+<h2><span class="header-section-number">10.14</span> The subset method</h2>
+<p>There is a generic method called <code>subset</code>. The method can also be used on vectors (but not very useful). However, when dealing with matrices the <code>subset</code> method becomes interesting, and will be even more important on data.frames.</p>
+<p><code>subset</code> can be used to subset a matrix similar to the ways we have learned above, however, the usage is different and may be more convenient. According to the <em>R</em> documentation (see <code>?subset</code> or <code>help(&quot;subset&quot;)</code>):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## S3 method for class &#39;matrix&#39;
+<span class="kw">subset</span>(x, subset, select, <span class="dt">drop =</span> <span class="ot">FALSE</span>, ...)</code></pre></div>
+<ul>
+<li><code>x</code>: object to be subsetted</li>
+<li><code>subset</code>: logical expression, indicating rows to keep</li>
+<li><code>select</code>: expression, indicating columns to keep</li>
+<li><code>drop</code>: drop attributes (default for <code>subset</code> is <code>FALSE</code>)</li>
+</ul>
+<p><strong>Note:</strong> that the default for <code>drop</code> is <code>FALSE</code> when calling <code>subset(...)</code>!</p>
+<p>Imagine we have a matrix <code>x</code> which looks as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x <span class="co"># Our matrix</span></code></pre></div>
+<pre><code>##      age size kids
+## Tom   23 1.79    1
+## Lea   34 1.73    3
+## Reto  22 1.80    0
+## Emma  28 1.51    0</code></pre>
+<p>The row names correspond to the given name of a set of people, the column names to some attributes (age of the person, body size, and number of kids). We can easily use <code>subset</code> to extract all individuals smaller than 1.75 using the <code>subset</code> argument:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subset</span>(x, <span class="dt">subset =</span> x[, <span class="st">&quot;size&quot;</span>] <span class="op">&lt;</span><span class="st"> </span><span class="fl">1.75</span>)</code></pre></div>
+<pre><code>##      age size kids
+## Lea   34 1.73    3
+## Emma  28 1.51    0</code></pre>
+<p><strong>Note:</strong> <code>x[, &quot;size&quot;] &lt; 1.75</code> does column subsetting by name (takes the column <code>&quot;size&quot;</code>) and checks whether or not each element in <code>x[, &quot;size&quot;]</code> is smaller than 1.75. If so, a logical <code>TRUE</code> will be returned, <code>FALSE</code> else. Thus, <code>x[, &quot;size&quot;] &lt; 1.75</code> is doing nothing else than creating <strong>a logical vector</strong> (try to execute this to see what’s returned by <code>x[, &quot;size&quot;] &lt; 1.75</code>)!</p>
+<p>We can, of course, also use a more complex logical statement, e.g., searching for all individuals smaller than 1.80 and not younger than 30 years old (<code>&amp;</code>, the logical and):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subset</span>(x, <span class="dt">subset =</span> x[, <span class="st">&quot;size&quot;</span>] <span class="op">&lt;</span><span class="st"> </span><span class="fl">1.80</span> <span class="op">&amp;</span><span class="st"> </span>x[, <span class="st">&quot;age&quot;</span>] <span class="op">&lt;</span><span class="st"> </span><span class="dv">30</span>)</code></pre></div>
+<pre><code>##      age size kids
+## Tom   23 1.79    1
+## Emma  28 1.51    0</code></pre>
+<p>So far we have only used the <code>subset</code> input argument which subsets on rows. The <code>select</code> argument can be used to subset columns. An example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subset</span>(x, <span class="dt">select =</span> <span class="st">&quot;kids&quot;</span>)</code></pre></div>
+<pre><code>##      kids
+## Tom     1
+## Lea     3
+## Reto    0
+## Emma    0</code></pre>
+<p>This only returns us the <code>kids</code> column.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[, <span class="kw">c</span>(<span class="st">&quot;kids&quot;</span>), drop =<span class="st"> </span><span class="ot">TRUE</span>]</code></pre></div>
+<pre><code>##  Tom  Lea Reto Emma 
+##    1    3    0    0</code></pre>
+<p>Or we <strong>combine</strong> <code>subset</code> and `select:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">subset</span>(x, <span class="dt">subset =</span> x[, <span class="st">&quot;size&quot;</span>] <span class="op">&lt;</span><span class="st"> </span><span class="fl">1.80</span> <span class="op">&amp;</span><span class="st"> </span>x[, <span class="st">&quot;age&quot;</span>] <span class="op">&lt;</span><span class="st"> </span><span class="dv">30</span>,
+          <span class="dt">select =</span> <span class="kw">c</span>(<span class="st">&quot;size&quot;</span>, <span class="st">&quot;kids&quot;</span>))</code></pre></div>
+<pre><code>##      size kids
+## Tom  1.79    1
+## Emma 1.51    0</code></pre>
+</div>
+<div id="matrix-arithmetic" class="section level2">
+<h2><span class="header-section-number">10.15</span> Matrix Arithmetic</h2>
+<div id="matrices-and-scalars" class="section level3">
+<h3><span class="header-section-number">10.15.1</span> Matrices and scalars</h3>
+<p>Matrices in <em>R</em> are often used for arithmetics when solving mathematical problems. In principle, all basic arithmetic operations work element-wise as for vectors:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x <span class="co"># Demo matrix</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    3
+## [2,]    2    4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Addition</span>
+x <span class="op">+</span><span class="st"> </span><span class="dv">2</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    3    5
+## [2,]    4    6</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Multiplication</span>
+x <span class="op">*</span><span class="st"> </span><span class="fl">1.5</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]  1.5  4.5
+## [2,]  3.0  6.0</code></pre>
+<p>The same is true for all other operations (e.g., <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>**</code>, <code>%%</code>, <code>sin(...)</code>, <code>cos(...)</code>, …).</p>
+</div>
+<div id="matrices-and-vectors" class="section level3">
+<h3><span class="header-section-number">10.15.2</span> Matrices and vectors</h3>
+<p>What happens if we e.g., multiply a matrix of dimension <span class="math inline">\(2 \times 2\)</span> with a vector of length <span class="math inline">\(2\)</span>?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x <span class="co"># Demo matrix</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    3
+## [2,]    2    4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(x)</code></pre></div>
+<pre><code>## [1] 2 2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y <span class="co"># Demo vector</span></code></pre></div>
+<pre><code>## [1]  10 100</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(y)</code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Multiplication</span>
+x <span class="op">*</span><span class="st"> </span>y</code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]   10   30
+## [2,]  200  400</code></pre>
+<p><strong>Note:</strong>* <em>R</em> recycles the vector! The vector is shorter than the matrix (vector length 2, matrix length 4). Thus, <em>R</em> simply re-uses the vector two times!</p>
+<p>In detail, the following happens: <em>R</em> spans up a matrix <code>y</code> which matches <code>x</code> and looks as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matrix</span>(y, <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">nrow =</span> <span class="dv">2</span>)</code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]   10   10
+## [2,]  100  100</code></pre>
+<p>Afterwards, <code>x</code> and this “<code>y</code> matrix” are multiplied. This does not result in an error or warning as the length of the matrix (4) is divisible by the length of the vector (2).</p>
+</div>
+</div>
+<div id="further-functions" class="section level2">
+<h2><span class="header-section-number">10.16</span> Further functions</h2>
+<p>I don’t want to talk about matrix arithmetics in detail. However, <em>R</em> can do ‘all’ you need, e.g.,:</p>
+<ul>
+<li><code>t(x)</code>: transpose <code>x</code></li>
+<li><code>diag(x)</code>: diagonal of <code>x</code></li>
+<li><code>x \%*\% y</code>: matrix multiplication</li>
+<li><code>solve(x)</code>: compute the inverse of <code>x</code></li>
+<li><code>crossprod(x, y)</code>: cross product</li>
+<li><code>outer(x, y)</code>: outer product</li>
+<li><code>det(x)</code>: calculate determinant</li>
+<li><code>qr(x)</code>: QR decomposition</li>
+<li>… for those interested in linear algebra/math with <em>R</em>, you may have a look at:</li>
+<li>See <code>?matmult</code> or <code>help(&quot;matmult&quot;)</code> for more details</li>
+<li><a href="https://www.math.uh.edu/~jmorgan/Math6397/day13/LinearAlgebraR-Handout.pdf" class="uri">https://www.math.uh.edu/~jmorgan/Math6397/day13/LinearAlgebraR-Handout.pdf</a></li>
+<li><a href="https://www.amazon.com/Hands-On-Matrix-Algebra-Using-Applications/dp/9814313696" class="uri">https://www.amazon.com/Hands-On-Matrix-Algebra-Using-Applications/dp/9814313696</a></li>
+<li>or simply use the internet search engine of your choice to find more material.</li>
+</ul>
+</div>
+<div id="practical-exercises-part-2" class="section level2">
+<h2><span class="header-section-number">10.17</span> Practical Exercises (part 2)</h2>
+<p>Note that there are no solutions in this file, there’s an extra file on OLAT with a detailed solution to the following short exercises.</p>
+<div id="practical-exercise-3" class="section level3">
+<h3><span class="header-section-number">10.17.1</span> Practical exercise 3</h3>
+<p>Create the following matrix:</p>
+<pre><code>##       Column A Column B
+## Row 1       10       20
+## Row 2       10       20
+## Row 3       10       20</code></pre>
+<p>From the matrix above, create:</p>
+<pre><code>##          Row 1 Row 2 Row 3
+## Column A    10    10    10
+## Column B    20    20    20</code></pre>
+<p>and:</p>
+<pre><code>##       Column A Column B
+## Row 1        5       40
+## Row 2        5       40
+## Row 3        5       40</code></pre>
+</div>
+<div id="practical-exercise-4" class="section level3">
+<h3><span class="header-section-number">10.17.2</span> Practical exercise 4</h3>
+<p>Create the following matrix (medals table, Olympic winter games 2018).</p>
+<pre><code>##         Bronce Silver Gold
+## Norway      11     14   14
+## Germany      7     10   14
+## Canada      10      8   11
+## USA          6      8    9</code></pre>
+<p>Compute the sum of medals per country (e.g., use a <code>for</code> loop) and add it to the matrix to get:</p>
+<pre><code>##         Bronce Silver Gold Total
+## Norway      11     14   14    39
+## Germany      7     10   14    31
+## Canada      10      8   11    29
+## USA          6      8    9    23</code></pre>
+</div>
+<div id="practical-exercise-5" class="section level3">
+<h3><span class="header-section-number">10.17.3</span> Practical exercise 5</h3>
+<p>Create the following matrix:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1234</span>)
+x &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">sample</span>(<span class="op">-</span><span class="dv">20</span><span class="op">:</span><span class="dv">20</span>, <span class="dt">size =</span> <span class="dv">25</span>),
+            <span class="dt">nrow =</span> <span class="dv">5</span>, <span class="dt">ncol =</span> <span class="dv">5</span>)
+x</code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    7  -16  -15    3   20
+## [2,]   -5   19   -6   13  -18
+## [3,]    1  -17   -7    4   11
+## [4,]   16   18   -1    0   15
+## [5,]  -12    5    8  -13  -19</code></pre>
+<p>Create a nested <code>for</code> loop:</p>
+<ul>
+<li>first, loop over the rows</li>
+<li>second, loop over the columns</li>
+</ul>
+<p>Check if the element <code>x[i, j]</code> is <strong>negative</strong>. If so, multiply it with itself and store it on <code>x[i, j]</code>.</p>
+
+</div>
+</div>
+<div id="typical-examples" class="section level2">
+<h2><span class="header-section-number">10.18</span> Typical Examples</h2>
+<pre><code>##      name gender eyecolor age height
+## 1  Renate female    green  33   1.55
+## 2    Kurt   male    brown  22   1.75
+## 3 Hermann   male    brown  18   1.71</code></pre>
+<pre><code>##   region year15 year16 year17 year18
+## 1   West   1.24   1.18   1.39   1.30
+## 2  Boise   1.37   1.14   1.49   1.49
+## 3  Tampa   1.36   1.26   1.62   1.33</code></pre>
+<div id="convert-matrix-to-data-frame" class="section level3">
+<h3><span class="header-section-number">10.18.1</span> Convert matrix to data frame</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dimnames &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="ot">NULL</span>, <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>))
+xmat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">9</span>, <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">dimnames =</span> dimnames)
+xmat</code></pre></div>
+<pre><code>##      A B C
+## [1,] 1 4 7
+## [2,] 2 5 8
+## [3,] 3 6 9</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Convert matrix to data.frame</span>
+xdf &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(xmat)
+xdf</code></pre></div>
+<pre><code>##   A B C
+## 1 1 4 7
+## 2 2 5 8
+## 3 3 6 9</code></pre>
+</div>
+<div id="convert-data-frame-to-matrix" class="section level3">
+<h3><span class="header-section-number">10.18.2</span> Convert data frame to matrix</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xdf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">name =</span> <span class="kw">c</span>(<span class="st">&quot;Ben&quot;</span>, <span class="st">&quot;Lea&quot;</span>),
+                  <span class="dt">age  =</span> <span class="kw">c</span>(<span class="dv">34</span>, <span class="dv">23</span>),
+                  <span class="dt">IQ   =</span> <span class="kw">c</span>(<span class="dv">90</span>, <span class="dv">95</span>))
+xdf</code></pre></div>
+<pre><code>##   name age IQ
+## 1  Ben  34 90
+## 2  Lea  23 95</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Convert data.frame to matrix</span>
+xmat &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(xdf)
+xmat</code></pre></div>
+<pre><code>##      name  age  IQ  
+## [1,] &quot;Ben&quot; &quot;34&quot; &quot;90&quot;
+## [2,] &quot;Lea&quot; &quot;23&quot; &quot;95&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xdf2 &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(xmat, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
+xdf2</code></pre></div>
+<pre><code>##   name age IQ
+## 1  Ben  34 90
+## 2  Lea  23 95</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(xdf2<span class="op">$</span>age)</code></pre></div>
+<pre><code>## Warning in mean.default(xdf2$age): argument is not numeric or logical:
+## returning NA</code></pre>
+<pre><code>## [1] NA</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(xdf2<span class="op">$</span>name)</code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(xdf2<span class="op">$</span>age)</code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xdf2 &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(xmat) <span class="co"># stringsAsFactors = TRUE</span>
+xdf2</code></pre></div>
+<pre><code>##   name age IQ
+## 1  Ben  34 90
+## 2  Lea  23 95</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(xdf2<span class="op">$</span>name)</code></pre></div>
+<pre><code>## [1] &quot;factor&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(xdf2<span class="op">$</span>age)</code></pre></div>
+<pre><code>## [1] &quot;factor&quot;</code></pre>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="control-structures-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="factors.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

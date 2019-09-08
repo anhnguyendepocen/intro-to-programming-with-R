@@ -1,0 +1,433 @@
+
+
+# Sort \& Order
+
+Today we will learn about two new functions: **Sort & Order**.
+
+Sometimes it is required to sort an object
+(`vector`, `matrix`, `data.frame`, ...).
+Not surprisingly the the functions are called `sort` \& `order`.
+Note that _R_ base does not provide convenience functions to directly
+sort `data.frame`s, however, additional packages like e.g.,
+`plyr` or `data.table` have extra functions for it. Nevertheless, we can
+also use the base functions to sort our objects without the need to install
+and load additional packages.
+
+## Sorting a vector
+
+To bring the values in order we can use `sort`.
+From `?sort`/`help("sort")`:
+
+```r
+Sort (or order) a vector or factor (partially) into ascending or
+descending order. For ordering along more than one variable,
+e.g., for sorting data frames, see 'order'.
+
+sort(x, decreasing = FALSE, na.last = NA, ...)
+```
+
+As we can see the function `sort` takes 3+ input arguments.
+The first one (`x`) is our vector, the following two arguments
+are optional and allow to control how the vector will be sorted.
+If not specified, the defaults will be used (`decreasing = FALSE`
+and `na.last = NA`). We will see how these arguments change the
+way the vector is sorted later on.
+
+For demonstration purposes let us create a simple integer
+vector with random numbers:
+```{r, fig.align = "center"}
+# Set randomization seed
+set.seed(555)
+# Sampling some random integers
+x <- sample(1:100, 10)
+# Setting element 8 to NA
+x[8] <- NA
+x
+```
+
+Note that I have set the eight element (`x[8]`) to `NA` (missing value)
+as we have to take care about missing values when using `sort`.
+First, let's simply call `sort(x)` and store the result (the sorted
+vector) on a new object called `xs` ("x sorted").
+```{r, fig.align = "center"}
+# Sort x, store sorted vector on sx
+xs <- sort(x)
+xs
+```
+
+`xs` now contains the sorted version of `x` with the smallest
+on the first element, the second largest on the second element
+and so far and so on. **But** the length of `xs` is no longer
+`r length(x)` (length of x) but `r length(xs)` (length of xs)!
+
+**The optional argument `na.last`**
+
+The reason is that `sort`, by default, uses `na.last = NA`.
+If `na.last = NA` missing values will simply be **removed** from
+the vector! In some situations we might need to keep the `NA`
+values, and this can be controlled by using the additional
+argument `na.last`.
+
+Available options:
+
+* `na.last = NA` (default): `NA`s are removed
+* `na.last = TRUE`: `NA`s will be added to **the end** of the
+     sorted vector ("place `NA` as last elements").
+* `na.last = FALSE`: `NA`s will be added to **the beginning** of the
+     sorted vector ("do not put `NA`s as last, but as first elements).
+
+```{r, fig.align = "center"}
+sort(x, na.last = NA) # default
+sort(x, na.last = TRUE)
+sort(x, na.last = FALSE)
+```
+
+As you can see `NA`s are once removed, once placed at the end of the
+sorted vector, and once at the beginning of the sorted vector.
+
+**The optional argument `decreasing`**
+
+The other additional input argument `decreasing = TRUE` controls
+whether the result is sorted in ascending (smallest to largest)
+or descending (largest to smallest) order. For those using
+SQL: this is equivalent to `"ORDER BY `field_name` ASC"` and
+`"ORDER BY `field_name` DESC"`.
+
+```{r, fig.align = "center"}
+# Sort x descending
+sort(x, decreasing = TRUE)
+```
+
+
+## Order of a vector
+
+While `sort` _sorts_ our vector, `order` returns us the _order_ (index) of the
+position of the elements in ascending/descending order.
+From the _R_ documentation (`?order`/`help("order")`):
+
+```
+'order' returns a permutation which rearranges its first argument
+into ascending or descending order, breaking ties by further
+arguments. 'sort.list' is the same, using only one argument.
+See the examples for how to use these functions to sort data
+frames, etc.
+
+order(..., na.last = TRUE, decreasing = FALSE,
+      method = c("auto", "shell", "radix"))
+```
+
+
+Let us use the same vector `x` we used before, but call `order`
+instead of `sort` this time:
+
+```{r, fig.align = "center"}
+x # Show x
+which(is.na(x)) # Position of NA
+# Order of vector x
+order(x)
+```
+
+
+The result is an integer vector of the same length as the vector
+`x`. By default, `order` returns an ascending order. Thus, the first
+element returned by `order` gives us the **position of the smallest
+value** in `x`, the second element the **second smallest**, and so far,
+and so on. Here, the first element of `order(x)` (`order(x)[1L]`) is
+`r order(x)[1L]` which simply tells us that **the smallest value in `x`
+is on `x[`r order(x)[1L]``.
+
+Remember that we have one missing value in `x` at position 8 (`x[8L]`)!
+In contrast to `sort`, `order` does not remove missing values by default
+but uses `na.last = TRUE`. Thus, we find the index `x` at the end of the
+index vector returned by `order(x)`.
+
+However, if needed we can also control the `na.last` behaviour as for the
+`sort` function, except that the default is different:
+
+```{r, fig.align = "center"}
+order(x, na.last = NA)
+order(x, na.last = TRUE) # default
+order(x, na.last = FALSE)
+```
+
+
+Acending/decending works the same way, if we set `decreasing = TRUE`
+_R_ will return the resverse order (index of the largest element first):
+
+```{r, fig.align = "center"}
+# Sort x descending
+order(x, decreasing = TRUE)
+```
+
+
+## Sort to get order, order to sort
+
+### Sort to get order
+
+Sort and order do something similar but not the same.
+To get a better understanding let's play arund a bit
+using the following vector `x`:
+```{r, fig.align = "center"}
+set.seed(333)
+x <- sample(1:100, 5)
+x
+sort(x)
+order(x)
+```
+
+
+`x` is a `r class(x)` vector of length `r length(x)` containing
+the values "`r paste(x, collapse = ", ")`". The question is:
+**How could we use `sort` to get the order
+of the elements in `x` without calling `order`)?**
+
+Well, let's think about it for a second.
+`sort` returns us the sorted vector of `x`.
+Thus, we could first use `sort(x)` and store
+the result on a new object `xs`. We know that
+`order` returns us the position of the elements
+in the original vector `x`. All we have to do
+is to find out at which position in `x`
+the smallest element is, and the smallest
+element is the one stored on `xs[1L]`!
+`xs[2L]` contains the second smallest element, ...
+
+Thus, we could do the following:
+
+* Sort `x` by calling `xs <- sort(x)`
+* Create a new empty vector `idx` to store the position
+   of the element `xs[i]` in `x`
+* Create a for loop wich goes along all elements
+   in `xs` (loop over `1:length(xs)`)
+
+```{r, fig.align = "center"}
+# Create new object 'xs',
+# sorted version of x
+xs <- sort(x, na.last = TRUE)
+# Empty vector to store index
+idx <- vector("integer", length(x))
+```
+
+```{r, fig.align = "center"}
+# Loop over 'xs', find 'xs[i]' in x
+for (i in seq_along(xs)) {
+  idx[i] <- which(x == xs[i])
+}
+idx
+```
+
+Et voila, we get the very same as when calling `order` (compare
+the result). **Warning:** will not work if `x` contains `NA`s.
+
+
+### Order to sort
+
+Another question is how to use `order` to sort a vector without
+calling `sort`! This is more straight forward and can be used
+to easily sort matrices and data frames.
+Let's use the same vector `x` as before:
+
+```{r, fig.align = "center"}
+set.seed(333)
+x <- sample(1:100, 5)
+x
+sort(x)
+order(x)
+```
+
+
+As we already know `order` returns us the index of
+the elements in `x` in an ascending order (by default).
+Let's store the `order(x)` on a new object `xorder`.
+Thus, `xorder[1L]` contains the index of the smallest
+element in `x`, `xorder[2L]` the index of the second
+smallest element in `x` and so far and so on.
+
+All we have to do to bring `x` in an ascending order
+is to pick the elements of `x` with the index sequence
+of `order`. As `xorder` is an integer index vector
+we can simply call `x[xorder]`:
+
+```{r, fig.align = "center"}
+# Get order of x
+xorder <- order(x)
+```
+
+```{r, fig.align = "center"}
+# Pick elements in 'x' in the
+# order of 'xorder'
+x[xorder]
+```
+
+... and done! `x[order]` (or, `x[order(x)]`  if you prefer
+to write all in one go) returns us the very same result
+as `sort(x)`.
+
+## Sort a matrix
+
+If we would like to sort a matrix we cannot simply use `sort`
+anymore. The reason: a matrix is basically a vector. Thus,
+`sort(x)` would return us **ALL** elements of the matrix
+`x` in an ascending/descending order (to be more specific:
+`sort(x)` of a matrix `x` returns a sorted **vector**).
+Thus, to be able to sort a matrix by a specific column,
+we have to do it slightly different.
+
+What we have to do is to:
+
+* Create an order sequence (index of the rows of a
+    specific column in the matrix).
+* Rearrange the matrix `x` given the oder sequence
+    from the first step.
+
+This will reorder/sort our matrix in a way that 
+we will have an ascending/descending order of
+the data of a **specific column** of our matrix.
+But let's do a practical example ...
+
+Let us start with creating a relatively
+simple $3 \times 3$ integer matrix with
+with three columns called `"A"`, `"B"`, and `"C"`
+as follows:
+
+```{r, fig.align = "center"}
+# Demo matrix
+x <- matrix(c(10,  8,  8,  3,
+               8,  3,  1,  4,
+              20, 33, 11, 31),
+            ncol = 3)
+colnames(x) <- c("A", "B", "C")
+x
+```
+
+
+**Task 1:** assume that we would like to have the
+matrix sorted such that we have ascending values
+in the first column (column `"A"`) without mixing
+up the data. For each row, the **data should be 
+the same** as before, we **only** want to **re-order the rows!**
+
+To do so we can again use `order` on column `"A"` by calling
+`order(x[, "A"])` (and store it on a new object `idx`).
+The result (`idx`) is an integer vector which tells us
+in which row we have the **smallest value in column `"A"`,
+and so far and so on.
+
+We can now use **matrix subsetting by index** on our rows
+to get the **rows of `x`** in the correct order.
+
+```{r, fig.align = "center"}
+idx <- order(x[, "A"])
+idx
+# Re-order matrix (store on
+# 'xs' (x sorted).
+xs <- x[idx, ]
+xs
+```
+
+
+As you can see `xs` contains the sorted version with
+increasing values in column `xs[, "A"]`, but the
+data in each row are kept the same (the first row
+of `xs` is simply what has been row `r order(x[, "A"])[1L]`
+in our matrix `x`).
+
+We can do the very same but sort by column `"B"`:
+```{r, fig.align = "center"}
+idx <- order(x[, "B"])
+idx
+# Re-order matrix (store on
+# 'xs' (x sorted).
+xs <- x[idx, ]
+xs
+```
+
+
+Sometimes it is required to not only sort by one specific column,
+but by first sort the matrix by one column, and then by another
+one. This can be done by calling `order` with more than one input
+vector. In this example I would like to sort the matrix `x`
+by column `"A"` first, and then (if needed) by column `"B"`.
+The procedure is the very same: we first create an index
+vector `idx` with the row indices and then re-order the 
+matrix `x` and store it on `xs`:
+
+```{r, fig.align = "center"}
+idx <- order(x[, "A"], x[, "B"])
+idx
+# Re-order
+xs <- x[idx, ]
+xs
+```
+
+As you can see the result is different than before
+(check column `"B"`; second and third element).
+
+
+## Sorting a data.frame
+
+The very same as for a `matrix` can be used for a `data.frame`.
+In this example I am loading the `faithful` data set from the
+_R_ dataset package.
+
+```{r, fig.align = "center"}
+# Loading the old faithful
+# data set:
+data("faithful")
+head(faithful, n = 3)
+```
+
+
+All I want to do is to sort the `data.frame`
+by  `eruption` (eruption time in seconds) in an increasing
+or ascending order. First, we create a new index vector
+`idx` with the row indices ...
+
+```{r, fig.align = "center"}
+idx <- order(faithful$eruption)
+head(idx)
+```
+
+
+... which we can use to re-order our `data.frame`.
+As I don't need the unsorted version of the object `faithful`
+anymore I simply overwrite it (`faithful <- faithful[idx,]`):
+
+```{r, fig.align = "center"}
+# Re-order (overwrite the
+# old object 'faithful' here)
+faithful <- faithful[idx, ]
+# Head of sorted object
+head(faithful)
+```
+
+
+As `head(faithful, n = 6)` returns us the first 6 entries
+of our `data.frame` this is a very convenient way to get
+the 6 elements with the smallest `eruption` times if needed
+(`y <- head(faithful)`).
+
+## Practical Exercise
+
+
+The second practical example is about the good old titanic.
+You can find a file called `"titanic_with_age.rda"` on OLAT
+(_Downloads/Files_) which contains some information about the
+passengers of the RMS Titanic. Try to do the following step/answer
+the following questions:
+
+1. Investigate the loaded object(s).
+2. Write a `for` loop to get/print the class of each variable.
+3. Do we have missing values? Do we have wrong/suspicious values?
+4. For numeric columns: calculate summary statistics (e.g.,
+            mean, minimum, maximum, range, ...).
+5. Sort the object by age (decreasing, oldest first).
+6. Create a new factor variable `age_group` with `"child"` for passengers $\le
+    14$ and `"adult"` for all others.
+7. Create a subset for "females", one for "males" using `subset`.
+8. Use `subset to create a new object only containing the variables `gender`
+    and `alive`.
+9. Was it more likely to survive as a female? Count number of males/females and
+    (given gender) how may of them survived/died. Advanced: use `table` and
+    `prop.table`
+

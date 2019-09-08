@@ -1,0 +1,151 @@
+
+# Getting Help
+
+There are several ways to find help for _R_ commands and functions.
+E.g.,:
+
+1. "ask google" (not recommended)
+2. use Rs built in documentation
+3. html version(s) of the _R_ documentation
+4. package manuals and vignettes
+5. make use of online communities
+
+What people typically do nowadays is to "ask google" or similar
+search engines. However, this is _not recommended_, at least not
+if help for specific functions or commands is needed!
+If you search online, especially if 
+especially if the query is not very precise, you may end
+up with a broad range of possible solutions of different flavors
+and quickly end up installing 20 new packages ... which might not
+be needed.
+
+## Accessing R documentation/help pages
+
+_R_ comes with built in documentation for all (exported) functions
+which can easily be accessed trough the console (or the IDE) by calling
+`?<command>` or `help(<command>)` where `<command>` is what you are looking for. As an example:
+we would like to know how the `mean` function works (arithmetic mean) and
+what options it offers.
+
+* `?mean` or `help(mean)`: will open the help page for the arithmetic mean
+* `?plot` or `help(mean)`: will open the `plot` help page
+* `?"?"` or `help("?")`: will open the help page for 'how to open the help page'
+* `?"+"` or `help("+")`: opens the help page for arithmetic operators
+
+The advantage of the _R_ documentation help pages: as they are loaded
+from your computer they fit _your version_ of the installed software
+or package.
+
+<div style="text-align: center;">
+ <img style="width: 60%;" src="images/02/02_documentation_RStudio.png"> 
+</div>
+
+The documentation will help in the bottom left corner. Help pages typically
+consist of:
+
+* **function name** the **package** in which the command is included (`mean`
+    is included in the `base` package)
+* **title** and a brief **description** what the function does
+* **usage**: how the function can be used
+* **arguments**: available arguments
+* **details**: more details about the function and the options
+* **value**: the result; what will be returned when calling the function
+* **references**: where to get some more information, if needed
+* **see also**: commands/functions which might also be helpful
+* **examples**: some (smaller) examples how the function can be used
+
+**The advantage of the built in _R_ documentation:**
+As the documentation comes with your _R_ installation or the
+package you have installed the documentation fits your version
+of the software! And it can also be used offline, if needed.
+
+Examples: if the documentation contains examples one can easily
+run these examples by calling the function `example(<command>)`.
+Try `example(mean)` or `example(plot)` to see how it works.
+
+If you don't know the exact command `help.search` allows to
+search for help pages containing a specific keyword.
+For example:
+
+* `help.search("mean")` will return a list of help pages
+    containing the word 'mean'
+* This search can be refined (see `?help.search`). E.g.,
+    we can search for help pages containing 'mean' in the
+    'base' package by calling `help.search("mean", package = "base")`.
+
+A similar function is `apropos`. Instead of a list `apropos` returns
+a character vector of functions which contain the keyword in the function
+name, e.g.,:
+
+```{r, fig.align = "center"}
+# Apropos mean
+apropos("mean")
+```
+
+## Package documentation and vignettes
+
+In addition to the built in help pages contributed _R_ packages
+come with a PDF manual and, often but not necessarily, with
+so called _vignettes_. A _vignette_ is an addition document
+by the authors of a specific software package which provides
+some introductory material and/or examples how to use the
+software and are, in contrast to the manuals (technical
+documentation) more "tutorial like".
+This is often helpful when using a new package
+for a specific task. As an example: the [zoo](https://CRAN.R-project.org/package=zoo)
+(for time series data in _R_) comes with a range of useful
+vignettes (see [https://CRAN.R-project.org/package=zoo](https://CRAN.R-project.org/package=zoo)).
+
+The vignette 'zoo' (from the `zoo` package) can be accessed out
+of the command line (_if `zoo` is intalled!_) by calling:
+
+* `vignette("zoo", package = "zoo")`
+
+Vignettes (and manuals) can also be found on
+[CRAN](https://cran.r-project.org) for contributed packages.
+A screenshot of the [CRAN website for the package `zoo`](https://CRAN.R-project.org/package=zoo),
+a package for handling regular and irregular time series in _R_:
+
+<div style="text-align: center;">
+ <img style="width: 60%;" src = "images/02/02_vignettes.jpg">
+</div>
+
+## Websites
+
+There are some websites providing access the _R_ documentation.
+However, all they do is to parse the _R_ documentation and
+present it as a html website. Looks nice, however not
+really needed (and you do have to take care if you are reading
+the manual matching the version of the software/package you
+are using). As an example: _R_ documentation for `mean` on
+[rdocumentation.org](https://www.rdocumentation.org/packages/base/versions/3.5.3/topics/mean).
+
+## Ask the community
+
+If the documentation does not help you, you may consider
+using one of the online communities like
+[stackoverflow.com](https://stackoverflow.com/questions/tagged/r),
+however, do _not overuse_ them! Before asking a question:
+
+* think about it once more
+* check if someone else has already asked the same question
+* when posting questions: write well-defined questions, provide
+     sufficient information and (in the best case) provide
+     a minimal which allows others to reproduce your problem.
+
+**A bad example**
+
+<img src="images/02/02_stackoverflow_1.png">
+
+**A good example**
+
+<img src="images/02/02_stackoverflow_2.png"> 
+
+Select a title which already summarizes the question.
+Be specific when asking the question and try to keep your
+questions short (and general).
+If possible provide a reproduceable minimal example such that
+others can see what's going wrong. In addition, provide some
+information about your current installation. The problem might
+be connected to a specific _R_ version or package.
+

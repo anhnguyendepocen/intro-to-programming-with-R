@@ -1,0 +1,244 @@
+
+## Typical Examples
+
+```{r, echo = FALSE, fig.align = "center"}
+load <- load("demodata_eyecolor.rda")
+data <- eyecolor
+print(head(data, 3))
+```
+
+```{r, echo = FALSE, fig.align = "center"}
+data <- readRDS("demodata_avocado.rds")
+print(head(data, 3))
+```
+
+
+### Convert matrix to data frame
+
+```{r, fig.align = "center"}
+dimnames <- list(NULL, c("A", "B", "C"))
+xmat <- matrix(1:9, nrow = 3, dimnames = dimnames)
+xmat
+```
+
+```{r, fig.align = "center"}
+# Convert matrix to data.frame
+xdf <- as.data.frame(xmat)
+xdf
+```
+
+
+### Convert data frame to matrix
+
+```{r, fig.align = "center"}
+xdf <- data.frame(name = c("Ben", "Lea"),
+                  age  = c(34, 23),
+                  IQ   = c(90, 95))
+xdf
+```
+
+```{r, fig.align = "center"}
+# Convert data.frame to matrix
+xmat <- as.matrix(xdf)
+xmat
+```
+
+```{r, fig.align = "center"}
+xdf2 <- as.data.frame(xmat, stringsAsFactors = FALSE)
+xdf2
+```
+
+```{r, fig.align = "center"}
+mean(xdf2$age)
+```
+
+```{r, fig.align = "center"}
+class(xdf2$name)
+class(xdf2$age)
+```
+
+```{r, fig.align = "center"}
+xdf2 <- as.data.frame(xmat) # stringsAsFactors = TRUE
+xdf2
+```
+
+```{r, fig.align = "center"}
+class(xdf2$name)
+class(xdf2$age)
+```
+
+
+# Factors
+
+```{r, echo = FALSE, fig.align = "center"}
+participants <- factor(c(1, 1, 2, 1, 2, 1),
+                       levels = c(1,2),
+                       labels = c("Students", "Experts"))
+```
+
+```{r, fig.align = "center"}
+print(participants)
+length(participants)
+class(participants)
+```
+
+```{r, fig.align = "center"}
+# As integer (level as integer)
+as.integer(participants)
+# As character (label as character vector)
+as.character(participants)
+```
+
+```{r, fig.align = "center"}
+# Generate character vector
+group <- c("Group B", "Group A", "Group A", "Group B", "Group B")
+class(group)
+```
+
+```{r, fig.align = "center"}
+# Convert to factor
+group_factor <- as.factor(group)
+class(group_factor)
+```
+
+```{r, fig.align = "center"}
+# Print
+print(group)
+print(group_factor)
+```
+
+```{r, fig.align = "center"}
+group_factor <- factor(group,
+                       levels = c("Group B", "Group A"),
+                       labels = c("Group-B", "Group-A"))
+print(group_factor)
+```
+
+```{r, fig.align = "center"}
+# Create new character vector
+age <- c("adult", "infant", "infant", "teen", "adult")
+# Convert into ordered factor
+age_factor <- factor(age,
+                     levels = c("infant", "teen", "adult"),
+                     ordered = TRUE)
+print(age_factor)
+```
+
+
+## Practical Exercises
+
+### Practical Exercises 1
+
+```{r, fig.align = "center"}
+month <- sample(month.abb, 24, replace = TRUE)
+class(month)
+month
+```
+
+
+### Practical Exercises 2
+
+```{r, fig.align = "center"}
+concentration <- sample(c("low", "mid", "high"), 24, replace = TRUE)
+concentration
+```
+
+
+### Practical Exercises 3
+
+```{r, fig.align = "center"}
+# Sampling 200 random values between 0 and 100
+concentration <- runif(200, 0, 100)
+```
+
+
+### Descriptive Data Analysis
+
+```{r, echo = FALSE, results = "hide", fig.align = "center"}
+rm(list = ls())
+```
+
+```{r, fig.align = "center"}
+# Read the data set (this is a real rds file!)
+load("demodata_eyecolor.rda")
+```
+
+```{r, fig.align = "center"}
+# Loading the data set, data set
+# from the R dataset package.
+data("cars")
+```
+
+```{r, fig.align = "center"}
+cars$speed <- round(cars$speed * 1.609344, 1) # miles/h to km/h
+cars$dist  <- round(cars$dist  * 0.3048, 1)   # feet to meters
+```
+
+```{r, fig.align = "center"}
+head(cars, n = 3)
+tail(cars, n = 3)
+```
+
+```{r, fig.align = "center"}
+class(cars)
+dim(cars)
+ncol(cars)
+nrow(cars)
+names(cars)
+```
+
+```{r, fig.align = "center"}
+# Structure of the object
+str(cars)
+```
+
+```{r, fig.align = "center"}
+mean(cars$dist)
+sd(cars$dist)
+var(cars$dist)
+```
+
+```{r, fig.align = "center"}
+min(cars$dist)
+max(cars$dist)
+range(cars$dist)
+```
+
+```{r, fig.align = "center"}
+# Median and 50% quantile
+median(cars$dist)
+# Object summary
+summary(cars$dist)
+```
+
+```{r, fig.align = "center"}
+# Manually specified quantiles
+quantile(cars$dist, probs = c(0, 0.25, 0.5, 0.75, 1.0))
+```
+
+```{r, fig.align = "center"}
+dups <- duplicated(cars$dist)
+head(dups)
+sum(dups)
+table(dups)
+```
+
+```{r, fig.align = "center"}
+x <- c(2, 1, 10, 10, 10, 4, 5)
+duplicated(x)
+```
+
+```{r, fig.align = "center"}
+duplicated(x, fromLast = TRUE)
+```
+
+```{r, fig.align = "center"}
+if (anyDuplicated(x)) print("yep, we have duplicated entries")
+```
+
+```{r, fig.align = "center"}
+uniq <- unique(cars$dist)
+head(uniq)
+length(uniq)
+```
+

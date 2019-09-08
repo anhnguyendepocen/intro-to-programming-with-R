@@ -1,0 +1,505 @@
+
+# Introduction
+
+
+## Programming
+
+**Programming** is the way of telling a computer how to do certain
+things by giving it (unambiguous) instructions. The person who
+writes these instructions (you) is called a **programmer**, the
+instructions itself are called a **program**. Instructions can
+be written in many different ways, depending on the task which has
+to be done. The format in which instructions are written are called
+**programming languages**.
+
+**Why should I learn to code?** Nowadays, tech is everywhere:
+laptops, smart phones, the display panel at the bus stop, the
+automatic doors at this university, and even in your coffee machine.
+Learning to code improves your problem-solving and logical skills
+and teaches you how to efficiently solve a specific problem.
+You'll quickly see that there is a solution for everything and
+being able to write small or large programs will make things (much!)
+easier. Spending less time on solving a complex and/or repetitive
+problem gives you more time to learn new things, think outside the
+box, and to think of new and interesting (research) questions.
+
+Furthermore, being able to code will also increase your chances
+on the job market.
+Understanding what programs can do and how they can be deployed 
+is more and more required in companies of all sizes and sectors.
+Even if you might not be employed as a full-time programmer having
+a programming background helps you to improve communication, e.g.,
+between you and your colleagues, customers, or team mates.
+
+
+And,  last but not least, **programming is so much fun!**
+Writing programs can be extremely creative, if one allows it to be.
+
+## Why not Natural Languages?
+
+Natural languages, such as German or English, are ambiguous
+(the same sentence/words in different situations may have different
+meanings), are fuzzily structured (we all know that there are _always_
+exceptions to the basic grammar rules), and have large (changing)
+vocabularies. For a computer, understanding natural languages
+is extremely difficult.
+
+Examples:
+
+* **I got struck by a bolt.** (A bolt can be a small piece of metal,
+    or a lightning. One hurts, the other one is quite likely life threatening)
+* **Ich sollte den Baum umfahren.** (In German umfahren can be
+    "drive around the obstacle" or "run it down"/"run over it")
+
+Thus different explicit languages have been developed for
+different tasks. Mathematicians designed a very strict mathematical
+notation (e.g., `10 + 1 = 11`, `100/5000 = 0.2`). Another example are
+chemists who use a 
+very strict notation for chemical equations
+(e.g., $CH_4 + 2\,O_2 \rightarrow CO_2 + 2\,H_2O$).
+Very similar, computer scientists had to define a language which
+allows them to give a machine some instructions such that it
+does what it should do. This is we call a programming language.
+As computers are "stupid" (they have no common sense) programming
+languages have to have relatively few and exactly defined
+rules and strictly controlled vocabularies. Every word
+(can be a variable name, a function, or a command) _has to be defined_
+before it can be used and can only be defined once (at a time).
+
+## History of Programming
+
+Modern programming goes back to the first part of the last
+century. The Z1, developed by Konradu Zuse (Germany) is known as
+the first modern programmable binary calculator. The Z1 was
+still a mechanical machine and, unfortunately, very complex and
+unreliable. Modern electronic computers were developed during/after
+the second world war. Back in these early years programs were often
+stored on so called _punched cards_ (pieces of cardboard/paper
+with holes). The first high-level programming language was
+`Fortran` developed back in 1954 - and still in use.
+Some more facts:
+    
+* 1938: Z1 by Konrad Zuse (GER)
+* 1945: first operational modern computer (U.S.)
+* 1950: first computer where the program was stored in memory
+* 1954: first high-level programming language (`Fortran`)
+* 1974: Xerox Alto, first workstation
+* 1976: IBM 5100, first laptop (weight: 25 kg; display size: 5'')
+* 2000+: first smart phones
+
+Since then (starting with `Fortran` in 1954) a wide range of
+programming languages have become available.
+An up-to-date list of programming languages
+[can be found here](https://www.levenez.com/lang/}{https://www.levenez.com/lang/).
+
+![](images/01/01_history_of_programming_languages.jpg)
+
+
+## Number of Languages
+
+Today, 7111 different living natural languages are known
+([recognized by ISO~639](\href{https://www.ethnologue.com}{ethnologue.com}))
+and 8945 programming languages (including different versions of
+the same software; [see hopl.info](http://hopl.info/}{hopl.info)).
+
+If programming languages are **explicit** and **well defined**,
+**why do we need so many different ones?** Well, depending on the
+task different languages have different advantages and drawbacks.
+Different programming languages have been designed for
+different tasks, devices, and/or requirements. Some are designed to
+run on different operating systems, others for web applications or
+for highly efficient parallel computing.
+A "_one for all_" programming language does not exist and will
+quite likely never exist in the future.
+
+For those interested:
+
+* ["Hello world" in 250 languages](https://en.wikibooks.org/wiki/Computer_Programming/Hello_world}{wikibooks.org)
+* ["99 bottles of beer" in 1500 languages](http://www.99-bottles-of-beer.net}{99-bottles-of-beer.net)
+* ["Rosetta Code" in over 700 languages](http://rosettacode.org/wiki/Rosetta_Code}{rosettacode.org)
+
+
+
+## The _R_ Programming Language
+
+### What is _R_?
+
+For short: **_R_ is a dialect of _S_**!
+
+To be more specific: _R_ is a programming language
+and **free software** environment for 
+**statistical computing** and **graphics** supported by
+the [R Foundation for Statistical Computing](https://www.r-project.org).
+And, of course, _R_ also has its own history.
+The software we use today originates from _S_
+developed by John Chambers back in 1976 and was originally
+written to make his own life easier (Bell Labs, a toolbox
+for internal data analysis). The software originally written
+as a set of `Fortran` libraries but has been rewritten
+in `C` back in 1988. Ten years later, 1998, version 4 of _S_ has
+been released, but then _S_ got sold to a private company
+(and further developed to `S-PLUS`).
+
+As _S_ was no longer available for public use
+Ross Ihaka and Robert Gentleman (Department of Statistics at 
+the University of Auckland) started to develop _R_ back in
+1991 based on _S_ version 4 (the last free open source version).
+Officially, _R_ got announced in 1993 (26 years ago).
+The current version (version `3.5.2`) has been released
+just before Christmas last year, the next minor update
+should become available these days.
+
+* _S_ was invented by John Chambers 1976 (`Fortran)
+* _S_ rewritten in `C` in 1988
+* _S_ version 4 released in 1998 (the one we use today)
+* _S_ got sold (further developed to `S-PLUS`)
+* _R_ developed in 1991 by **R**oss Ihaka and **R**obert Gentleman
+* _R_ first official release in 1993
+* Current release candidate: _R_ version `3.5.2`
+
+Why is it important to know the history of _R_? Well, first of
+all because a lot of people will ask you why _R_ is called _R_ (for sure).
+And secondly because **it is important to keep in mind** that
+_R_ (also `S` and `S-PLUS`) is **written from statisticians
+for statisticians**. This is the biggest advantage of _R_,
+and at the same time also one of the biggest disadvantages :).
+
+An important aspect of _R_ is that **_R_ is free!**
+It's **free** as in **free speech**, not as in **free beer** and 
+released under the [GNU Public License](https://www.gnu.org/)
+which guarantees four essential freedoms:
+
+* **Freedom 0**: The freedom to run the program as you wish, **for any purpose**.
+* **Freedom 1**: The freedom to **study** how the program works, and **change** it so
+    it does your computing as you wish. **Access** to the
+    **source code** is a precondition for this.
+* **Freedom 2**: The freedom to **redistribute** copies so you can **help others**.
+* **Freedom 3**: The freedom to **distribute copies** of your **modified versions** to
+    others. By doing this you can give the whole **community**
+    a chance to **benefit** from your changes. **Access** to the **source code** is
+    a precondition for this.
+
+### Open Science
+
+Open source languages are an **important part**
+of good **open science practice** and help to make
+research transparent and reproducible.
+**The backbone of good open science**:
+
+* **open data**
+* **open source software/code**
+* **open methodology**
+* open peer review
+* open access publications
+
+Furthermore, open source software (open science in general)
+allows to learn and benefit from others, improve existing
+methods, and help each other.
+
+### _R_ on the job market
+
+_R_ is one of the leading programming languages for data science
+on the job market. The figure below shows the
+frequency which which different programming languages have been mentioned in
+job announcements for open data science positions (source:
+[fossbytes.com](https://fossbytes.com/popular-top-programming-languages-machine-learning-data-science/}{fossbytes.com)).
+
+![](images/01/01_fossbytes_com.png)
+
+## The _R_ Ecosystem
+
+![](images/01/01_R_ecosystem.png)
+
+As other programming languages (`perl`, `python`, ...) the _R_ system
+is modular. The base installation
+only provides a 'small' set of features (**base**/**recommended** packages)
+but can easily be extended by installing **additional** packages.
+**Contributed** packages (main sources) are available via the
+[Comprehensive R Archive Network](https://cran.r-project.org/) (CRAN), however,
+other sources exist such as
+[Bioconductor](https://www.bioconductor.org/) (focus on bioinformatics),
+private and community projects on [github](https://github.com), or private
+packages. Packages exist for nearly everything and different packages may 
+provide similar features, however, not all packages do have the same quality
+or are carefully maintained. Thus, it is recommended to use packages published
+via CRAN (or bioconductor) as they undergo some quality control and automated
+checks while some private packages (e.g., from github) may not work on all
+operating systems or _R_ versions.
+One important aspect of all programming languages is to communicate with
+the outside world to import and export data (see also
+[R Data Import/Export](https://cran.r-project.org/doc/manuals/R-data.html) manual)
+or to communicate over a network.
+
+![](images/01/01_R_outside_world.png)
+
+_R_ comes with a custom binary file format. These binary files are typically
+called `.rda`/`.rds` (`.Rda`/`.Rds`) and are used to store/load _R_ objects.
+Beside its own format _R_ allows to read and write data from and to 
+(nearly) all available file formats. _R_ base provides some high-level functions
+to easily import data from human readable files (e.g., `csv` or `ASCII` in general)
+which is often used for _simple_ data sets. However, there is basically no limit
+to read and write data in _R_ and packages exist for nearly all file formats, e.g.,
+`XLS`/`XLSX`, `XML`, `JSON`, `NetCDF`, rastered data sets such as `geotiff`,
+images in general (`png`/`jpg`/`gif`), databases (`sqlite`/`SQL`) and many many more.
+If no package exists, feel free to develop one yourself and contribute
+it to the _R_ community! _R_ also provides
+socket connections for server-to-server connections over the network.
+
+
+## Examples
+
+**Now as we know what _R_ is, what can we do with it?**
+Well, basically everything you can think of!
+Your own creativity is the limit - and your programming skills. 
+In this course we will start with basic programming in _R_ to get
+used to the language, data types and objects, and main control
+features and functions. The more complex the task, the more complex
+the program, but **the fundamentals wont change**. Thus it is very **important**
+to **acquire solid knowledge** of the **basics** before proceeding to more
+**complex tasks**.
+
+Below you can see some motivational examples of what
+you can do with _R_:
+
+
+### Empirical Mean and Quartiles
+
+A simple example of a program (one function) to calculate
+the empirical _mean_ and the _1th_ and _3th_ empirical quartile 
+of a set of `1000` random numbers of a standard uniform
+distribution (random values between `0` and `1`).
+
+Side note: As the distribution is symmetric, the mean is asymptotically
+identical to the median (or the _2th_ quartile).
+by theory the thee quartiles should be `0.25`, `0.50`, and `0.75`.
+let's try and draw `1000` random numbers, store them on
+variable `x`. `x` will thus get a numeric vector of length `1000`
+
+```{r, echo = TRUE, fig.align = "center"}
+x <- runif(1000)
+```
+
+Step two is to create a function which does the job for us.
+We are creating a function called `fun` which takes one input
+argument `x` and calculates the empirical mean (`m`), the
+_1th_ quartile (`q1`) and the _3th_ quartile (`q3`).
+At the end a numeric vector of length `3` will be returned
+containing all three values (`c(q1, m, q3)`), rounded to
+three digits.
+Once our function `fun` is defined we can call it using
+our random numbers as input (`fun(x)`) to get the result.
+Et voila.
+```{r, echo = TRUE, fig.align = "center"}
+fun <- function(x, round = 3) {
+    m  <- 1 / length(x) * sum(x)
+    q1 <- sort(x)[round(length(x)*.25)]
+    q3 <- sort(x)[round(length(x)*.75)]
+    return(round(c(q1, m, q3), round))
+}
+
+# Call the function
+fun(x)
+```
+
+We can, of course, use this function over and over again.
+Let's draw another 1000 values from the uniform distribution
+and call the function again (`fun(runif(1000))`):
+```{r, echo = TRUE, fig.align = "center"}
+fun(runif(1000))
+```
+
+Of course there are implementations for this. One could e.g.,
+use the `summary()` method or the `quantile()` function.
+let's have a look if our function works as intended:
+
+```{r, echo = TRUE}
+# Repeat again, compare to R's summary function
+x <- runif(1000)
+fun(x, round = 7)
+c(quantile(x, probs = 0.25, type = 3), mean(x), quantile(x, probs = 0.75, type = 3))
+# Summary method (uses different quantile approximation function)
+summary(x)
+```
+**Note**: as random data are used you will never get the same
+results.
+
+### Statistical Modeling
+
+One of the biggest strengths of _R_ is, of course the
+wide range of functions and methods for data analysis and
+statistical modeling from simple linear regression models
+to complex and highly nonlinear frameworks.
+
+This is just a very small example how easy it can be
+to do some data analysis. We are using a data set which
+is contained in `datasets` package (comes with _R_ base)
+called `ToothGrowth` (see `?ToothGrowth` for details).
+
+The data set contains observations of the length of
+a special cell which is responsible for the growth
+of the teeth. The longer (length) the cells, the stronger
+the teeth are growing (they grow for the entire life).
+The experiment investigates the impact of vitamin C on these
+cells. One group got orange juice (`OJ`), the other one
+ascorbic acid (a form of vitamin C; `VC`). Each individuum
+got either `0.5`, `1.0`, or `2.0` mg/day.
+
+Variables:
+
+* `len`: numeric, length of the tooth (cells)
+* `supp`: factor, supplement type (`VC` or `OJ`)
+* `dose`: the dose in milligrams per day
+
+```{r, echo = FALSE, results = TRUE}
+DT::datatable(ToothGrowth, rownames = FALSE)
+```
+
+This is how the data set (`data.frame`) looks like:
+```{r, echo = TRUE, fig.show = "hide", fig.align = "center"}
+head(ToothGrowth, 3)
+
+require(graphics)
+coplot(len ~ dose | supp,
+       data = ToothGrowth,
+       panel = panel.smooth,
+       xlab = "length vs dose, given type")
+```
+
+And this is the corresponding plot (one way of visualizing
+this data set). The two `supp` groups are plotted separately
+with the orange juice group on the left hand side and the ascorbic acid group
+on the right hand side.
+```{r, echo = FALSE, fig = TRUE, fig.align = "center"}
+require("graphics")
+coplot(len ~ dose | supp, data = ToothGrowth,
+       panel = panel.smooth, xlab = "length vs dose, given type")
+```
+
+Estimate a linear model on the `ToothGrowth` data set.
+Length (`len`) of the cells responsible for tooth growth conditional
+on the treatment (`supp`) and the dose (`dose`)
+
+Rather than only doing a graphical analysis we can also estimate
+a statistical model. In this case a linear model with might not be
+the best model (just for illustration) to estimate the overall effect
+of the two treatments and the effect of increasing the dose (conditional
+on the treatment).
+
+Interpretation of such models is part of statistical bachelor courses
+and will not be part of this programming course!
+```{r, echo = TRUE, fig = FALSE, fig.align = "center"}
+# Estimate the model:
+mod <- lm(len ~ supp/dose, data = ToothGrowth)
+```
+
+```{r, echo = TRUE, fig = FALSE, fig.align = "center"}
+# Coefficient test statistics:
+lmtest::coeftest(mod)
+```
+
+### Spatial Data
+
+_R_ is also capable of plotting geo-referenced data sets, e.g.,
+spatial data as in this example. This figure shows the surface
+air temperature in degrees Celsius for March 7, 2018 at 12 UTC
+(which is 1 pm local time) based on the ECMWF ERA-5 reanalysis
+data set
+using [Copernicus Climate Change Service information](https://cds.climate.copernicus.eu/#!/search?text=ERA5).
+
+**_R_ packages used**:
+        [ecmwfr](https://cran.r-project.org/package=ecmwfr),
+        [ncdf4](https://cran.r-project.org/package=ncdf4),
+        [raster](https://cran.r-project.org/package=raster),
+        [maps](https://cran.r-project.org/package=maps),
+        [colorspace](https://cran.r-project.org/package=colorspace).
+
+Some more (mostly) nice spatial _R_ examples can be found
+on [Spatial.ly](01_R_version1_CD.jpeg).
+
+![](Examples/output_ERA5.png)
+
+
+### Geographical Data
+
+Another common type of visualizations are geo-referenced data on
+an e.g., national or international level. The figure below is based
+on a public data set by the
+[National Center for Health Statistics](https://www.cdc.gov/nchs/index.htm)
+(id [bi63-dtpu](https://data.cdc.gov/api/views/bi63-dtpu/),
+[csv format](https://data.cdc.gov/api/views/bi63-dtpu/rows.csv?accessType=DOWNLOAD))
+and shows the mean increase in the number of suicides on
+a state level (excluding Alaska and Hawaii) over the years 1999-2016
+in percent.
+The barplot on the right hand side shows the very same information
+as the spatial plot on the right hand side.
+
+State boundaries downloaded form the [GADM](https://gadm.org) website
+which provides national/political boundaries in an _R_ format (rds)
+for different levels of detail (national and sub-national).
+
+**_R_ packages used**:
+        [sp](https://cran.r-project.org/package=sp),
+        [zoo](https://cran.r-project.org/package=zoo),
+        [colorspace](https://cran.r-project.org/package=colorspace).
+
+For a list of contributed _R_ packages dealing with spatial and
+spatio-temporal data visit the
+[Spatial](https://CRAN.R-project.org/view=Spatial)
+and [SpatioTemporal](https://CRAN.R-project.org/view=SpatioTemporal)
+CRAN task views.
+Some more (mostly) nice spatial _R_ examples can be found
+on [Spatial.ly](http://spatial.ly/r/).
+
+![](Examples/output_US_Death.png)
+### Text Mining
+
+Beside spatial or geographical data sets _R_ is also
+often used for _text mining_ applications (automatically
+classifying texts, find similarities between different texts,
+study the evolution of language, ...).
+
+The example below shows so called **word clouds** based on the
+latest 500 tweets (from [twitter](https://twitter.com)) from two
+American politicians. The tweets are downloaded and cleaned
+(common words as "the" or "A" are removed, URL's and some special
+characters or quotes are removed) before counting the frequency
+of each word. Words which are used more frequent are shown
+with a larger font size and darker color.
+**Guess who is who?**
+
+**_R_ packages used**:
+        [rtweet](https://cran.r-project.org/package=rtweet),
+        [tm](https://cran.r-project.org/package=tm),
+        [wordcloud](https://cran.r-project.org/package=wordcloud),
+        [colorspace](https://cran.r-project.org/package=colorspace).
+
+The CRAN task view [Natural Language Processing](https://CRAN.R-project.org/view=NaturalLanguageProcessing<Paste>) shows an overview/list of contributed _R_ packages for
+processing language/words.
+For some more inspiration of graphical representations of _R_ based
+text mining applications [visit bnosac.be](https://www.bnosac.be/index.php/blog/56-an-overview-of-text-mining-visualisations-possibilities-with-r-on-the-ceta-trade-agreement).
+
+![](Examples/output_twitter.png)
+Answer: Donald Trump left (easy), Hillary Clinton right (less obvious
+but remarkably different to the tweets of the president).
+### Three Dimensional Plots
+
+Three dimensional plots are always a bit more difficult to
+produce _and_ they often do not make sense (at least not
+plotting 3D barplots). However, in some cases three dimensional
+perspective plots can make sense as in this case. The image below
+shows the area around Innsbruck, a combination of
+a digital elevation model ([ASTER](https://asterweb.jpl.nasa.gov/gdem.asp) data)
+and an [OpenStreetMap](https://www.openstreetmap.org) overlay.
+Takes quite a while to get this result, but looks cool :).
+
+**_R_ packages used**:
+        [OpenStreetMap](https://cran.r-project.org/package=OpenStreetMap),
+        [rayshader](https://cran.r-project.org/package=rayshader),
+        [raster](https://cran.r-project.org/package=raster),
+        [sp](https://cran.r-project.org/package=sp),
+        [colorspace](https://cran.r-project.org/package=colorspace).
+
+More details available on the [rayshader website](https://www.rayshader.com).
+
+![](Examples/output_map.png)
+

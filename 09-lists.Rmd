@@ -1,0 +1,102 @@
+
+# Lists
+
+<span style="color: red; font-size: 5em;">
+Documentation ends here, I need to write the last part
+another day! Sorry.
+</span>
+
+```{r, fig.align = "center"}
+x <- list("Max", "Muster", 34)
+print(x)
+```
+
+```{r, fig.align = "center"}
+# Class of the object
+class(x)
+# Length of the object
+length(x)
+# Names of the object
+names(x) # No names set
+```
+
+```{r, fig.align = "center"}
+x <- list("Max Muster",
+          c(1L, 2L),
+          matrix(1:6, ncol = 2))
+print(x)
+```
+
+```{r, fig.align = "center"}
+# Class of the object
+class(x)
+# Length of the object
+length(x)
+# Names of the object
+names(x) # No names set
+```
+
+```{r, fig.align = "center"}
+x <- list(given_name  = "Max",
+          family_name = "Muster",
+          age         = 35)
+print(x)
+names(x)
+```
+
+```{r, fig.align = "center"}
+x <- list(char = "Max Muster",
+          mat  = matrix(1:6, ncol = 2))
+print(x)
+names(x)
+```
+
+```{r, fig.align = "center"}
+x <- list(given_name = "Max", family_name = "Muster",
+          age = 34,           mat = matrix(1:9, ncol = 3))
+```
+
+```{r, fig.align = "center"}
+x[1L]
+class(x[1L])
+```
+
+```{r, fig.align = "center"}
+x[[1L]]
+class(x[[1L]])
+```
+
+```{r, fig.align = "center"}
+x <- list(given_name = "Max", family_name = "Muster",
+          age = 34,           mat = matrix(1:9, ncol = 3))
+```
+
+```{r, fig.align = "center"}
+x["age"]
+class(x["age"])
+```
+
+```{r, fig.align = "center"}
+x[["age"]]
+class(x[["age"]])
+```
+
+```{r, fig.align = "center"}
+x <- list(given_name = "Max", family_name = "Muster", age = 34,
+          mat = matrix(1:9, ncol = 3))
+x$given_name    # equiv. to x[["given_name"]]
+x$family_name   # equiv. to x[["family_name"]]
+x$mat           # equiv. to x[["mat"]]
+```
+
+```{r, fig.align = "center"}
+x <- c(1L, 2L, 3L)
+x[10]       # non-existent, returns NA
+```
+
+```{r, fig.align = "center"}
+x <- list(given_name = "Max", age = 34)
+x$something  # non-existent, returns NULL
+```
+
+

@@ -1,0 +1,786 @@
+
+# Nuts and Bolts
+
+_R_ is an object oriented programming language. In _R_ basically
+everything is an object. Objects can be:
+
+* defined variables (e.g., `a`, `b`, `result`),
+* functions (e.g., `mean`, `max`, `sin`),
+* connection handlers,
+* ... (as I said, basically everything).
+
+Each object in _R_ has a specific class and can have a set of
+class-specific attributes and generic functions (or methods).
+
+## Atomic classes
+
+There are five so called atomic classes. Atomic classes
+are the most basic classes on which most high-level objects
+are based on. These are:
+
+* **double:**    `-0.5`, `120.9`, `5.0`
+* **integer:**   `-1`, `121`, `5`
+* **logical:**   `TRUE` and `FALSE`
+* **character:** `"Reto"`, `"Innsbruck"`, `"5"`
+* **complex:**   `-5+11i`, `3+2i`, `0+4i`
+
+You can always check the class of an object by calling `class`:
+```{r, fig.align = "center"}
+# numeric
+x <- 1
+class(x)
+```
+
+```{r, fig.align = "center"}
+# character
+y <- "This is just a dummy text"
+class(y)
+```
+
+### Know the basics!
+
+It is fundamental to understand the basic objects or data
+types of _R_ (same for other programming languages).
+More complex objects are based on these basic data types.
+Once you have understood the basics it makes it _much easier_
+to understand objects of increasing complexity.
+
+<div style="text-align: center;"><img src="images/02/02_datatypes_3.png"></div>
+<div style="text-align: center;"><img src="images/02/02_datatypes_4.png"></div>
+
+Thus, **knowing the basics** is **essential**
+to get a good programmer.
+
+
+## Input and Output
+
+This is just a very brief repetition from the last session.
+In _R_, values are assigned to objects (input) using either
+`=` or `<-`. The latter one is the preferred way in _R_.
+As an example: if we want to store the number `5` on
+a variable called `a` we will write `a <- 5`. This is read
+as "_a gets five_", you can think of it as an arrow assigning
+`5` to `a`.
+
+An assignment always requires a left and a right hand side,
+just as in mathematics (`a = 5`).
+```{r, eval = FALSE, fig.align = "center"}
+x = 2
+x <- 2 # preferred in R
+```
+
+Comments in _R_ can be written everywhere using the `#` character.
+Everything behind `#` will be ignored by _R_ (a comment is not
+a command, but an explanation or note for those reading your code.
+
+```{r, eval = FALSE, fig.align = "center"}
+# Everything behind '#' is ignored (just a comment)
+# Comments are not executed: y <- 100
+x <- 5  # Can also be at the end of the line
+```
+
+
+**Keep in mind that code is more often read than written!** Well
+written comments will make it much easier for you to understand
+what you did and why you did it (believe me, you will forget it)
+but also for others checking, using or adapting your code.
+Some people say a good code-to-comment ratio is 60 percent comments,
+40 percent code.
+When typing commands into _R_ console without assigning the value(s) to
+an object _R_ prints the values (output), also known as implicit printing.
+Two examples:
+```{r, fig.align = "center"}
+50
+"A useless character string"
+```
+
+
+We can also _explicitly_ call the `print` function. The result
+is the very same. Note: _implicit printing_ is only used when you
+are working on an interactive _R_ console (as in your IDE).
+When calling _R_ as a batch job you have to do explicit printing.
+```{r, fig.align = "center"}
+print(50)
+print("A useless character string")
+```
+
+On an interactive _R_ command line we can also use both,
+implicit and explicit printing, when we want to print the
+current values of an object. 
+In this example we store a character string as `y` and print
+it to examine `y`s current content/values:
+
+```{r, fig.align = "center"}
+y <- "A useless character string"
+print(y)
+```
+
+
+## Atomic Classes
+
+### Double
+
+One atomic data class are doubles (double precision floating
+point values). Double is actually not often used in _R_, objects
+of type double are simply called `numeric` and the class of
+floating point numbers will be `numeric`.
+
+```{r, fig.align = "center"}
+# define a double (numeric)
+x <- 1.5
+x
+# another one
+x <- 10
+x
+class(x)
+```
+
+### Integers
+
+A second atomic class are integers.
+Integers can explicitly be defined using the
+so called `L` suffix. While `1` will be numeric,
+`1L` will e integer.
+```{r, fig.align = "center"}
+# define an integer value
+x <- 10L
+x
+class(x)
+```
+
+This is not important most of the time when you are
+using _R_. Except when it is! There are some situations
+where integers are required!
+### Logical values
+
+Logicals are rather simple as they can only take
+up two different values: either `TRUE` or `FALSE`.
+
+```{r, fig.align = "center"}
+# logical "true"
+x <- TRUE
+x
+# logical "false"
+x <- FALSE
+x
+class(x)
+```
+
+### Characters
+
+The last atomic class we will is the character class.
+A character is basically just a text and can be of any length.
+```{r, fig.align = "center"}
+# define character string
+x <- "Austria"
+x
+# can be of an arbitrary length
+x <- "Max Konstantin Mustermann (AT)"
+x
+class(x)
+```
+
+### Checking classes
+
+We can check if an object is of a specific class
+in several different ways. One handy way are the
+`is.*` commands. `is.character("foo")` will return
+logical `TRUE` if `"foo"` is a character object
+and `FALSE` else. Functions for all base objects
+exist such as:
+
+* `is.double`
+* `is.integer`
+* `is.logical`
+* `is.character`
+* ... and many more.
+
+```{r, fig.align = "center"}
+is.integer(1.5)
+is.double(1.5)
+is.logical(FALSE)
+```
+
+
+# Vectors
+
+So far we have always only assigned one element to a variable,
+e.g., `x <- 5`. To assign more than only one single element to
+an object vectors can be used. A vector is basically just a sequence
+of elements. **Note:** vectors can only take up elements of the same
+class! A character vector can only contain characters, a numeric vector
+only numerics, and so on.
+
+We can define vectors in different ways. One option is to create
+new vectors by calling the `vector` function. The function takes
+two input values: the class of the vector we would like to get
+(`"character"`, `"numeric"`, `"logical"`, `"integer"`) and an integer
+which specifies how long the vector should be. In the example
+below two vectors are created: an numeric or double vector of length `5`,
+and a character vector of length 3.
+
+```{r, fig.align = "center"}
+# Numeric vector of length 5
+vector("double", length = 5)
+# Character vector of length 3
+vector("character", length = 3)
+```
+
+As you can see both vectors are empty. The default value of numeric
+vectors is `0`, the default for character vectors is `""` (just
+an empty character string, a text without any characters in it).
+More frequently we will use the `c` function (for combine values or
+concatenate). `c(...)` is a function which takes up multiple values
+separated by a comma. For example:
+```{r, fig.align = "center"}
+# Numeric vector with
+# five explicit values
+c(5, 4, 3, 2, 1)
+# Character vector
+c("Innsbruck", "Austria")
+```
+
+The `c(5, 4, 3, 2, 1)` creates a vector of length `5` containing
+`5`, `4`, ..., `1` in this order. As all elements we insert are
+numeric, the resulting vector will be a numeric vector. In the
+line below two characters (`"Innsbruck"`, `"Austria"`) are combined
+to a vector. Thus, the result will be a character vector of length `2`.
+We could, of course, repeat this example for all atomic
+classes like including doubles (numeric), logical, character,
+integer, and complex values:
+```{r, echo = TRUE, fig.align = "center"}
+x <- c(0.5, 0.6, 0.7)            # double
+x <- c(TRUE, FALSE, TRUE)        # logical
+x <- c(T, F, T)                  # logical
+x <- c("a", "b", "c")            # character
+x <- c(1L, 2L, 3L, 4L)           # integer
+x <- 15:20                       # integer
+x <- c(1+0i, 2+4i, 5+2i)         # complex
+```
+
+**Warning:** The example above shows that you could also
+use `T` and `F` as an abbreviation for `TRUE` and `FALSE`.
+**Please don't do that!** `T` and `F` are not protected and
+can be changed. Below we re-define or overwrite `T` with
+`"bar"` and `F` with `"FOO"`. Thus, `c(T, T, F, T)` becomes
+something completely different. **Even more mean:** Imagine
+what happens if I re-define `T <- FALSE` and `F <- TRUE`.
+
+```{r, fig.align = "center"}
+c(T, T, F, T)
+```
+
+```{r, fig.align = "center"}
+T <- "foo"        # overwrite T
+F <- "bar"        # overwrite F
+c(T, T, F, T)
+```
+
+Thus, please get used to `TRUE` and `FALSE` from the beginnign
+on. `T` and `F` is shorter, but you might run into strange 
+problems at some point which can be avoided by just not
+using these abbreviations.
+
+## Create Vectors
+
+We can also create vectors using different functions. Here we will
+have a closer look to `seq`/`seq.int` (sequence) and `rep` (repeat).
+
+**Sequences:** sequences are a set of numeric or integer values
+between two well defined points (`from` and `to`) with an equidistant
+spacing. By default the spacing/increment is `1` but can be explicitly
+specified using the `by` argument.
+
+**Repeat:** Repeat allows to repeat a number (or a set of number)
+in different ways. We can repeat one element several times, repeat
+a vector multiple times, or repeat the elements of a vector
+multiple times.
+
+Some examples for numeric sequences:
+```{r, fig.align = "center"}
+# Equidistant sequence
+seq(from = 1.5, to = 2.5, length = 5)
+# Repeat `1` five times
+rep(1.0, 5)
+# Repat `1` and `2`, each twice
+rep(c(1, 2), each = 2)
+# Repeat `7` three times, `6` once
+rep(c(7, 6), c(3, 1))
+```
+
+For integer sequences, the repeat function can be used as for
+numeric values (and all others), however, some things are
+slightly different for integers. To create an integer sequence
+with an increment of `1` we can call `<from>:<to>`, e.g.,
+`50:55` creates an integer sequence between `50` and `55`
+(can also be used to create decreasing sequences).
+A `seq.int` function also exists to create integer sequences.
+`seq.int` returns an integer sequence if and only if the
+`from` argument can be interpreted as integer. For example:
+`seq.int(from = 5, ...)` returns an integer sequence, so does
+`seq.int(from = 5.0, ...)`. However, if `from` is no integer
+(e.g., `seq.int(from = 5.5, ...)`, or the interval is no
+integer (e.g., `seq.int(..., by = 0.5)` a numeric sequence will
+be returned and `seq.int` acts like `seq`.
+
+Some examples:
+```{r, fig.align = "center"}
+# Integer from 50 to 55
+50:55
+# Reverse
+55:50
+# Sequence
+seq.int(from = 5, to = 12, by = 2)
+# Repeat `1L` five times
+rep(1L, 5)
+```
+
+```{r, fig.align = "center"}
+# Repeat `TRUE` 5 times
+rep(TRUE, 5)
+# Repeat `TRUE`/`FALSE` twice
+rep(c(TRUE, FALSE), each = 2)
+# Repeat 3 x `FALSE`, 1 x `TRUE`
+rep(c(FALSE, TRUE), c(3, 1))
+```
+
+... and characters. Convenient for characters: _R_ has
+two objects you can use called `LETTERS` and `letters`.
+`LETTERS` contains the alphabet (no special characters)
+in upper case letters (`"A"`, `"B"`, ...), `letters` the
+same in lower case letters (`"a"`, `"b"`, ...). This can
+be used if one just wants to have some random character
+values.
+```{r, fig.align = "center"}
+# Repeat `"A"` seven times
+rep("A", 7)
+# First 7 letters of the alphabet
+LETTERS[1:7]
+letters[1:7]
+```
+
+
+## Vectors
+
+As mentioned in the first part of this section:
+vectors **can only contain elements of one type!**
+What happens if we try to mix elements of different
+classes, e.g., a numeric and a character?
+```{r, fig.align = "center"}
+# Numeric and character = character
+x <- c(1.7, "A")
+class(x)
+x
+```
+
+The class of `x` is `character`. Reason: `1.7` can be
+converted into `character`, `"A"` cannot be converted
+to a numeric value. Thus, _R_ converts the numeric
+value to character (note that `"1.7"` is now a character
+string which contains the 'word' `"1.7"` and not a number anymore).
+Similar when mixing `logical` and `numeric` values.
+The result is `numeric`. Note: we could also convert
+`6.2` to `logical`, but all numbers not equal to `0` will be converted
+to `TRUE`, and `0` will be converted to `FALSE`. Thus, if we would
+convert from `numeric` to `integer` we would lose much more information
+as when converting from `logical` to `integer`, that's why _R_ does
+it this way around. Example:
+```{r, fig.align = "center"}
+# Logical and numeric = numeric
+x <- c(TRUE, 6.2)
+class(x)
+x
+```
+
+Converting values between different data types (atomic classes)
+is called coercion, in this case implicit coercion as we did
+not tell _R_ to do so, but to be able to create our object
+_R_ has to do it.
+We can, of course, also use explicit coercion. The `as.*` functions
+allow us to explicitly convert values between different classes.
+E.g., `as.character(1.42)` will convert the numeric value `1.42`
+into a character. A wide range of different `as.*` functions
+exists such as:
+
+* `as.integer`
+* `as.numeric`
+* `as.character`
+* `as.logical`
+* `as.matrix`
+Let us create a new integer vector between `0` and `4`,
+assign it to `x`, and convert this integer vector to
+logical:
+```{r, fig.align = "center"}
+# let `x` be an integer vector
+# with elements 0, 1, 2, 3, 4.
+x <- 0:4
+x
+```
+
+```{r, fig.align = "center"}
+# Coerce to character
+as.character(x)
+# Coerce to logical
+as.logical(x)
+```
+
+As mentioned previously: all numeric values `0` will
+converted to `0`, all others (including negative values)
+to `TRUE`.
+Even if we use explicit coercion it is sometimes not
+possible to convert from one class to another.
+Characters from the alphabet, such as `"a"` or `"b"`
+cannot be converted. Characters which are basically
+only characters containing a numeric value (`"100"`, `"135.3"`)
+can be coerced.
+
+If _R_ is not able to convert elements, it will return
+`NA` (and throw a warning):
+```{r, fig.align = "center"}
+# let `x` be a character vector
+x <- c("a", "b", "c", "d")
+x
+# Coerce to integer
+as.integer(x)
+# But ...
+x <- c("1", "100", "a", "b", "33")
+as.integer(x)
+```
+
+## Missing values
+
+So far we have not been talking about missing values. _R_ knows
+two types of missing values: `NaN` and `NA`.
+`NaN` is "not a number" and results from mathematical operations
+which are illegal/invalid. One classical example is if we try
+to divide `0` by `0`.
+`NA` is Rs "missing value" element.
+
+* `NaN`: mathematically not defined (and always of class `numeric`)
+* `NA`: missing value, \code{NA}'s still have classes!
+* `NaN` is also `NA` but not vice versa
+
+Examples:
+
+```{r}
+# 0/0 is invalid
+x <- 0/0
+class(x)
+is.nan(x)
+is.na(x)
+```
+```{r, fig.align = "center"}
+x <- 0/0
+x
+```
+
+
+If you just assign `NA` to an object (`x <- NA`) the class of
+`x` will be `numeric` by default. However, for demonstration
+purposes let us convert a missing value into `character` and
+`integer` using the coercion functions:
+
+```{r, fig.align = "center"}
+# numeric/logical NA
+x <- as.numeric(NA)
+y <- as.logical(NA)
+x
+class(x)
+y
+class(y)
+```
+
+As you can both `x` and `y` look identical (both just contain
+one single `NA` element), however, `x` is of class `character`
+while `y` is of class `integer`.
+
+## Coercion
+
+```{r, echo = FALSE, fig.align = "center"}
+fn <- function() {
+    options(warn = -1); on.exit(options(warn = 1))
+    cmd <- c("as.numeric", "as.integer", "as.logical", "as.character")
+    val <- list(2.9, 0.0, 4L, 0L, TRUE, FALSE, "A", "TRUE", "FALSE", "NA")
+    res <- list()
+    for(i in seq_along(val)) {
+        res[[i]] <- lapply(cmd, function(x, v) do.call(x,list(x=v)), v = val[i])
+        res[[i]] <- lapply(res[[i]], function(x) ifelse(is.na(x), "NA", x))
+        # Characters
+        idx <- grep("as.character", cmd)
+        if(length(idx) > 0)
+            res[[i]][[idx]] <- sprintf("\"%s\"", res[[i]][[idx]])
+    }
+    return(res)
+}
+res <- fn()
+```
+
+
+## Attributes
+
+Objects in _R_ can also have attributes. Attributes can be seen as
+class specific meta information. Vectors have, by default, a length
+(number of elements in the vector) and can, optionally, have names.
+Matrices have attributes which specify the dimension of the matrix
+and (optional) names for the columns and rows.
+
+## Vector Attributes
+
+We can get the length of a vector by calling the `length` function,
+and all other attributes by calling `attributes`.
+```{r, fig.align = "center"}
+# Basic numeric vector
+x <- c(28, 1.82)
+x
+length(x)
+attributes(x)
+```
+
+As you can see the vector above (`x <- c(28, 1.82)`) has
+no additional attributes. We can, however, define a vector
+with names:
+```{r, fig.align = "center"}
+# A vector with names
+y <- c(age = 54, size = 1.82)
+y
+length(y)
+attributes(y) # See also `names(y)`
+```
+
+Note that the names (`age` and `size`) are not part of the
+values stored in the vector. The vector still contains the
+two numeric values `54` and `1.82`, however, we can now
+use the names to access the data.
+
+## Vector Subsetting
+
+Accessing specific elements of a vector (or an object in general)
+is called subsetting. For vectors this can be done in several ways:
+
+* by index (position in the vector)
+* based on logical vectors
+* by name (if defined)
+
+### Subsetting by indizes
+
+We can access elements by simply specifying the
+index of the element we would like to get. Subsetting
+can be done using the squared brackets `[...]`
+while function calls use round brackets (e.g., `mean(...)`).
+We can simply pick the first or fifth element of a vector
+`x` by calling `x[1]` or `x[5]`. _R_ will return element `1`/`5` out
+of `x`.  If we need the first _and_ the fifth we can also
+ask for `x[c(1, 5)]`:
+
+```{r, fig.align = "center"}
+x <- c(10, 20, 0, 30, 50)
+x
+# Get first and/or fifth element
+x[1]
+x[5]
+x[c(1, 5)]
+```
+
+We can also do it the other way around:
+`x[-1]` gives us all elements of `x` **except** the first one.
+```{r, fig.align = "center"}
+x[-1]
+x[-5]
+x[-c(1, 5)]
+```
+
+Using indizes we can also take the first four elements ...
+```{r, fig.align = "center"}
+# First four elements
+x <- 1:10
+x[1:4]
+```
+
+... or the last four elements of a vector.
+```{r, fig.align = "center"}
+# Last four elements
+x[7:10]
+```
+
+_R_ provides two convenient functions called
+`head` and `tail` to get the
+first `n` entries (default is `n = 6`) and the
+last `n` entries which works on most objects (not
+only vectors!):
+```{r, fig.align = "center"}
+# First four elements
+x <- 1:10
+head(x, n = 4)
+```
+
+```{r, fig.align = "center"}
+# Last four elements
+tail(x, n = 4)
+```
+
+### Subsetting by name
+
+If we have a vector with names, here a vector with three
+elements named `age`, `height`, and `zipcode` we can also
+access vector elements by name.
+Instead of using a numeric index (`x[1]`) we use a character
+string to specify the element we would like to get returned.
+**Note** that this has to be a character string. Thus, we
+have to call `x["age"]` (with quotes). `x[age]` does **not work**
+as _R_ would try to find an object or variable `age` which does
+not exist. If two elements are needed we can, again, also use
+a vector (in this case a character vector) to get both,
+the `"age"` and `"height"`:
+```{r, fig.align = "center"}
+x <- c(age = 28, height = 1.82,
+       zipcode = 6020)
+x["age"]     # age (note "")
+x["height"]  # height (note "")
+x[c("age", "height")]
+```
+
+In contrast to index subsetting `x[-"age"]` does not work.
+You cannot get "all elements except age" like it worked for
+index subsetting.
+
+### Subsetting by logical vectors
+
+An alternatively we can use a `logical` vector to subset
+vectors. Remember: `logical` vectors contain either `TRUE`
+or `FALSE`. In the context of subsetting it can be used to
+get all elements where the logical vector contains `TRUE`.
+An example:
+```{r, fig.align = "center"}
+x <- c(10, 20, 0, 30, 50)
+x[c(TRUE, TRUE, FALSE, FALSE, FALSE)]
+```
+
+As you can see we only get the first two elements, as only the
+first two elements of the logical vector contain `TRUE`s.
+This is what happens if we use logical operators to subset
+a data frame. Let's assume that we are interested in getting
+all elements of `x` which are larger than `25` (`x > 25`, see `?Comparison`
+for more information):
+```{r, fig.align = "center"}
+# Find all values x > 25
+x > 25
+# Returns logical vector, thus:
+x[x > 25]
+```
+
+What happens is: `x > 25` returns a logical vector of
+the same length as `x` (try `x > 25` on the console).
+`x[x > 25]` is thus called with a logical vector and
+we will get all values `x` where `x > 25` (where 
+`x > 25 == TRUE`.
+
+In some situations we might not only be interested in
+getting all values of `x` which fulfill a specific condition,
+we may also want to know where these elements are located
+in the vector `x` (we will get the index, not the value).
+This can be done using `which`. `which(...)` returns the
+index of all `TRUE`s.
+`which(c(FALSE, TRUE))` will thus return `2` as only the
+second element is `TRUE`. We can use this to, for example,
+find the position of all elements `x` which are `30`
+(`x == 30`, see `?Comparison`):
+```{r, fig.align = "center"}
+# Logical vector where x == 30
+y <- x == 30
+y
+# Find index where x == 30
+idx <- which(y == TRUE) 
+idx
+# Get elements
+x[idx]
+```
+
+Or with some fewer lines of code (more compact):
+```{r, fig.align = "center"}
+# Same vector
+x <- c(10, 20, 0, 30, 50)
+# Get all x == 30
+x[x == 30]
+# Opposite
+x[!x == 30]
+x[x != 30]
+x[x >= 20 & x < 35]
+```
+
+Logical operators can also be used to find, e.g.,
+the position of the maximum within a vector.
+`which(x == max(x))` returns us the index of the
+element in `x` which is equal to the maximum of
+`x`. Thus `x[which(x == max(x))]` will be the very
+same as `max(x)`. There are two functions to 
+get the index of the maximum/minimum element of
+`x` called `which.min` and `which.max`:
+
+```{r, fig.align = "center"}
+# Using which
+which(x == max(x))
+# Special functions:
+which.min(x)
+which.max(x)
+```
+
+* `which.min(x)` is equivalent to `which(x == min(x))`
+* `which.max(x)` is equivalent to `which(x == max(x))`
+
+
+## Relational and Logical Operators
+
+### Rational Operators
+
+We have already used some rational operators to check
+for values larger, smaller, or equal to a number or character.
+The full list of rational operators (see also `?Comparison` and `?Logic`):
+
+* `x < y`:  where `x` smaller than `y`
+* `x > y`:  where `x` larger than `y`
+* `x <= y`: where `x` smaller or equal `y` 
+* `x >= y`: where `x` larger or equal `y`
+* `x == y`: where `x` equals `y`
+* `x != y`: where `x` is not equal to `y`
+* `!`:      negation (NOT; `! x == 20`)
+* `\&`:     logical "and" (`x >= 20 \& x < 35`)
+* `|`:      logical "or" (`x == 20 | x > 45`)
+* `xor`:    logical "exclusive or'' (`xor(x == 20, x == 50)`)
+* `x \%in\% y`:    where `x` in `y` (value matching; character)
+* `! x \%in\% y`:  where `x` not in `y` (value matching; character)
+
+Note that there is also `&&`, `||` and `isTRUE` but these are
+_no element wise operations_, ignore them for now.
+
+
+## Practical Session
+
+For those who want to practice a bit, try to create
+the following vectors using `rep`, `seq` or other methods/ways
+we have learned this time:
+
+**Number 1:**
+
+```{r, echo = FALSE, fig.align = "center"}
+# Number 1
+-5:5
+```
+
+**Number 2:**
+
+```{r, echo = FALSE, fig.align = "center"}
+seq(from = 11, to = 7, by = -0.5)
+```
+
+**Number 3:**
+
+```{r, echo = FALSE, fig.align = "center"}
+rep(c(TRUE, FALSE, TRUE, FALSE), c(3,3,1,3))
+```
+
+
+**Number 4:** Create a sequence between `-5` and `5` with an interval of `0.1`.
+
+
+**Number 5:** Create a sequence between `100` and `150` with a length of `17`.
+

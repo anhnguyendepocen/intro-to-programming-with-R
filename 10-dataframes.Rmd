@@ -1,0 +1,111 @@
+
+# Data frames
+
+```{r, fig.align = "center"}
+x <- data.frame(given_name  = c("Reto",     "Lea",    "Max"),  # character
+                family_name = c("Stauffer", "Muster", "Pain"), # character
+                age         = c(28,         25,       22),     # numeric
+                vegetarian  = c(FALSE,      FALSE,    TRUE),   # logical
+                stringsAsFactors = FALSE) # to be discussed
+```
+
+```{r, fig.align = "center"}
+# Let's print x
+print(x)
+```
+
+```{r, fig.align = "center"}
+cbind(x, data.frame(foo = c("AAA", "BBB", "CCC")))
+```
+
+```{r, fig.align = "center"}
+x$bar <- c(9999, 8888, 7777)
+x
+```
+
+```{r, fig.align = "center"}
+# 3th row
+x[3, ]
+# 2nd column
+x[3, 2]
+# 2nd row, column "age"
+x[2, "age"]
+```
+
+```{r, fig.align = "center"}
+# 3th row
+x[3, ]
+class(x[3, ])
+# 3th column
+x[, 3]
+class(x[, 3])
+```
+
+```{r, fig.align = "center"}
+# Element in row 3, column 2
+x[3, 2]
+class(x[3, 2])
+# 2nd row, column "age"
+x[2, "age"]
+class(x[2, "age"])
+```
+
+```{r, echo = FALSE, fig.align = "center"}
+x <- data.frame(given_name  = c("Reto",     "Lea",    "Max"),  # character
+                family_name = c("Stauffer", "Muster", "Pain"), # character
+                age         = c(28,         25,       22),     # numeric
+                vegetarian  = c(FALSE,      FALSE,    TRUE),   # logical
+                stringsAsFactors = FALSE) # to be discussed
+```
+
+```{r, fig.align = "center"}
+x # Our data frame
+```
+
+```{r, fig.align = "center"}
+subset(x, subset = age <= 25, select = c(given_name, age))
+```
+
+```{r, fig.align = "center"}
+x$age
+class(x$name)
+class(x$age)
+class(x$vegetarian)
+```
+
+
+## Convert Objects
+
+```{r, fig.align = "center"}
+# Convert matrix to vector
+x <- matrix(1:9, ncol = 3)
+as.vector(x)
+# Convert data.frame to list
+x <- data.frame(name = c("Ben", "Lea", "Max"), age = c(11, 22, 33))
+as.list(x)
+```
+
+```{r, fig.align = "center"}
+# Create a list
+x <- list(name = c("Lea", "Ben", "MAx"),
+          age  = c(11, 22, 33),
+          sex  = c("female", "male", "male"))
+as.data.frame(x, stringsAsFactors = FALSE)
+```
+
+```{r, fig.align = "center"}
+# name has only length 1
+x <- list(name = c("Lea"),
+          age  = c(11, 22, 33),
+          sex  = c("female", "male", "male"))
+as.data.frame(x, stringsAsFactors = FALSE)
+```
+
+```{r, echo = FALSE, fig.align = "center"}
+x <- data.frame(transportation = c("Railjet", "Car", "Bike"),
+                distance       = c(  462,  475, 508),
+                expenses       = c(39.90,  190, 0.0),
+                duration       = c( 4.15, 4.47, 27.0))
+x
+```
+

@@ -1,0 +1,399 @@
+
+# Style guide
+
+### What is a coding style?
+    
+``Good coding style is like using correct punctuation. You can manage without
+it, but it sure makes things easier to read.'' [Headley Wickham](http://adv-r.had.co.nz/Style.html).
+
+``thus try to make use of it try to follow the style guides you
+may thin it is kind of useless in the beginning however you
+will see that it is especially when your functions get more complex
+very useful to do so i often spent hours to find my own bugs
+just because my coding style was horrible keep that in mind'' Reto, 2019.
+
+```{r, echo = FALSE, fig.align = "center"}
+options(prompt = " ", continue = " ")
+```
+
+### Special characters
+
+* do not use special characters (Umlauge, apostrophes, ...)
+* neither for object names, nor comments!
+* you may have noticed it: object names have to start with
+   a letter, blanks are not allowed
+
+### Language
+
+Preferably in English. Especially if you hand over your code to
+someone else.
+
+### Script file names
+
+Should be meaningful and use the `.R` suffix.
+
+**Good:**
+
+* `fit-linear-models.R`
+* `utility-functions.R`
+* `session02_exerciseA.R`
+
+**Bad:**
+
+* `foo.R`
+* `things.R`
+* `exercise.R`
+
+### Object names
+
+Should be lowercase and meaningful! Use underscores to separate
+words within a name. If possible use nouns for variables
+and verbs for functions.
+
+**Good:**
+
+* `day_one`
+* `day_1`
+* `gender`
+* `height`
+* `smallest_male`
+* `temp_kelvin`
+
+**Bad:**
+
+* `the_first_day_of_month`
+* `DayOne`
+* `dayone`
+* `djm1`
+* `foo`
+* `T` (existing name!)
+* `c` (existing name!)
+* `mean` (existing name!)
+
+### Spaces: infix operators
+
+Put spaces around all infix operators (`+`, `/`, `*`,
+`&`, `==`, `|`), around the get operator (`<-`) and `=`' s.
+
+**Well written code:**
+```{r, echo = FALSE, results = "hide", fig.align = "center"}
+temp <- 5
+```
+
+```{r, fig.align = "center"}
+temp <- temp * 9 / 5 + 32
+volume <- 4 / 3 * pi**3
+if (temp == 0) print("cool")
+```
+
+**Bad code:**
+```{r, fig.align = "center"}
+temp<-temp*9/5+32
+volume<-4/3*pi**3
+if( temp==0) print("cool")
+```
+
+### Spaces: colons
+
+One exception: There is no space around colons (`:`, `::`, `:::`):
+
+**Good:**
+```{r, fig.align = "center"}
+x <- 1:10
+```
+
+**Bad:**
+```{r, fig.align = "center"}
+x <- 1 : 10
+```
+
+### Spaces: multiple spaces
+
+Ok to use multiple spaces if it increases readability. E.g.:
+
+**More well-structured ...**
+```{r, echo = FALSE, results = "hide", fig.align = "center"}
+l <- b <- h <- 5
+```
+
+```{r, echo = TRUE, results = "hide", fig.show = "hide", fig.align = "center"}
+list(
+  total    = l + b + h,
+  mean     = (l + b + h) / 3,
+  variance = var(c(l + b + h))
+)
+```
+
+**... than this:**
+```{r, echo = TRUE, results = "hide", fig.show = "hide", fig.align = "center"}
+list(
+  total = l + b + h,
+  mean = (l + b + h) / 3,
+  variance = var(c(l + b + h))
+)
+```
+
+### Spaces: brackets
+
+A space before opening round brackets (`(`) and
+after closing round brackets (`)`)
+_except for function calls_.
+
+**Good:**
+```{r, echo = FALSE, results = "hide", fig.show = "hide", fig.align = "center"}
+a <- 10
+debug <- FALSE
+x <- y <- 10
+```
+
+```{r, echo = TRUE, results = "hide", fig.show = "hide", fig.align = "center"}
+if (a == 4)
+if (debug) print(x)
+mean(x)
+plot(x, y, col = "red")
+```
+
+**Bad:**
+```{r, echo = TRUE, results = "hide", fig.show = "hide", fig.align = "center"}
+if(a==4)
+if(debug)print(x)
+mean (x)
+plot (x,y,col="red")
+```
+
+### Spaces: commas
+
+Always use spaces after the comma.
+
+**Good:**
+```{r, echo = FALSE, results = "hide", fig.align = "center"}
+mat <- matrix(1:9, ncol = 3)
+y <- rnorm(3)
+```
+
+```{r, echo = TRUE, results = "hide", fig.show = "hide", fig.align = "center"}
+x <- c(1, 2, 4)
+x <- mat[1, ]
+plot(x, y, col = "red")
+```
+
+**Bad:**
+```{r, echo = FALSE, results = "hide", fig.align = "center"}
+mat <- matrix(1:9, ncol = 3)
+y <- rnorm(3)
+```
+
+```{r, echo = TRUE, results = "hide", fig.show = "hide", fig.align = "center"}
+x <- c(1,2,4)
+x <- mat[1,]
+plot(x,y,col = "red")
+```
+
+### Opening/closing brackets
+
+Opening curly brackets should never go in a new line,
+but should always be followed by a new line.
+Final closing curly brackets should be in a separate line.
+
+**Good:**
+```{r, echo = FALSE, results = "hide", fig.align = "center"}
+a <- 10
+```
+
+```{r, echo = TRUE, results = "hide", fig.align = "center"}
+if (a == 10) {
+  res <- TRUE
+} else {
+  res <- FALSE
+}
+
+myfun <- function(x) {
+  # Instructions
+}
+```
+
+**Bad:**
+```{r, echo = TRUE, results = "hide", fig.align = "center"}
+if (a == 10)
+{
+  res <- TRUE
+} else
+{
+  res <- FALSE}
+```
+
+### Indention
+
+Use block-wise indention (RStudio supports you).
+Suggested by Headley: use two spaces as indent.
+
+**Good:**
+```{r, echo = TRUE, results = "hide", fig.align = "center"}
+powfun <- function(x) {
+  res <- x**y
+  return(res)
+}
+```
+
+**Bad:**
+```{r, echo = TRUE, results = "hide", fig.align = "center"}
+powfun <- function(x) {
+res <- x**y
+return(res)
+}
+```
+
+**For very short statements:**
+```{r, echo = FALSE, results = "hide", fig.align = "center"}
+a <- 10
+```
+
+```{r, echo = TRUE, results = "hide", fig.align = "center"}
+powfun <- function(x, y) { return(x^y) }
+if (a == 10) { res <- TRUE }
+```
+
+```{r, echo = TRUE, results = "hide", fig.align = "center"}
+powfun <- function(x, y) return(x^y)
+if (a == 10) res <- TRUE
+```
+
+### Explicit return
+
+My personal suggestion: explicitly use the \code{return} command
+when returning results from a function!
+
+**Good:**
+```{r, echo = TRUE, results = "hide", fig.align = "center"}
+powfun <- function(x) {
+    res <- x^2
+    return(res)
+}
+powfun <- function(x, y) return(x^y)
+```
+
+**Bad:**
+```{r, echo = TRUE, results = "hide", fig.align = "center"}
+powfun <- function(x) {
+    res <- x^2
+    res
+}
+powfun <- function(x, y) x^y
+```
+
+### Line breaks
+
+Line breaks: lines should not be longer than 80 characters.
+Use line breaks for long statements.
+
+**Good:**
+```{r, echo = TRUE, fig.align = "center"}
+data <- c(firstname  = "Reto",      lastname = "Stauffer",
+          city       = "Innsbruck", zipcode  = "6020",
+          department = "Department of Statistics")
+```
+
+**Bad:**
+```{r, echo = TRUE, fig.align = "center"}
+data <- c(firstname = "Reto", lastname = "Stauffer", city = "Innsbruck", zipcode = "6020", department = "Department of Statistics")
+```
+
+### Nested indention
+
+Use block-wise indention (RStudio supports you).
+Use two spaces as indent.
+
+**Good:**
+```{r, echo = TRUE, fig.align = "center"}
+demo_function <- function(x) {
+  if (a == 3) {
+    res <- "This"
+  } else {
+    for (i in 1:10) {
+      res <- a + i
+    }
+  }
+  return(res)
+}
+```
+
+**Bad:**
+```{r, echo = TRUE, fig.align = "center"}
+demo_function <- function(x) {
+if (a == 3) {
+res <- "This"
+} else {
+for (i in 1:10) {
+res <- a + i
+}
+}
+return(res)
+}
+```
+
+### Object assignment
+
+Use `<-` and not `=`.
+**Good:**
+```{r, echo = TRUE, fig.align = "center"}
+a <- 5
+powfun <- function(x, y) return(x^y)
+```
+
+**Bad:**
+```{r, echo = TRUE, fig.align = "center"}
+a = 5
+powfun = function(x, y) return(x^y)
+```
+
+### Comments
+
+* Start to write comments!
+* Again: code is more often read then written,
+* comments help to understand code (also your own!).
+* Use `# ------` or `# ========` to separate code blocks.
+
+```{r, results = "hide", fig.show = "hide", fig.align = "center"}
+# -----------------------------
+# Define variables
+x <- seq(0, 100, length = 100)
+y <- sin(x / pi * 180)
+# -----------------------------
+# Create plot
+plot(x, y, col = 5)
+```
+
+```{r, echo = FALSE, fig.align = "center"}
+options(prompt = "R> ", continue = "+  ")
+```
+
+### All together
+
+Both code chunks do the very same. And both will work.
+I think there's nothing to say here!
+
+**Good:**
+```{r, echo = TRUE, fig.align = "center"}
+demo_function <- function(x) {
+  if (a == 3) {
+    res <- "This"
+  } else {
+    for (i in 1:10) {
+      res <- a + i
+    }
+  }
+  return(res)
+}
+```
+
+**Very, very bad:**
+```{r, echo = TRUE, fig.align = "center"}
+DmoFn<-function(x)
+{if(a==3) {res <- "This"
+}else{
+for(i in 1    :10) {
+res= a   +i}}
+    res}
+```
+
+

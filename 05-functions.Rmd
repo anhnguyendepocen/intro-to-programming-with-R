@@ -1,0 +1,648 @@
+
+
+# Functions and mathematical operators
+
+In this session we will learn how to write (basic) custom
+functions in _R_.
+For some of the examples and the exercises we may need arithmetics
+and mathematical functions.
+
+We have already used some basic arithmetics such as addition (`+`)
+or the power function (`^`) in the previous lessens. A full list
+can be found on the _R_ documentation `?Arithmetic` (or `help(Arithmetic)`).
+In addition to that we may use basic mathematical functions such as
+sine and cosine (`sin`, `cos`), the exponential and natural logarithmic
+function (`exp`, `log`), or others. A full list can be found on the help
+page for `?Math`.
+
+## Functions
+
+Functions and control structures are what make your code more dynamic. In
+programming, "functional programming" is a programming paradigm, a style how
+code is written.  Rather than writing so called spaghetti code (one line
+after another after another ...) functions and control structures allow
+one to build code in blocks.
+Writing functions and control structures makes the difference
+between a pure user and a developer.
+
+Functional programing helps to keep the code:
+
+* more structured,
+* more readable,
+* and much easier to maintain or find errors.
+    
+Control structures are typically not used when using the interactive command
+line, but are essential parts of of _each_ program and software we use.
+
+Functions are sets of instructions which take over specific tasks.
+One simple example is the function `sd` which computes the empirical
+standard deviation of a set of numeric values. Mathematically the standard
+deviation is defined as:
+
+$\text{sd}(x) = \sqrt{\frac{1}{N - 1} \sum_{i=1}^N (x_i - \bar{x})^2} ~~|~~ i = 1, \dots, N$
+
+Let's assume we have three numeric vectors and we need the standard
+deviation from all of them.
+
+```{r}
+# Define some values
+x1 <- rnorm(100, 0, 1)
+x2 <- rnorm(100, 0, 1.5)
+x3 <- rnorm(100, 0, 5)
+# Calculate standard deviation once ...
+sd1 <- sqrt(sum((x1-mean(x1))^2) / (length(x1)-1))
+# ... and again, ...
+sd2 <- sqrt(sum((x2-mean(x2))^2) / (length(x2)-1))
+# ... and again ...
+sd3 <- sqrt(sum((x3-mean(x3))^2) / (length(x3)-1))
+print(c(sd1, sd2, sd3))
+```
+
+... even if the equation for the standard deviation is rather simple you can
+easily see that the code is quickly getting complex and prone to errors!
+Rather than doing this spaghetti-style-coding we write ourself a function.
+Well, `sd` is a mathematical function from _R_ base, but here we will use
+a simple hand-written sd function (I call it `sdfun`):
+
+```{r}
+# Define the function once:
+sdfun <- function(x) {
+  return(sqrt(sum((x - mean(x))^2) / (length(x) - 1)))
+}
+# Define some values
+x1 <- rnorm(100, 0, 1)
+x2 <- rnorm(100, 0, 1.5)
+x3 <- rnorm(100, 0, 5)
+# Calculate standard deviation
+sd1 <- sdfun(x1)
+sd2 <- sdfun(x2)
+sd3 <- sdfun(x3)
+print(c(sd1, sd2, sd3))
+# Or even
+print(c(sdfun(x1), sdfun(x2), sdfun(x3)))
+```
+
+## When should I use functions?
+
+A good indicator is if you start **copy \& paste** code! Copy \& paste
+means that you quite likely use the same thing (or something very
+similar) over and over again.
+Thus, think of writing a function instead!
+Functions can be rather simple, or already more complex allowing to
+control them in a way that they do the same thing but with slightly different
+conditions. This is done by adding additional input arguments to the function
+which allows one to control the function (control arguments).
+
+As soon as your **code is getting** more **complicated**: think of extracting some
+blocks/essential parts and put them into functions. The functions can be stored
+in extra script files which drastically reduces the number of lines of code in your
+main script and increases the readability. This helps _a lot_!
+
+Whenever you have a block of **code you may reuse in the future**,
+or a **block of code** you double-checked
+and you are **sure it works well**: you may pack it into functions. This allows you to
+reuse the function in the future, and, when searching for errors, you may not have
+to check the code inside these functions as you are sure that they work as expected.
+
+## The structure of functions
+
+Functions consist of three key elements. These are:
+
+* **input arguments**
+* **instructions**
+* **output or return values**
+
+All three are optional. Well, if you have a function without instructions,
+the function does absolutely nothing and would be completely useless, however,
+technically an empty function can be created.
+
+Input and output are also optional. You may have a function which has input
+arguments but no output (e.g., a function that saves data to a file), or
+no input but output (e.g., a function that reads data from a standard file).
+However, these are special cases.
+
+Typically functions have at least **inputs** and **instructions**, and most
+will also **return** a result or at least an indication that the function
+successfully executed the instructions.
+
+## Functions in _R_
+
+As we have learned in an earlier session nearly anything in _R_ is an object.
+Functions are first class objects as well and can be used as all the other
+objects or variables. This allows one to pass functions as input to other
+function which is frequently used and an important feature in _R_, even if
+it might be a bit confusing to people coming from other programming languages.
+
+Functions can of course also be nested (a function calls another function as
+part of the instructions), and functions can be used recursively (one function
+may call itself several times) which is useful for some tasks.
+
+Functions are often encapsulated (they take their input, do something, and
+return a result without touching all the objects on the workspace). However,
+they do not have to be encapsulated! _R_ uses lexical scoping and functions
+may access variables on the workspace and/or other environments. This can
+be very useful, but also a bit confusing.
+
+## Calling functions
+
+Function calls are indicated by round brackets (`(...)`). We have
+already used a range of functions such as `seq(...)`, `mean(...)`,
+`is.numeric(...)`, `as.numeric(...)`, or `plot(...)` over the past
+weeks. A side note: _R_ differs between functions and so called
+generic functions. Generic functions act differently depending on
+the input. For example, `summary(c("A","B","A","B"))` and
+`summary(1:50)` act different on character vectors and numeric
+vectors. We will learn something about generic functions
+in another session.
+
+## Naming functions
+
+You can basically use any name (as long as it is a valid variable/function
+name). However, **you may overwrite existing functions** if the function 
+name already exists! Thus, use meaningful, clear, and unique names and try
+not to name all your functions `f` and `fun` and don't use existing names
+such as `mean` or `plot` (except you know what you do).
+
+In _R_ variables and functions with the same name can co-exist,
+e.g.,:
+
+```{r, fig.align = "center"}
+mean <- c(1, 2, 3, 4, 5, 6)
+mean(mean)
+```
+
+Here we define a numeric vector `mean` and calculate the 
+arithmetic mean by calling `mean(mean)`. _R_ calls the
+function `mean` using the vector `mean`. Even if this
+works **try to avoid such constructs**!
+
+## Functions In Real Life
+
+We all come across function-like situations in our daily life multiple
+times a day. One illustrative example are backing recipes. Imagine
+you are cooking some brownies:
+
+<div style="text-align: center;">
+ <img style="width: 60%;" src="images/03/03_recipe.jpg">
+</div>
+
+Classical recipes are set up as follows:
+
+* A list of the required ingredients (our **inputs**)
+* A set of **instructions** (mix this, do that, bake for 180 minutes)
+* And a delicious foto. Or, if you cook it, some nice food! That's
+  the **result** or **output**.
+
+We can even find more analogies on this screenshot:
+
+* The name of the recipe is like the function name, the website
+  where we have found the recipe is the name of the _R_ package (if
+  the function is included in a package).
+
+<div style="text-align: center;">
+ <img style="width: 60%;" src="images/03/03_recipe2.jpg">
+</div>
+
+Thus, every time we call this "function" (use this recipe) with this
+very specific name (Cocoa Brownies) from this specific package (or site,
+the food network) using the inputs (ingredients) as specified 
+we will always get the same result. And that's what functions do.
+
+## Declare Functions in _R_
+
+Let's begin with an empty function. As mentioned previously
+all parts of a function (input, instructions, and output) are optional.
+If we don't declare all three, that is what we will end up:
+
+```{r, results = "hide", fig.align = "center"}
+myfun <- function() {
+    # Instructions
+}
+```
+
+We define a new function called `myfun` by assigning a new `function()`
+to the variable `myfun` as you would do it with e.g., numeric values (`x <- 3`).
+Function inputs will be declared within the round brackets `()`, but this
+function has no inputs. The instructions are defined inside the curly brackets `{...}`,
+in this example it is simply a comment (no code; no instructions). And last but not
+least, the function does not `return` anything at the end.
+
+However, we just defined our first custom function! As for all other objects
+we can examine the object using default methods such as `class` and `is.function`:
+
+```{r, fig.align = "center"}
+# Get the class of myfun
+class(myfun)
+# Check if is function
+is.function(myfun)
+```
+
+To be precise: functions _always_ return something even if nothing
+is explicitly declared as in our empty function `myfun`. Returns
+may be invisible as in this case, but _R_ returns something. Let's
+store the return on `x` and see what we got:
+```{r, fig.align = "center"}
+# Declare function
+myfun <- function() {
+    # Instructions
+}
+# Store return on x
+x <- myfun()
+# Examine
+print(x)
+class(x)
+```
+
+Our empty function returns a `NULL` (an object of class `"NULL"`).
+
+## The NULL value in _R_
+
+The `NULL` value in _R_ is what the `None` type is in python.
+It is basically an object which tells us that it does not contain
+anything (so `NULL` basically means "nothing").
+`NULL` objects are used quite regularly and we might, every now
+and then, check for `is.null` to check if we got an empty object.
+```{r, fig.align = "center"}
+# Define variable
+x <- NULL
+# Print
+print(x)
+# Check if is null
+is.null(x)
+```
+
+## Back to functions
+
+Let us write some more useful functions.
+
+* **Input:** no input
+* **Instructions:** print a string
+* **Output:** no output
+```{r, fig.align = "center"}
+# Declare the function
+myfun <- function() {
+    print("Hello World!")
+}
+# Call function
+myfun()
+```
+
+We can call our new `myfun` function by typing `myfun()` into
+the console. As we have no input, nothing has to be declared
+between the brackets (we are not even allowed to do so).
+As soon as called the function executes the instructions. Here,
+the string `"Hello World!"` is printed.
+
+Again, we have not explicitly declared an output or return value, but
+_R_ returns us something:
+```{r, fig.align = "center"}
+# Store return value/output
+x <- myfun()
+print(x)
+class(x)
+```
+
+As we can see the return, which is assigned to our variable `x`,
+contains the very same character string the function printed.
+**Why?** Well, this is a bit tricky to understand. _R_ always
+returns the last return it can find. `print(...)` invisibly returns
+what it just printed. Thus, the last return was the string itself (even
+if we did not see it), wherefore our `myfun` function also returns this
+at the end. It is not important to know the details, but keep that in
+mind!
+
+We now extend our function and provide an input argument:
+
+* **Input:** one argument called `x`
+* **Instructions:** combine two character strings (`paste`) and print it
+* **Output:** no explicit return value
+```{r, fig.align = "center"}
+# Declare the function
+myfun <- function(x) {
+    print(paste("Good morning", x))
+}
+# Call function
+myfun("Jochen")
+```
+
+We can now call our function `myfun` and provide (required) one
+input, let's use the character string `"Jochen"` for now.
+The function now takes this input argument and stores it - internally -
+on the name `x` (as we named our input `x`).
+Given the instructions the function combines the two character strings
+`"Good morning"` and `x` and prints the result.
+
+Once defined we can now reuse our function `myfun` with different
+inputs:
+```{r, fig.align = "center"}
+myfun("Helga")
+myfun("Jose")
+```
+
+Define a return value:
+
+* **Input:** one argument called `x`
+* **Instructions:** combine two character strings (`paste`) and print it
+* **Output:** return the number of characters of the pasted string
+
+Again, extend the function from above. We now define an explicit return
+value. But rather than just returning the combined string we are interested
+in the number of characters the string had.
+
+The instructions:
+
+* paste the two character strings `"Good evening"` and `x` and store the
+  new character string on a variable called `tmp`
+* print the string `tmp`
+* count the number of characters of the string `tmp` (that's what `nchar` does;
+  _number of characters_)
+* ... and return this number, an positive integer.
+```{r, fig.align = "center"}
+# Declare the function
+myfun <- function(x) {
+    # Create the string
+    tmp <- paste("Good evening", x)
+    # Print string
+    print(tmp)
+    # Return number of characters
+    res <- nchar(tmp)
+    return(res)
+}
+```
+
+```{r, fig.align = "center"}
+# Call function, store result
+x <- myfun("Jochen")
+# Print result
+print(x)
+# Class
+class(x)
+```
+
+Et voila, our first "useful" function with inputs, instructions,
+and an explicitly defined return value or output.
+### Different formulations
+
+In _R_ things can often be written in slightly different ways.
+This also yields for function definitions.
+Even if they are all valid and do the very same thing, some
+of them are not recommended at all. What I recommend is to
+always explicitly use the `return(...)` command because it makes it
+much easier for you and all others reading your code
+to identify what will be returned (increase readability)
+
+Furthermore, except for very short functions, always use the 
+curly brackets `{...}` as they structure your code. You can
+easily identify the instructions as they are written between
+brackets. For multi-line functions this is required anyways.
+
+
+**Version 1:** <span style="color: green;">(recommended)</span>
+```{r, results = "hide", fig.align = "center"}
+powfun <- function(x) {
+    return(x^2)
+}
+```
+
+
+**Version 2:** as a one-liner <span style="color: green;">(recommended)</span>
+```{r, results = "hide", fig.align = "center"}
+powfun <- function(x) { return(x^2) }
+```
+
+
+**Version 3:** without brackets <span style="color: orange;">(ok for short functions)</span>
+```{r, results = "hide", fig.align = "center"}
+powfun <- function(x) return(x^2)
+```
+
+
+**Version 4:** without brackets, no explicit return
+<span style="color: red;">(not recommended)</span>
+```{r, results = "hide", fig.align = "center"}
+powfun <- function(x) x^2
+```
+
+
+**Version 4:** without brackets, no explicit return
+<span style="color: red;">(not recommended)</span>
+```{r, results = "hide", fig.align = "center"}
+powfun <- function(x) {
+    x^2
+}
+```
+
+### Multiple input arguments
+
+Functions can have multiple input arguments and they do
+not have to be named `x` (even if often used as the first
+argument).
+The following simple function has two inputs, one
+called `greeting`, and one called `name`. We are expecting
+two strings, paste them together (`paste`), and return the
+new character string. In contrast to the functions shown
+earlier in this document the function itself does not print
+the new string, but returns it at the end of the function.
+
+```{r, fig.align = "center"}
+# Function with two required arguments
+myfun <- function(greeting, name) {
+    # Store combined string
+    res <- paste(greeting, name)
+    return(res)
+}
+```
+
+Functions with multiple arguments can be used the very
+same way, except that we have to provide two input
+arguments separated by a colon.
+
+```{r, fig.align = "center"}
+# Call the function
+x <- myfun("Welcome to the course,", "Jordan")
+print(x)
+```
+
+
+## Practical Session
+
+Let's do some practical work in this session.
+
+### Exercise 1
+
+1. write a function `powfun2` with one
+   input argument `x` which returns $x^2$ (`?Arithmetic`)
+2. write a function `powfun4` with one
+   input argument `x` which returns $x^4$
+
+**Solution:**
+```{r}
+# One input argument 'x', returns 'x^2'
+# Input: numeric vector 'x'.
+# Return: numeric vector of the same
+# length, x to the power of 2.
+powfun2 <- function(x) {
+  return(x^2)
+}
+# One input argument, just for demonstration purpuses
+# I call it 'z' here! Returns input^4, or z^4.
+# Input: numeric vector 'x'.
+# Return: numeric vector of the same
+# length, x to the power of 2.
+powfun4 <- function(z) {
+  return(z^4)
+}
+```
+
+### Exercise 2
+
+1. write a function `powfun` with two
+   input arguments to calculate $x^y$.
+   Return the result.
+
+**Solution:** The two functions from exercise 1 are
+extremely similar, except they use a different power
+parameter. If you write functions, you may write them
+as general as necessary. Thus, let us define one function
+which is able to do both:
+
+```{r}
+# Flexible custom power function
+# Input: x numeric, the 'base'
+#        y numeric, the power exponent
+# Return: Numeric vector with x^y
+powfun <- function(x, y) {
+  return(x^y)
+}
+```
+Note that the function now has two inputs, namely `x` and
+`y`. You could add additional inputs by simply adding them
+(comma separated), e.g., `function(x, y, a, b, foo, bar)` if needed.
+
+Testing the functions:
+```{r}
+# 3 to the power of 2
+powfun2(3)
+# 3 to the power of 4
+powfun4(3)
+# The same with the powfun function:
+powfun(3, 2)
+powfun(3, 4)
+```
+
+### Exercise 3
+
+Combine exercise 1 & 2:
+
+1. overwrite your existing functions `powfun2` and `powfun4`
+   by creating new functions with the same name. Rather
+   than calling `x^2` and `x^4` explicitly these functions should
+   internally call the function from exercise 2 and return
+   its results (nesting functions, one of your functions internally
+   uses another function).
+2. what happens if the inputs are vectors,
+   what if they are vectors of different lengths?
+3. extend the function from Exercise 2,
+   check you get valid inputs (define 'valid' on your own)
+
+**Solution:** I am sorry this was rather confusing. What I had
+planned is that you re-declare `powfun2` and `powfun4` (overwrite the
+existing ones) and, internally, call `powfun` rather than hard-coding
+`x^2` or `x^4` inside `powfun2` and `powfun4`.
+So what we do is to define `powfun2 <- function(x) { ... }` but now
+call `powfun` inside (so include `powfun` in the instructions `{...}`).
+
+For the new `powfun2`: As we would like
+to "return the input to the power of two", we use "2" as the
+second input argument to "powfun". As the first input we forward
+`x`. What happens is that we call `powfun2` with some data on input `x`.
+`powfun2` does not do anything with `x` but directly "forwards" it to
+the `powfun` function (as first input argument to `powfun`).
+The second input is "2" (always 2 in this case):
+
+```{r}
+# Re-declare functions
+powfun2 <- function(x) {
+  # Call powfun: forward "x", set the second argument to "2"
+  # "powfun" does the calculation for us.
+  res <- powfun(x, 2)
+  return(res)
+}
+```
+  
+The very same for the new `powfun4` but using "4" as the second
+argument when calling the `powfun` function (inside `powfun4`).
+
+```{r}
+# Re-declare functions
+powfun2 <- function(z) {
+  # Call powfun: forward "z", set the second argument to "2"
+  # "powfun" does the calculation for us.
+  res <- powfun(z, 2)
+  return(res)
+}
+```
+Again, I used `z` as input here to illustrate that the input
+of the function `powfun2` is a different object/variable than
+the input `x` on `powfun(x, y)`.
+
+
+What happens if call `powfun` with two vectors (for the two
+inputs) of different lengt?
+If `x` is of length `1` or `y` is
+of length `1` it is kind of obvious:
+
+```{r}
+# First argument 2, second argument is c(2,3,4)
+powfun(2, c(2, 3, 4))
+```
+The result is a vector c($2^2$, $2^3$, $2^4$) (base is always `2`).
+
+```{r}
+# First argument a vector c(2,3,4), second argument is 2:
+powfun(c(2, 3, 4), 2)
+```
+The result is a vector c($2^2$, $3^2$, $4^2$) (power exponent is always `2`).
+
+```{r}
+# First argument a vector c(2,3,4),
+# the second argument is a vector c(4,3,2):
+powfun(c(2, 3, 4), c(4,3,2))
+```
+Now _R_ performs element-wise or pair-wise calculation. Thus, the
+result is a vector c($2^4$, $3^3$, $4^2$).
+
+Less obvious: if the first argument is of length 2, the second one
+of length 4,  or the other way around.
+
+```{r}
+# First argument a vector c(2,3)
+# the second argument is a vector c(2,3,4,5):
+powfun(c(2, 3), c(2, 3, 4, 5))
+```
+The first vector is recycled to match the length of the second vector!
+Thus R is actually calculating `c(2, 3, 2, 3)^(2, 3, 4, 5)` and we get
+c($2^2$, $3^3$, $2^4$, $3^5$). This is not how I would use such a function,
+but to demonstrate what _R_ does in these cases.
+
+Similar in this case:
+```{r}
+# First argument a vector c(2,3,4,5)
+# the second argument is a vector c(2,3):
+powfun(c(2, 3, 4, 5), c(2, 3))
+```
+The second vector is recycled to match the length of the first vector!
+Thus R is actually calculating `c(2, 3, 4, 5)^(2, 3, 2, 3)`
+(c($2^2$, $3^3$, $4^2$, $5^3$)).
+
+If the two length of the vectors is not a multiple of the first one,
+e.g, the first is of length 2, the second of length 3, _R_ still tries
+to recycle the short one, but will warn you that this is not possible.
+
+```{r}
+powfun(c(2, 3), c(2, 3, 4))
+```
+
+Checking inputs: we will learn about this in the next session, as
+we will make use of conditions and other control structures.
+
